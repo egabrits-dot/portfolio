@@ -1,0 +1,99 @@
+{
+  "name": "03_Order_Invoice_Payment_Autopilot",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "order-created",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "name": "Webhook: Новый заказ с расчётом",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [220, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.tinkoff.ru/v2/Init",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"TerminalKey\": \"YOUR_TERMINAL_KEY\",\n  \"Amount\": {{ $json.body.totalAmount * 100 }},\n  \"OrderId\": \"ORD-{{ $json.body.orderId }}\",\n  \"Description\": \"Оплата заказа #{{ $json.body.orderId }}\",\n  \"NotificationURL\": \"https://your-n8n.ru/webhook/payment-confirmed\"\n}"
+      },
+      "name": "Генерация ссылки на оплату",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $json.body.clientTgId }}",
+        "text": "=🧾 *Счёт на оплату заказа #{{ $json.body.orderId }} готов!*\n\nСумма: {{ $json.body.totalAmount }} ₽\nСостав: {{ $json.body.itemsSummary }}\n\nНажмите кнопку ниже для безопасной оплаты картой или через СБП:",
+        "additionalFields": {
+          "reply_markup": {
+            "inline_keyboard": [
+              [
+                { "text": "💳 Оплатить {{ $json.body.totalAmount }} ₽", "url": "{{ $json.PaymentURL }}" }
+              ]
+            ]
+          }
+        }
+      },
+      "name": "Отправка счёта клиенту в Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.1,
+      "position": [700, 300]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "payment-confirmed",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "name": "Webhook: Оплата подтверждена",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [220, 520]
+    },
+    {
+      "parameters": {
+        "chatId": "YOUR_PRODUCTION_CHAT_ID",
+        "text": "=✅ *ЗАКАЗ ОПЛАЧЕН! ЗАПУСК В ПРОИЗВОДСТВО*\n\nЗаказ: #{{ $json.body.OrderId }}\nСумма: {{ $json.body.Amount / 100 }} ₽\nСтатус: Оплачен через СБП / Эквайринг\n\nСрок сдачи: 24 часа. Файлы макета прикреплены в CRM."
+      },
+      "name": "Telegram: Оповещение производства",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.1,
+      "position": [480, 520]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "sheetId": "1A2B3C4D_ORDERS_SPREADSHEET",
+        "range": "Заказы!F:F",
+        "options": {}
+      },
+      "name": "Обновление статуса в CRM: Оплачено",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [720, 520]
+    }
+  ],
+  "connections": {
+    "Webhook: Новый заказ с расчётом": {
+      "main": [[{ "node": "Генерация ссылки на оплату", "type": "main", "index": 0 }]]
+    },
+    "Генерация ссылки на оплату": {
+      "main": [[{ "node": "Отправка счёта клиенту в Telegram", "type": "main", "index": 0 }]]
+    },
+    "Webhook: Оплата подтверждена": {
+      "main": [
+        [
+          { "node": "Telegram: Оповещение производства", "type": "main", "index": 0 },
+          { "node": "Обновление статуса в CRM: Оплачено", "type": "main", "index": 0 }
+        ]
+      ]
+    }
+  }
+}

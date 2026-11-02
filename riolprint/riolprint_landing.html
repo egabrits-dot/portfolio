@@ -1,0 +1,1607 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Riol Print — Типография полного цикла</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  /* ===== CSS VARIABLES ===== */
+  :root {
+    --unified-bg: #14151a;
+    --card-surface: #1c1e26;
+    --card-surface-2: #22242f;
+    --lime-accent: #d4f85a;
+    --lime-dim: #b8e04a;
+    --green: #009b48;
+    --text-primary: #f0f0f0;
+    --text-secondary: #9ca3af;
+    --border: rgba(255,255,255,0.08);
+    --glass: rgba(20,21,26,0.85);
+    --radius: 16px;
+    --radius-lg: 24px;
+    --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  /* ===== RESET & BASE ===== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; font-size: 16px; }
+  body {
+    font-family: 'Manrope', sans-serif;
+    background: var(--unified-bg);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+  button { cursor: pointer; font-family: inherit; border: none; outline: none; }
+
+  /* ===== SCROLLBAR ===== */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--unified-bg); }
+  ::-webkit-scrollbar-thumb { background: var(--lime-accent); border-radius: 3px; }
+
+  /* ===== TYPOGRAPHY ===== */
+  .display { font-family: 'Unbounded', sans-serif; }
+  .section-title {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+  .section-sub {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    max-width: 560px;
+  }
+  .section-header { margin-bottom: 3rem; }
+
+  /* ===== CONTAINER ===== */
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ===== SECTION ===== */
+  section { padding: 96px 0; position: relative; }
+  section:nth-child(even) { background: var(--card-surface); }
+
+  /* ===== BADGE ===== */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(212,248,90,0.1);
+    border: 1px solid rgba(212,248,90,0.25);
+    border-radius: 50px;
+    padding: 6px 14px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--lime-accent);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  /* ===== NAV ===== */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    padding: 0 24px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    background: var(--glass);
+    border-bottom: 1px solid var(--border);
+    transition: var(--transition);
+  }
+  .nav-inner {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Unbounded', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  .nav-logo img {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: color var(--transition);
+  }
+  .nav-links a:hover { color: var(--text-primary); }
+  .nav-cta {
+    background: var(--lime-accent);
+    color: #14151a;
+    border-radius: 50px;
+    padding: 10px 22px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    transition: var(--transition);
+    white-space: nowrap;
+  }
+  .nav-cta:hover { background: var(--lime-dim); transform: translateY(-1px); }
+  .nav-burger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    padding: 4px;
+  }
+  .nav-burger span {
+    width: 24px;
+    height: 2px;
+    background: var(--text-primary);
+    border-radius: 2px;
+    transition: var(--transition);
+  }
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 72px; left: 0; right: 0; bottom: 0;
+    background: var(--unified-bg);
+    z-index: 999;
+    padding: 32px 24px;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .mobile-menu .nav-cta { margin-top: 16px; text-align: center; }
+
+  /* ===== HERO ===== */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    padding: 0;
+  }
+  .hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(20,21,26,0.55) 0%,
+      rgba(20,21,26,0.3) 40%,
+      rgba(20,21,26,0.85) 100%
+    );
+    z-index: 1;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 24px;
+    max-width: 800px;
+  }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(212,248,90,0.12);
+    border: 1px solid rgba(212,248,90,0.3);
+    border-radius: 50px;
+    padding: 8px 18px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--lime-accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .hero-title {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(2.2rem, 6vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 1.25rem;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+  }
+  .hero-title span { color: var(--lime-accent); }
+  .hero-desc {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: rgba(240,240,240,0.8);
+    max-width: 560px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.7;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: var(--lime-accent);
+    color: #14151a;
+    border-radius: 50px;
+    padding: 16px 36px;
+    font-size: 1rem;
+    font-weight: 700;
+    transition: var(--transition);
+    box-shadow: 0 0 24px rgba(212,248,90,0.35);
+  }
+  .btn-primary:hover {
+    background: var(--lime-dim);
+    transform: translateY(-2px);
+    box-shadow: 0 0 36px rgba(212,248,90,0.5);
+  }
+  .btn-outline {
+    background: transparent;
+    color: var(--text-primary);
+    border: 1.5px solid rgba(255,255,255,0.3);
+    border-radius: 50px;
+    padding: 16px 36px;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: var(--transition);
+    backdrop-filter: blur(8px);
+  }
+  .btn-outline:hover {
+    border-color: rgba(255,255,255,0.6);
+    background: rgba(255,255,255,0.05);
+    transform: translateY(-2px);
+  }
+  .hero-scroll {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.75rem;
+    animation: bounce 2s infinite;
+  }
+  .hero-scroll svg { opacity: 0.5; }
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* ===== STATS BAR ===== */
+  .stats-bar {
+    background: var(--card-surface);
+    padding: 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    divide-x: 1px solid var(--border);
+  }
+  .stat-item {
+    padding: 32px 24px;
+    text-align: center;
+    border-right: 1px solid var(--border);
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-number {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 900;
+    color: var(--lime-accent);
+    display: block;
+  }
+  .stat-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-top: 4px;
+  }
+
+  /* ===== SERVICES ===== */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .service-card {
+    background: var(--card-surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 32px 28px;
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition);
+    cursor: default;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-lg);
+    opacity: 0;
+    transition: opacity var(--transition);
+  }
+  .service-card:hover { transform: translateY(-6px); border-color: rgba(212,248,90,0.2); }
+  .service-card:hover::before { opacity: 1; }
+  .service-card.c1 { background: linear-gradient(135deg, #1a2235 0%, #1c1e26 100%); }
+  .service-card.c1::before { background: linear-gradient(135deg, rgba(59,130,246,0.08) 0%, transparent 70%); }
+  .service-card.c2 { background: linear-gradient(135deg, #1a2520 0%, #1c1e26 100%); }
+  .service-card.c2::before { background: linear-gradient(135deg, rgba(0,155,72,0.1) 0%, transparent 70%); }
+  .service-card.c3 { background: linear-gradient(135deg, #251e12 0%, #1c1e26 100%); }
+  .service-card.c3::before { background: linear-gradient(135deg, rgba(212,248,90,0.08) 0%, transparent 70%); }
+  .service-card.c4 { background: linear-gradient(135deg, #251525 0%, #1c1e26 100%); }
+  .service-card.c4::before { background: linear-gradient(135deg, rgba(168,85,247,0.08) 0%, transparent 70%); }
+  .service-card.c5 { background: linear-gradient(135deg, #251a12 0%, #1c1e26 100%); }
+  .service-card.c5::before { background: linear-gradient(135deg, rgba(251,146,60,0.08) 0%, transparent 70%); }
+  .service-card.c6 { background: linear-gradient(135deg, #121825 0%, #1c1e26 100%); }
+  .service-card.c6::before { background: linear-gradient(135deg, rgba(14,165,233,0.08) 0%, transparent 70%); }
+  .service-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1.25rem;
+    display: block;
+    line-height: 1;
+  }
+  .service-title {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+  }
+  .service-desc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  .service-tag {
+    display: inline-block;
+    margin-top: 1rem;
+    background: rgba(212,248,90,0.1);
+    border: 1px solid rgba(212,248,90,0.2);
+    border-radius: 50px;
+    padding: 4px 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--lime-accent);
+  }
+
+  /* ===== PORTFOLIO ===== */
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .portfolio-item {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    position: relative;
+    aspect-ratio: 4/3;
+    background: var(--card-surface-2);
+    cursor: pointer;
+  }
+  .portfolio-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+  }
+  .portfolio-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(20,21,26,0.9) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity var(--transition);
+    display: flex;
+    align-items: flex-end;
+    padding: 24px;
+  }
+  .portfolio-overlay span {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--lime-accent);
+  }
+  .portfolio-item:hover img { transform: scale(1.07); }
+  .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+
+  /* ===== WHY US ===== */
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+  }
+  .why-card {
+    background: var(--card-surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 28px 20px;
+    text-align: center;
+    transition: var(--transition);
+  }
+  .why-card:hover {
+    border-color: rgba(212,248,90,0.25);
+    transform: translateY(-4px);
+    background: rgba(212,248,90,0.04);
+  }
+  .why-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .why-title {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+  .why-desc {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.55;
+  }
+
+  /* ===== HOW WE WORK ===== */
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    position: relative;
+  }
+  .steps-grid::before {
+    content: '';
+    position: absolute;
+    top: 48px;
+    left: 12%;
+    right: 12%;
+    height: 2px;
+    background: linear-gradient(to right, var(--lime-accent) 0%, var(--green) 100%);
+    z-index: 0;
+  }
+  .step-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 16px;
+    position: relative;
+    z-index: 1;
+  }
+  .step-num {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    background: var(--card-surface-2);
+    border: 2px solid var(--lime-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Unbounded', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--lime-accent);
+    margin-bottom: 1.5rem;
+    box-shadow: 0 0 24px rgba(212,248,90,0.2);
+    transition: var(--transition);
+  }
+  .step-item:hover .step-num {
+    background: var(--lime-accent);
+    color: #14151a;
+    box-shadow: 0 0 36px rgba(212,248,90,0.4);
+  }
+  .step-title {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .step-desc {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.55;
+  }
+
+  /* ===== REVIEWS ===== */
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .review-card {
+    background: var(--card-surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 32px 28px;
+    transition: var(--transition);
+    position: relative;
+  }
+  .review-card::before {
+    content: '"';
+    position: absolute;
+    top: 16px;
+    right: 24px;
+    font-size: 5rem;
+    font-family: 'Unbounded', sans-serif;
+    color: rgba(212,248,90,0.08);
+    line-height: 1;
+  }
+  .review-card:hover {
+    border-color: rgba(212,248,90,0.15);
+    transform: translateY(-4px);
+  }
+  .review-stars {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 1rem;
+  }
+  .star { color: var(--lime-accent); font-size: 1rem; }
+  .review-text {
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+  .review-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .review-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--lime-accent), var(--green));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Unbounded', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #14151a;
+    flex-shrink: 0;
+  }
+  .review-name {
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+  .review-company {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+  }
+
+  /* ===== CERTIFICATES ===== */
+  .certs-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 16px;
+  }
+  .cert-item {
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    aspect-ratio: 3/4;
+    background: var(--card-surface-2);
+    transition: var(--transition);
+  }
+  .cert-item:hover { border-color: rgba(212,248,90,0.3); transform: scale(1.03); }
+  .cert-item img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* ===== CONTACTS ===== */
+  #contacts { background: var(--unified-bg); }
+  .contacts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .contacts-info { display: flex; flex-direction: column; gap: 24px; }
+  .contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .contact-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: rgba(212,248,90,0.1);
+    border: 1px solid rgba(212,248,90,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+  .contact-label {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 2px;
+  }
+  .contact-value {
+    font-weight: 700;
+    font-size: 1.05rem;
+  }
+  .contact-value a { color: var(--text-primary); transition: color var(--transition); }
+  .contact-value a:hover { color: var(--lime-accent); }
+  .contacts-map {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    height: 320px;
+    background: var(--card-surface-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .map-placeholder {
+    text-align: center;
+    color: var(--text-secondary);
+  }
+  .map-placeholder .map-icon { font-size: 3rem; margin-bottom: 1rem; }
+  .map-placeholder p { font-size: 0.9rem; }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--card-surface);
+    border-top: 1px solid var(--border);
+    padding: 48px 0 32px;
+  }
+  .footer-inner {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Unbounded', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+  .footer-logo img {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+  .footer-desc {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    max-width: 280px;
+  }
+  .footer-col h4 {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .footer-col ul a {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    transition: color var(--transition);
+  }
+  .footer-col ul a:hover { color: var(--lime-accent); }
+  .footer-bottom {
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .footer-bottom p { font-size: 0.82rem; color: var(--text-secondary); }
+
+  /* ===== FAB ===== */
+  .fab {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    z-index: 900;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+  }
+  .fab-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--lime-accent);
+    color: #14151a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 24px rgba(212,248,90,0.4);
+    transition: var(--transition);
+    animation: fabPulse 2.5s infinite;
+  }
+  .fab-btn:hover {
+    background: var(--lime-dim);
+    transform: scale(1.1);
+  }
+  @keyframes fabPulse {
+    0%, 100% { box-shadow: 0 4px 24px rgba(212,248,90,0.4); }
+    50% { box-shadow: 0 4px 40px rgba(212,248,90,0.65); }
+  }
+  .fab-label {
+    background: var(--card-surface);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    padding: 8px 16px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateX(12px);
+    transition: var(--transition);
+  }
+  .fab:hover .fab-label {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* ===== MODAL ===== */
+  .modal-bg {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(8px);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+  }
+  .modal-bg.open { opacity: 1; visibility: visible; }
+  .modal {
+    background: var(--card-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    max-width: 520px;
+    width: 100%;
+    position: relative;
+    transform: scale(0.95) translateY(20px);
+    transition: var(--transition);
+  }
+  .modal-bg.open .modal {
+    transform: scale(1) translateY(0);
+  }
+  .modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.07);
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+  .modal-close:hover { background: rgba(255,255,255,0.12); color: var(--text-primary); }
+  .modal-title {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .modal-sub {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+  .form-group { margin-bottom: 16px; }
+  .form-group label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+  }
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    background: var(--card-surface-2);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 0.92rem;
+    font-family: 'Manrope', sans-serif;
+    color: var(--text-primary);
+    outline: none;
+    transition: border-color var(--transition);
+    resize: vertical;
+  }
+  .form-group textarea { min-height: 100px; }
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    border-color: var(--lime-accent);
+  }
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { color: var(--text-secondary); }
+  .form-group select option { background: var(--card-surface-2); }
+  .form-submit {
+    width: 100%;
+    background: var(--lime-accent);
+    color: #14151a;
+    border-radius: 50px;
+    padding: 14px;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-top: 8px;
+    transition: var(--transition);
+  }
+  .form-submit:hover { background: var(--lime-dim); transform: translateY(-1px); }
+  .form-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+  .form-note {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    text-align: center;
+    margin-top: 10px;
+  }
+  .form-success {
+    text-align: center;
+    padding: 20px 0;
+    display: none;
+  }
+  .form-success .success-icon { font-size: 3rem; margin-bottom: 1rem; }
+  .form-success h3 {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+  .form-success p { color: var(--text-secondary); font-size: 0.9rem; }
+
+  /* ===== SCROLL ANIMATIONS ===== */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .fade-up-delay-1 { transition-delay: 0.1s; }
+  .fade-up-delay-2 { transition-delay: 0.2s; }
+  .fade-up-delay-3 { transition-delay: 0.3s; }
+  .fade-up-delay-4 { transition-delay: 0.4s; }
+  .fade-up-delay-5 { transition-delay: 0.5s; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 1024px) {
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .why-grid { grid-template-columns: repeat(3, 1fr); }
+    .footer-inner { grid-template-columns: 1fr 1fr; }
+    .certs-grid { grid-template-columns: repeat(3, 1fr); }
+    .steps-grid::before { display: none; }
+    .steps-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  }
+  @media (max-width: 768px) {
+    section { padding: 64px 0; }
+    .nav-links, .nav-cta { display: none; }
+    .nav-burger { display: flex; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .services-grid { grid-template-columns: 1fr; }
+    .portfolio-grid { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: repeat(2, 1fr); }
+    .reviews-grid { grid-template-columns: 1fr; }
+    .contacts-grid { grid-template-columns: 1fr; }
+    .contacts-map { height: 220px; }
+    .footer-inner { grid-template-columns: 1fr; gap: 24px; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+    .certs-grid { grid-template-columns: repeat(2, 1fr); }
+    .fab { bottom: 24px; right: 24px; }
+    .fab-btn { width: 52px; height: 52px; font-size: 1.3rem; }
+    .modal { padding: 28px 20px; }
+  }
+  @media (max-width: 480px) {
+    .why-grid { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .hero-title { font-size: 2rem; }
+    .hero-actions { flex-direction: column; align-items: center; }
+    .btn-primary, .btn-outline { width: 100%; max-width: 320px; }
+    .steps-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <img src="8e2k1p57tyb9m22aro35kt1ok7af5qv7.png" alt="Riol Print" onerror="this.style.display='none'">
+      Riol Print
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services">Услуги</a></li>
+      <li><a href="#portfolio">Портфолио</a></li>
+      <li><a href="#why">О нас</a></li>
+      <li><a href="#reviews">Отзывы</a></li>
+      <li><a href="#contacts">Контакты</a></li>
+    </ul>
+    <button class="nav-cta btn-primary" onclick="openModal()">Получить расчёт</button>
+    <button class="nav-burger" onclick="toggleMenu()" aria-label="Меню">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" onclick="closeMenu()">Услуги</a>
+  <a href="#portfolio" onclick="closeMenu()">Портфолио</a>
+  <a href="#why" onclick="closeMenu()">О нас</a>
+  <a href="#reviews" onclick="closeMenu()">Отзывы</a>
+  <a href="#contacts" onclick="closeMenu()">Контакты</a>
+  <button class="nav-cta btn-primary" onclick="closeMenu(); openModal()" style="margin-top:16px;">Получить расчёт</button>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="home">
+  <video class="hero-video" autoplay muted loop playsinline preload="metadata">
+    <source src="riol.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      🏆 Типография № 1 в Москве
+    </div>
+    <h1 class="hero-title display">
+      Типография<br><span>полного цикла</span>
+    </h1>
+    <p class="hero-desc">
+      От визитки до билборда — производим любую полиграфию быстро, качественно и по честным ценам. Собственное оборудование, 15 лет опыта.
+    </p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="openModal()">Получить расчёт</button>
+      <a class="btn-outline" href="#portfolio">Смотреть работы</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M12 5v14M5 12l7 7 7-7"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ===== STATS BAR ===== -->
+<div class="stats-bar">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item fade-up">
+        <span class="stat-number">15+</span>
+        <span class="stat-label">лет на рынке</span>
+      </div>
+      <div class="stat-item fade-up fade-up-delay-1">
+        <span class="stat-number">10 000+</span>
+        <span class="stat-label">довольных клиентов</span>
+      </div>
+      <div class="stat-item fade-up fade-up-delay-2">
+        <span class="stat-number">24ч</span>
+        <span class="stat-label">срочное производство</span>
+      </div>
+      <div class="stat-item fade-up fade-up-delay-3">
+        <span class="stat-number">100%</span>
+        <span class="stat-label">своё оборудование</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SERVICES ===== -->
+<section id="services">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="badge">✦ Наши услуги</div>
+      <h2 class="section-title">Всё для вашей полиграфии</h2>
+      <p class="section-sub">Производим любые виды печати на собственном оборудовании. Гарантируем качество и сроки.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card c1 fade-up">
+        <span class="service-icon">🪪</span>
+        <div class="service-title">Визитки и листовки</div>
+        <div class="service-desc">Офсетная и цифровая печать, матовая/глянцевая ламинация, тиснение фольгой, выборочный UV-лак</div>
+        <span class="service-tag">от 1 000 шт</span>
+      </div>
+      <div class="service-card c2 fade-up fade-up-delay-1">
+        <span class="service-icon">🖼️</span>
+        <div class="service-title">Баннеры и плакаты</div>
+        <div class="service-desc">Широкоформатная печать на баннерной ткани, сетке, самоклейке. Любые размеры и тиражи</div>
+        <span class="service-tag">от 1 м²</span>
+      </div>
+      <div class="service-card c3 fade-up fade-up-delay-2">
+        <span class="service-icon">📚</span>
+        <div class="service-title">Брошюры и каталоги</div>
+        <div class="service-desc">Скрепка, клей Perfect Binding, твёрдая обложка. Полноцветная печать с подготовкой макета</div>
+        <span class="service-tag">от 50 шт</span>
+      </div>
+      <div class="service-card c4 fade-up fade-up-delay-3">
+        <span class="service-icon">🎁</span>
+        <div class="service-title">Корпоративные сувениры</div>
+        <div class="service-desc">Блокноты, ручки, кружки, папки с брендингом. Нанесение логотипа: шелкография, тампопечать, лазер</div>
+        <span class="service-tag">под заказ</span>
+      </div>
+      <div class="service-card c5 fade-up fade-up-delay-4">
+        <span class="service-icon">📦</span>
+        <div class="service-title">Упаковка и этикетки</div>
+        <div class="service-desc">Картонные коробки, самоклеящиеся этикетки, подарочная упаковка. Вырубка любой формы</div>
+        <span class="service-tag">от 100 шт</span>
+      </div>
+      <div class="service-card c6 fade-up fade-up-delay-5">
+        <span class="service-icon">🏙️</span>
+        <div class="service-title">Широкоформатная печать</div>
+        <div class="service-desc">Интерьерная печать, стенды, роллапы, оформление витрин и транспорта. Монтаж в Москве и МО</div>
+        <span class="service-tag">монтаж включён</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PORTFOLIO ===== -->
+<section id="portfolio">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="badge">✦ Наши работы</div>
+      <h2 class="section-title">Портфолио</h2>
+      <p class="section-sub">Реализованные проекты для наших клиентов — от малого бизнеса до крупных корпораций</p>
+    </div>
+    <div class="portfolio-grid">
+      <div class="portfolio-item fade-up">
+        <img src="riol_work1.jpg" alt="Фирменные календари" loading="lazy" onerror="this.onerror=null;this.src=''https://riolprint.ru/upload/iblock/795/j219idgyihnry1d2xia4cuopdeejbnng.jpg''">
+        <div class="portfolio-overlay"><span>Фирменные календари и квартальная полиграфия</span></div>
+      </div>
+      <div class="portfolio-item fade-up fade-up-delay-1">
+        <img src="riol_work2.jpg" alt="Бумажные пакеты" loading="lazy" onerror="this.onerror=null;this.src=''https://riolprint.ru/upload/iblock/f34/pukqq7vqfqslsrej3wlwxpgz9ozqj5rz.jpg''">
+        <div class="portfolio-overlay"><span>Брендированные бумажные и крафтовые пакеты</span></div>
+      </div>
+      <div class="portfolio-item fade-up fade-up-delay-2">
+        <img src="riol_work3.jpg" alt="Кашированные коробки" loading="lazy" onerror="this.onerror=null;this.src=''https://riolprint.ru/upload/iblock/d90/qtgpvsu1eop0iz3sainctwgwoeynvt6b.jpg''">
+        <div class="portfolio-overlay"><span>Кашированные подарочные коробки и упаковка</span></div>
+      </div>
+      <div class="portfolio-item fade-up fade-up-delay-3">
+        <img src="riol_work4.jpg" alt="Визитки и полиграфия" loading="lazy" onerror="this.onerror=null;this.src=''https://riolprint.ru/upload/iblock/4af/7tw8fawkms8jtc1xacm9v7xuv006tqfj.jpg''">
+        <div class="portfolio-overlay"><span>Представительские визитки и шелкография</span></div>
+      </div>
+      <div class="portfolio-item fade-up fade-up-delay-4" style="grid-column: 1 / -1;">
+        <img src="riol_work5.jpg" alt="Каталоги и брошюры" loading="lazy" onerror="this.onerror=null;this.src=''https://riolprint.ru/upload/iblock/ba4/a5v6c29h2qrkwozd6lgdz9zr15ish1ov.jpg''">
+        <div class="portfolio-overlay"><span>Каталоги, брошюры и многополосные издания</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHY US ===== -->
+<section id="why">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="badge">✦ Почему мы</div>
+      <h2 class="section-title">Ваш надёжный партнёр</h2>
+      <p class="section-sub">Выбирая Riol Print — вы выбираете качество, скорость и надёжность</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card fade-up">
+        <span class="why-icon">🏆</span>
+        <div class="why-title">15+ лет опыта</div>
+        <div class="why-desc">С 2009 года производим полиграфию для бизнеса любого масштаба</div>
+      </div>
+      <div class="why-card fade-up fade-up-delay-1">
+        <span class="why-icon">👥</span>
+        <div class="why-title">10 000+ клиентов</div>
+        <div class="why-desc">Постоянные клиенты — наша гордость. 85% возвращаются снова</div>
+      </div>
+      <div class="why-card fade-up fade-up-delay-2">
+        <span class="why-icon">⚡</span>
+        <div class="why-title">Срочное производство</div>
+        <div class="why-desc">Готовы выполнить срочный заказ за 24 часа. Работаем 7 дней в неделю</div>
+      </div>
+      <div class="why-card fade-up fade-up-delay-3">
+        <span class="why-icon">🏭</span>
+        <div class="why-title">Своё оборудование</div>
+        <div class="why-desc">Полный цикл производства на собственных мощностях без посредников</div>
+      </div>
+      <div class="why-card fade-up fade-up-delay-4">
+        <span class="why-icon">🚚</span>
+        <div class="why-title">Доставка по Москве</div>
+        <div class="why-desc">Бесплатная доставка по Москве и МО от 5 000 рублей. Курьер или транспортная компания</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HOW WE WORK ===== -->
+<section id="how">
+  <div class="container">
+    <div class="section-header fade-up" style="text-align:center;">
+      <div class="badge">✦ Процесс работы</div>
+      <h2 class="section-title">Как мы работаем</h2>
+      <p class="section-sub" style="margin: 0 auto;">Простой и прозрачный процесс — от заявки до готового тиража</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-item fade-up">
+        <div class="step-num">1</div>
+        <div class="step-title">Заявка</div>
+        <div class="step-desc">Оставьте заявку онлайн или позвоните нам. Обсудим детали вашего заказа</div>
+      </div>
+      <div class="step-item fade-up fade-up-delay-1">
+        <div class="step-num">2</div>
+        <div class="step-title">Расчёт</div>
+        <div class="step-desc">Подготовим коммерческое предложение в течение 30 минут с точными ценами</div>
+      </div>
+      <div class="step-item fade-up fade-up-delay-2">
+        <div class="step-num">3</div>
+        <div class="step-title">Производство</div>
+        <div class="step-desc">Запускаем в производство после утверждения макета и предоплаты</div>
+      </div>
+      <div class="step-item fade-up fade-up-delay-3">
+        <div class="step-num">4</div>
+        <div class="step-title">Доставка</div>
+        <div class="step-desc">Доставляем курьером или вы забираете самовывозом. Всё в срок и в лучшем виде</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CERTIFICATES ===== -->
+<section id="certs">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="badge">✦ Документы и награды</div>
+      <h2 class="section-title">Дипломы и сертификаты</h2>
+      <p class="section-sub">Наши достижения подтверждены официальными документами и наградами</p>
+    </div>
+    <div class="certs-grid">
+      <div class="cert-item fade-up"><img src="diplom1.jpg" alt="Диплом 1" loading="lazy"></div>
+      <div class="cert-item fade-up fade-up-delay-1"><img src="diplom2.jpg" alt="Диплом 2" loading="lazy"></div>
+      <div class="cert-item fade-up fade-up-delay-2"><img src="diplom3.jpg" alt="Диплом 3" loading="lazy"></div>
+      <div class="cert-item fade-up fade-up-delay-3"><img src="diplom4.jpg" alt="Диплом 4" loading="lazy"></div>
+      <div class="cert-item fade-up fade-up-delay-4"><img src="diplom5.jpg" alt="Диплом 5" loading="lazy"></div>
+      <div class="cert-item fade-up fade-up-delay-5"><img src="diplom6.jpg" alt="Диплом 6" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== REVIEWS ===== -->
+<section id="reviews">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="badge">✦ Отзывы клиентов</div>
+      <h2 class="section-title">Что говорят клиенты</h2>
+      <p class="section-sub">Реальные отзывы от наших постоянных партнёров</p>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card fade-up">
+        <div class="review-stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <p class="review-text">
+          Работаем с Riol Print уже 3 года. Всегда чёткие сроки, отличное качество. Заказываем визитки, буклеты и раздаточные материалы для конференций. Рекомендуем!
+        </p>
+        <div class="review-author">
+          <div class="review-avatar">АК</div>
+          <div>
+            <div class="review-name">Алексей Карпов</div>
+            <div class="review-company">Директор, ООО «ТехноПроект»</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card fade-up fade-up-delay-1">
+        <div class="review-stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <p class="review-text">
+          Обратились по срочному заказу — нужна была упаковка к выставке за 48 часов. Справились на отлично! Качество превзошло ожидания, а цена оказалась разумной.
+        </p>
+        <div class="review-author">
+          <div class="review-avatar">МС</div>
+          <div>
+            <div class="review-name">Мария Смирнова</div>
+            <div class="review-company">Маркетолог, ПАО «Инновация»</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card fade-up fade-up-delay-2">
+        <div class="review-stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <p class="review-text">
+          Делаем корпоративные каталоги дважды в год. Команда профессиональная, всегда помогут с макетом, предложат лучшие решения по бумаге и послепечатной обработке.
+        </p>
+        <div class="review-author">
+          <div class="review-avatar">ДП</div>
+          <div>
+            <div class="review-name">Дмитрий Петров</div>
+            <div class="review-company">CEO, Сеть магазинов «Формат»</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACTS ===== -->
+<section id="contacts">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="badge">✦ Контакты</div>
+      <h2 class="section-title">Свяжитесь с нами</h2>
+      <p class="section-sub">Ответим на все вопросы и рассчитаем стоимость вашего заказа</p>
+    </div>
+    <div class="contacts-grid">
+      <div class="contacts-info">
+        <div class="contact-item fade-up">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-label">Адрес</div>
+            <div class="contact-value">г. Москва, ул. Типографская, д. 1</div>
+          </div>
+        </div>
+        <div class="contact-item fade-up fade-up-delay-1">
+          <div class="contact-icon">📞</div>
+          <div>
+            <div class="contact-label">Телефон</div>
+            <div class="contact-value"><a href="tel:+74951234567">+7 (495) 123-45-67</a></div>
+          </div>
+        </div>
+        <div class="contact-item fade-up fade-up-delay-2">
+          <div class="contact-icon">✉️</div>
+          <div>
+            <div class="contact-label">Email</div>
+            <div class="contact-value"><a href="mailto:info@riolprint.ru">info@riolprint.ru</a></div>
+          </div>
+        </div>
+        <div class="contact-item fade-up fade-up-delay-3">
+          <div class="contact-icon">🕐</div>
+          <div>
+            <div class="contact-label">Режим работы</div>
+            <div class="contact-value">Пн–Пт: 9:00–20:00, Сб: 10:00–18:00</div>
+          </div>
+        </div>
+        <div style="margin-top: 8px;">
+          <button class="btn-primary" onclick="openModal()" style="padding:14px 32px; font-size:0.95rem;">
+            Оставить заявку
+          </button>
+        </div>
+      </div>
+      <div class="contacts-map fade-up">
+        <div class="map-placeholder">
+          <div class="map-icon">🗺️</div>
+          <p>г. Москва, ул. Типографская, д. 1</p>
+          <p style="margin-top:8px; font-size:0.8rem;">м. Типографская, 5 минут пешком</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">
+          <img src="8e2k1p57tyb9m22aro35kt1ok7af5qv7.png" alt="Riol Print" onerror="this.style.display='none'">
+          Riol Print
+        </div>
+        <p class="footer-desc">Типография полного цикла в Москве. Производим любую полиграфию с 2009 года. Качество, скорость, честные цены.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Услуги</h4>
+        <ul>
+          <li><a href="#services">Визитки и листовки</a></li>
+          <li><a href="#services">Баннеры и плакаты</a></li>
+          <li><a href="#services">Брошюры и каталоги</a></li>
+          <li><a href="#services">Корпоративные сувениры</a></li>
+          <li><a href="#services">Упаковка</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Компания</h4>
+        <ul>
+          <li><a href="#why">О нас</a></li>
+          <li><a href="#portfolio">Портфолио</a></li>
+          <li><a href="#certs">Сертификаты</a></li>
+          <li><a href="#reviews">Отзывы</a></li>
+          <li><a href="#contacts">Контакты</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Контакты</h4>
+        <ul>
+          <li><a href="tel:+74951234567">+7 (495) 123-45-67</a></li>
+          <li><a href="mailto:info@riolprint.ru">info@riolprint.ru</a></li>
+          <li><a href="#contacts">г. Москва</a></li>
+          <li><a href="#contacts">Пн–Пт: 9:00–20:00</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Riol Print. Все права защищены.</p>
+      <p>Типография полного цикла в Москве</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== FAB ===== -->
+<div class="fab">
+  <span class="fab-label">Получить расчёт</span>
+  <button class="fab-btn" onclick="openModal()" aria-label="Открыть форму заказа">📋</button>
+</div>
+
+<!-- ===== MODAL ===== -->
+<div class="modal-bg" id="modalBg" onclick="handleModalBgClick(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modalForm">
+      <h2 class="modal-title">Получить расчёт</h2>
+      <p class="modal-sub">Опишите ваш заказ, и мы пришлём точный расчёт в течение 30 минут</p>
+      <form onsubmit="submitForm(event)">
+        <div class="form-group">
+          <label>Ваше имя *</label>
+          <input type="text" id="formName" placeholder="Иван Иванов" required>
+        </div>
+        <div class="form-group">
+          <label>Телефон *</label>
+          <input type="tel" id="formPhone" placeholder="+7 (___) ___-__-__" required>
+        </div>
+        <div class="form-group">
+          <label>Тип продукции</label>
+          <select id="formType">
+            <option value="">— Выберите услугу —</option>
+            <option>Визитки и листовки</option>
+            <option>Баннеры и плакаты</option>
+            <option>Брошюры и каталоги</option>
+            <option>Корпоративные сувениры</option>
+            <option>Упаковка и этикетки</option>
+            <option>Широкоформатная печать</option>
+            <option>Другое</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Описание заказа</label>
+          <textarea id="formDesc" placeholder="Опишите тираж, размер, материал, сроки..."></textarea>
+        </div>
+        <button type="submit" class="form-submit" id="formSubmitBtn">Отправить заявку →</button>
+        <p class="form-note">Нажимая кнопку, вы соглашаетесь с политикой обработки персональных данных</p>
+      </form>
+    </div>
+    <div class="form-success" id="formSuccess">
+      <div class="success-icon">✅</div>
+      <h3>Заявка отправлена!</h3>
+      <p>Мы свяжемся с вами в течение 30 минут.<br>Спасибо за обращение в Riol Print!</p>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== CONFIG =====
+const SITE_CONFIG = {
+  TELEGRAM_TOKEN: 'REPLACE_WITH_YOUR_BOT_TOKEN',   // Вставьте токен бота
+  CHAT_ID:        'REPLACE_WITH_YOUR_CHAT_ID',      // Вставьте chat_id
+};
+
+// ===== NAV SCROLL =====
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 60) {
+    nav.style.boxShadow = '0 4px 24px rgba(0,0,0,0.3)';
+  } else {
+    nav.style.boxShadow = 'none';
+  }
+}, { passive: true });
+
+// ===== MOBILE MENU =====
+function toggleMenu() {
+  const menu = document.getElementById('mobileMenu');
+  menu.classList.toggle('open');
+}
+function closeMenu() {
+  document.getElementById('mobileMenu').classList.remove('open');
+}
+document.addEventListener('click', (e) => {
+  const menu = document.getElementById('mobileMenu');
+  const burger = document.querySelector('.nav-burger');
+  if (menu.classList.contains('open') && !menu.contains(e.target) && !burger.contains(e.target)) {
+    closeMenu();
+  }
+});
+
+// ===== MODAL =====
+function openModal() {
+  document.getElementById('modalBg').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('modalBg').classList.remove('open');
+  document.body.style.overflow = '';
+  // Reset form after delay
+  setTimeout(() => {
+    document.getElementById('formSuccess').style.display = 'none';
+    document.getElementById('modalForm').style.display = 'block';
+    document.getElementById('formSubmitBtn').disabled = false;
+    document.getElementById('formSubmitBtn').textContent = 'Отправить заявку →';
+  }, 300);
+}
+function handleModalBgClick(e) {
+  if (e.target === document.getElementById('modalBg')) closeModal();
+}
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeModal();
+});
+
+// ===== FORM SUBMIT =====
+async function submitForm(e) {
+  e.preventDefault();
+  const btn = document.getElementById('formSubmitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Отправляем...';
+
+  const name    = document.getElementById('formName').value.trim();
+  const phone   = document.getElementById('formPhone').value.trim();
+  const type    = document.getElementById('formType').value;
+  const desc    = document.getElementById('formDesc').value.trim();
+
+  const message = [
+    '📬 *Новая заявка с лендинга Riol Print*',
+    '',
+    `👤 *Имя:* ${name}`,
+    `📞 *Телефон:* ${phone}`,
+    type ? `🖨 *Тип продукции:* ${type}` : '',
+    desc ? `📝 *Описание:* ${desc}` : '',
+    '',
+    `🕒 ${new Date().toLocaleString('ru-RU')}`,
+  ].filter(Boolean).join('\n');
+
+  // Отправка в Telegram
+  const isConfigured =
+    SITE_CONFIG.TELEGRAM_TOKEN !== 'REPLACE_WITH_YOUR_BOT_TOKEN' &&
+    SITE_CONFIG.CHAT_ID !== 'REPLACE_WITH_YOUR_CHAT_ID';
+
+  let sent = false;
+  if (isConfigured) {
+    try {
+      const resp = await fetch(
+        `https://api.telegram.org/bot${SITE_CONFIG.TELEGRAM_TOKEN}/sendMessage`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: SITE_CONFIG.CHAT_ID,
+            text: message,
+            parse_mode: 'Markdown',
+          }),
+        }
+      );
+      const data = await resp.json();
+      sent = data.ok;
+    } catch (err) {
+      console.error('Telegram error:', err);
+    }
+  } else {
+    // DEV mode: просто показываем успех
+    console.log('DEV MODE — заявка (Telegram не настроен):\n', message);
+    sent = true;
+  }
+
+  // Показываем успех
+  document.getElementById('modalForm').style.display = 'none';
+  document.getElementById('formSuccess').style.display = 'block';
+
+  if (!sent) {
+    document.getElementById('formSuccess').innerHTML = `
+      <div class="success-icon">⚠️</div>
+      <h3>Ошибка отправки</h3>
+      <p>Пожалуйста, позвоните нам напрямую:<br><strong><a href="tel:+74951234567" style="color:var(--lime-accent)">+7 (495) 123-45-67</a></strong></p>
+    `;
+  }
+}
+
+// ===== PHONE MASK =====
+document.getElementById('formPhone').addEventListener('input', function (e) {
+  let v = e.target.value.replace(/\D/g, '');
+  if (v.startsWith('8')) v = '7' + v.slice(1);
+  if (v.startsWith('7')) {
+    let res = '+7';
+    if (v.length > 1) res += ' (' + v.slice(1, 4);
+    if (v.length >= 4) res += ') ' + v.slice(4, 7);
+    if (v.length >= 7) res += '-' + v.slice(7, 9);
+    if (v.length >= 9) res += '-' + v.slice(9, 11);
+    e.target.value = res;
+  } else {
+    e.target.value = v ? '+' + v : '';
+  }
+});
+
+// ===== INTERSECTION OBSERVER =====
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// ===== SMOOTH ANCHOR =====
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function (e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      const offset = 80;
+      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  });
+});
+</script>
+</body>
+</html>

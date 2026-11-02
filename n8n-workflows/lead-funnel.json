@@ -1,0 +1,74 @@
+{
+  "name": "01_Lead_Funnel_CRM_Telegram",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "lead-capture",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "name": "Webhook: Заявка с сайта",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Валидация и нормализация данных лида\nconst body = $input.first().json.body || $input.first().json;\nconst phone = (body.phone || '').replace(/[^0-9+]/g, '');\nconst name = (body.name || 'Не указано').trim();\nconst service = body.service || 'Общая заявка';\nconst source = body.source || 'Лендинг';\n\nif (!phone || phone.length < 10) {\n  throw new Error('Некорректный номер телефона');\n}\n\nreturn [{\n  json: {\n    leadId: 'LEAD-' + Math.floor(1000 + Math.random() * 9000),\n    name: name,\n    phone: phone,\n    service: service,\n    source: source,\n    createdAt: new Date().toISOString(),\n    status: 'Новый'\n  }\n}];"
+      },
+      "name": "Валидация и очистка",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "sheetId": "1A2B3C4D_YOUR_SPREADSHEET_ID",
+        "range": "Лиды!A:G",
+        "options": {}
+      },
+      "name": "Запись в CRM / Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [680, 200]
+    },
+    {
+      "parameters": {
+        "chatId": "YOUR_TELEGRAM_CHAT_ID",
+        "text": "=⚡ *НОВЫЙ ЛИД С САЙТА!*\n\n👤 *Имя:* {{ $json.name }}\n📞 *Телефон:* {{ $json.phone }}\n🎯 *Услуга:* {{ $json.service }}\n🌐 *Источник:* {{ $json.source }}\n🆔 *ID:* {{ $json.leadId }}\n\n⏱ *Время реакции: до 5 минут*",
+        "additionalFields": {
+          "parse_mode": "Markdown",
+          "reply_markup": {
+            "inline_keyboard": [
+              [
+                { "text": "✅ Взять в работу", "callback_data": "claim_{{ $json.leadId }}" },
+                { "text": "📞 Позвонить", "url": "tel:{{ $json.phone }}" }
+              ]
+            ]
+          }
+        }
+      },
+      "name": "Telegram: Оповещение менеджера",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.1,
+      "position": [680, 400]
+    }
+  ],
+  "connections": {
+    "Webhook: Заявка с сайта": {
+      "main": [
+        [{ "node": "Валидация и очистка", "type": "main", "index": 0 }]
+      ]
+    },
+    "Валидация и очистка": {
+      "main": [
+        [
+          { "node": "Запись в CRM / Google Sheets", "type": "main", "index": 0 },
+          { "node": "Telegram: Оповещение менеджера", "type": "main", "index": 0 }
+        ]
+      ]
+    }
+  }
+}

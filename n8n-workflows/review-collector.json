@@ -1,0 +1,106 @@
+{
+  "name": "02_Review_NPS_Collector_2GIS_Yandex",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "service-completed",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "name": "Webhook: Заказ / Услуга оказана",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [220, 300]
+    },
+    {
+      "parameters": {
+        "amount": 2,
+        "unit": "hours"
+      },
+      "name": "Пауза 2 часа (после визита)",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [440, 300]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $json.body.clientTgId }}",
+        "text": "=Здравствуйте, {{ $json.body.clientName }}! 🌸\n\nСпасибо, что выбрали нас сегодня! Пожалуйста, оцените качество обслуживания от 1 до 5:",
+        "additionalFields": {
+          "reply_markup": {
+            "inline_keyboard": [
+              [
+                { "text": "⭐⭐⭐⭐⭐ 5", "callback_data": "rate_5_{{ $json.body.orderId }}" },
+                { "text": "⭐⭐⭐⭐ 4", "callback_data": "rate_4_{{ $json.body.orderId }}" }
+              ],
+              [
+                { "text": "⭐⭐⭐ 3", "callback_data": "rate_3_{{ $json.body.orderId }}" },
+                { "text": "⭐⭐ 2", "callback_data": "rate_2_{{ $json.body.orderId }}" },
+                { "text": "⭐ 1", "callback_data": "rate_1_{{ $json.body.orderId }}" }
+              ]
+            ]
+          }
+        }
+      },
+      "name": "Запрос оценки в Telegram / WA",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.1,
+      "position": [660, 300]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "number": [{ "value1": "={{ $json.rating }}", "operation": "largerEqual", "value2": 5 }]
+              }
+            }
+          ]
+        }
+      },
+      "name": "Фильтр оценки (5 vs <5)",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [880, 300]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $json.clientTgId }}",
+        "text": "=Огромное спасибо за 5 звёзд! 💖\n\nОставьте, пожалуйста, пару тёплых слов на Яндекс Картах или 2GIS — это очень помогает нашим мастерам:\n\n📍 [Оставить отзыв на Яндекс Картах](https://yandex.ru/maps)\n📍 [Оставить отзыв в 2GIS](https://2gis.ru)\n\nВ благодарность дарим вам скидку 10% на следующий визит по промокоду *СПАСИБО5*!"
+      },
+      "name": "Отправка ссылки на карты (5 звезд)",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.1,
+      "position": [1120, 200]
+    },
+    {
+      "parameters": {
+        "chatId": "YOUR_ADMIN_CHAT_ID",
+        "text": "=⚠️ *ВНИМАНИЕ! НИЗКАЯ ОЦЕНКА КЛИЕНТА!*\n\nКлиент: {{ $json.clientName }} (тел: {{ $json.clientPhone }})\nОценка: {{ $json.rating }}/5\nЗаказ: #{{ $json.orderId }}\n\nСрочно свяжитесь для урегулирования ситуации до публикации негатива в сети!"
+      },
+      "name": "Алерт управляющему (1-3 звезды)",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.1,
+      "position": [1120, 420]
+    }
+  ],
+  "connections": {
+    "Webhook: Заказ / Услуга оказана": {
+      "main": [[{ "node": "Пауза 2 часа (после визита)", "type": "main", "index": 0 }]]
+    },
+    "Пауза 2 часа (после визита)": {
+      "main": [[{ "node": "Запрос оценки в Telegram / WA", "type": "main", "index": 0 }]]
+    },
+    "Запрос оценки в Telegram / WA": {
+      "main": [[{ "node": "Фильтр оценки (5 vs <5)", "type": "main", "index": 0 }]]
+    },
+    "Фильтр оценки (5 vs <5)": {
+      "main": [
+        [{ "node": "Отправка ссылки на карты (5 звезд)", "type": "main", "index": 0 }],
+        [{ "node": "Алерт управляющему (1-3 звезды)", "type": "main", "index": 0 }]
+      ]
+    }
+  }
+}

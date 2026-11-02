@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Анна Михайленко | Врач-косметолог, эстетист и преподаватель</title>
+    
+    <!-- Подключение премиальных шрифтов Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==========================================================================
+           1. ПЕРЕМЕННЫЕ ДИЗАЙНА И ПАЛИТРА «ТИХАЯ РОСКОШЬ + ДИНАМИКА»
+           ========================================================================== */
+        :root {
+            --bg-card: rgba(255, 255, 255, 0.9);
+            --text-main: #2A2522;
+            --text-muted: #5C524C;
+            --accent-bright: #E5A93C;
+            --accent-rose: #C28F8F;
+            --accent-gradient: linear-gradient(135deg, #E5A93C, #F47C62);
+            --border-soft: rgba(229, 169, 60, 0.22);
+            --radius-xl: 32px;
+            --radius-md: 20px;
+            --transition-bounce: all 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        /* ==========================================================================
+           2. АНИМИРОВАННЫЙ ЖИВОЙ ФОН И ПОЛОСА ПРОГРЕССА
+           ========================================================================== */
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            color: var(--text-main);
+            line-height: 1.65;
+            overflow-x: hidden;
+            background: linear-gradient(-45deg, #FAF5EE, #FFF0EC, #FDF4E3, #FDF8F5);
+            background-size: 400% 400%;
+            animation: gradientFlow 15s ease infinite;
+        }
+
+        .scroll-progress {
+            position: fixed;
+            top: 0; left: 0;
+            height: 4px;
+            background: var(--accent-gradient);
+            width: 0%;
+            z-index: 3000;
+            transition: width 0.1s ease;
+        }
+
+        .container { max-width: 1320px; margin: 0 auto; padding: 0 24px; }
+
+        /* ==========================================================================
+           3. ТИПОГРАФИКА И КНОПКИ
+           ========================================================================== */
+        h1, h2, h3, h4, .serif-font {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            line-height: 1.12;
+        }
+
+        .section-title {
+            font-size: clamp(36px, 5.5vw, 62px);
+            margin-bottom: 20px;
+        }
+
+        .italic-accent {
+            font-style: italic;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        .tag-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            border-radius: 100px;
+            background: #FFFFFF;
+            color: var(--accent-bright);
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(229, 169, 60, 0.15);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 18px 36px;
+            border-radius: 100px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition-bounce);
+            font-family: 'Manrope', sans-serif;
+            font-size: 13px;
+        }
+
+        .btn-primary {
+            background: var(--accent-gradient);
+            color: #FFFFFF;
+            box-shadow: 0 10px 25px rgba(229, 169, 60, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 16px 35px rgba(244, 124, 98, 0.42);
+        }
+
+        .btn-outline {
+            background: #FFFFFF;
+            color: var(--text-main);
+            border: 1.5px solid var(--border-soft);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent-bright);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 24px rgba(229, 169, 60, 0.15);
+        }
+
+        /* ==========================================================================
+           4. ШАПКА САЙТА (HEADER)
+           ========================================================================== */
+        header {
+            position: fixed;
+            top: 12px; left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 32px);
+            max-width: 1320px;
+            z-index: 1000;
+            padding: 14px 28px;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 100px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 25px;
+            font-weight: 700;
+            color: var(--text-main);
+            text-decoration: none;
+        }
+
+        .nav-links { display: flex; gap: 24px; list-style: none; }
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--accent-bright); }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none; border: none;
+            font-size: 24px; cursor: pointer; color: var(--text-main);
+        }
+
+        /* ==========================================================================
+           5. ГЛАВНЫЙ ЭКРАН (HERO)
+           ========================================================================== */
+        .hero { padding: 170px 0 90px; }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.12fr 0.88fr;
+            gap: 56px;
+            align-items: center;
+        }
+
+        .hero-photo-wrapper {
+            position: relative;
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            aspect-ratio: 4/3.6;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+            border: 8px solid #FFFFFF;
+            transition: var(--transition-bounce);
+            cursor: pointer;
+            background: #F5EBE1;
+        }
+
+        .hero-photo-wrapper:hover {
+            transform: translateY(-8px) rotate(0.8deg);
+            box-shadow: 0 40px 80px rgba(229, 169, 60, 0.25);
+        }
+
+        .hero-photo-wrapper img {
+            width: 100%; height: 100%; object-fit: cover; display: block;
+        }
+
+        .stats-strip {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 36px;
+        }
+
+        .stat-box {
+            background: var(--bg-card);
+            padding: 18px 20px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-soft);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+        }
+
+        .stat-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 34px;
+            font-weight: 700;
+            color: var(--accent-bright);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        /* ==========================================================================
+           6. БЕГУЩАЯ СТРОКА БРЕНДОВ КОСМЕЦЕВТИКИ (MARQUEE)
+           ========================================================================== */
+        .marquee-bar {
+            padding: 20px 0;
+            background: rgba(255, 255, 255, 0.7);
+            border-top: 1px solid var(--border-soft);
+            border-bottom: 1px solid var(--border-soft);
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .marquee-track {
+            display: inline-block;
+            animation: marqueeScroll 28s linear infinite;
+        }
+
+        .marquee-item {
+            display: inline-block;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0 32px;
+            color: var(--text-main);
+        }
+
+        .marquee-item span { color: var(--accent-bright); margin-right: 10px; }
+
+        @keyframes marqueeScroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        /* ==========================================================================
+           7. БЛОК ФИЛОСОФИИ И REELS-ГАЛЕРЕЯ ПРАКТИКИ
+           ========================================================================== */
+        section { padding: 100px 0; }
+
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: 0.95fr 1.05fr;
+            gap: 56px;
+            align-items: center;
+        }
+
+        .photo-collage {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .collage-img {
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 6px solid #FFF;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            aspect-ratio: 3/4;
+            transition: var(--transition-bounce);
+            cursor: pointer;
+            background: #F5EBE1;
+        }
+
+        .collage-img.offset { margin-top: 40px; }
+        .collage-img:hover {
+            transform: scale(1.04) translateY(-8px);
+            box-shadow: 0 25px 50px rgba(229, 169, 60, 0.3);
+        }
+        .collage-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+        .feature-card {
+            background: var(--bg-card);
+            padding: 26px 30px;
+            border-radius: var(--radius-md);
+            margin-bottom: 18px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            transition: var(--transition-bounce);
+            border-left: 4px solid var(--accent-bright);
+        }
+
+        .feature-card:hover {
+            transform: translateX(8px);
+            box-shadow: 0 15px 40px rgba(229, 169, 60, 0.15);
+        }
+
+        .reels-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            margin-top: 44px;
+        }
+
+        .reel-card {
+            position: relative;
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            aspect-ratio: 9/14;
+            border: 6px solid #FFF;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            transition: var(--transition-bounce);
+            background: #F5EBE1;
+            cursor: pointer;
+        }
+
+        .reel-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 30px 60px rgba(229, 169, 60, 0.38);
+        }
+
+        .reel-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+        .reel-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(0deg, rgba(0,0,0,0.82) 0%, transparent 55%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 28px;
+            color: #FFF;
+        }
+
+        /* ==========================================================================
+           8. ИНТЕРАКТИВНЫЙ ПРОТОКОЛ ЧИСТКИ И ЛАЙФХАКИ
+           ========================================================================== */
+        .method-grid {
+            display: grid;
+            grid-template-columns: 1.25fr 0.75fr;
+            gap: 48px;
+            align-items: start;
+        }
+
+        .protocol-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .tab-btn {
+            padding: 10px 18px;
+            border-radius: 100px;
+            border: 1px solid var(--border-soft);
+            background: #FFFFFF;
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background: var(--accent-gradient);
+            color: #FFFFFF;
+            border-color: transparent;
+            box-shadow: 0 8px 20px rgba(229, 169, 60, 0.25);
+        }
+
+        .protocol-display {
+            background: #FFFFFF;
+            border-radius: var(--radius-xl);
+            padding: 36px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+            border: 2px solid var(--border-soft);
+        }
+
+        .lifehack-banner {
+            margin-top: 20px;
+            padding: 18px 22px;
+            background: #FFF9F0;
+            border-left: 4px solid var(--accent-bright);
+            border-radius: 12px;
+            font-size: 14px;
+        }
+
+        .schema-card {
+            position: sticky;
+            top: 110px;
+            background: #FFFFFF;
+            padding: 24px;
+            border-radius: var(--radius-xl);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+            border: 4px solid #FFF;
+            text-align: center;
+        }
+        .schema-card img {
+            width: 100%;
+            aspect-ratio: 4/3;
+            object-fit: cover;
+            border-radius: var(--radius-md);
+            margin-bottom: 14px;
+            display: block;
+            cursor: pointer;
+        }
+
+        /* ==========================================================================
+           9. ПРОГРАММЫ ОБУЧЕНИЯ И 4 ШАГА ОПЛАТЫ/ВЫДАЧИ
+           ========================================================================== */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            margin-top: 48px;
+        }
+
+        .course-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-xl);
+            padding: 32px;
+            border: 2px solid rgba(255,255,255,0.9);
+            box-shadow: 0 18px 45px rgba(0,0,0,0.06);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: var(--transition-bounce);
+            position: relative;
+        }
+
+        .course-card.featured {
+            background: #FFFFFF;
+            border: 2px solid var(--accent-bright);
+            box-shadow: 0 25px 60px rgba(229, 169, 60, 0.22);
+        }
+
+        .course-card:hover { transform: translateY(-10px); }
+
+        .course-img-thumb {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 18px;
+            margin-bottom: 18px;
+            border: 4px solid #FFFFFF;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.07);
+            display: block;
+        }
+
+        .course-badge {
+            display: inline-block;
+            align-self: flex-start;
+            padding: 6px 14px;
+            border-radius: 100px;
+            background: #FFF3DC;
+            color: #B87D14;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 12px;
+        }
+
+        .course-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 38px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin: 16px 0 6px;
+        }
+
+        .course-list {
+            list-style: none;
+            margin: 18px 0 26px;
+        }
+
+        .course-list li {
+            margin-bottom: 10px;
+            font-size: 14px;
+            padding-left: 24px;
+            position: relative;
+            color: var(--text-muted);
+        }
+
+        .course-list li::before {
+            content: "✓";
+            position: absolute; left: 0;
+            color: var(--accent-bright);
+            font-weight: 800;
+        }
+
+        .payment-steps-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 48px;
+        }
+
+        .pay-step-card {
+            background: #FFFFFF;
+            border-radius: var(--radius-md);
+            padding: 28px 24px;
+            border: 1px solid var(--border-soft);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.04);
+        }
+
+        .pay-step-num {
+            width: 42px; height: 42px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            color: #FFF; font-weight: 700;
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        /* ==========================================================================
+           10. ИНТЕРАКТИВНЫЙ ТРЕНАЖЕР (ПРАКТИЧЕСКИЕ КЕЙСЫ)
+           ========================================================================== */
+        .quiz-container {
+            background: #FFFFFF;
+            border-radius: var(--radius-xl);
+            padding: 48px;
+            box-shadow: 0 24px 60px rgba(0,0,0,0.06);
+            border: 2px dashed var(--accent-bright);
+        }
+
+        .quiz-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 28px;
+        }
+
+        .quiz-card {
+            background: #FAF7F2;
+            padding: 26px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-soft);
+        }
+
+        .quiz-opt {
+            display: block; width: 100%; text-align: left;
+            padding: 12px 16px; margin-top: 10px;
+            border-radius: 12px; border: 1px solid #E2D9D0;
+            background: #FFFFFF; font-family: inherit;
+            font-size: 13px; cursor: pointer; transition: all 0.2s;
+        }
+
+        .quiz-opt:hover { border-color: var(--accent-bright); background: #FFFDF9; }
+        .quiz-opt.correct { background: #E8F5E9; border-color: #4CAF50; color: #1B5E20; font-weight: 600; }
+        .quiz-opt.wrong { background: #FFEBEE; border-color: #EF5350; color: #B71C1C; }
+
+        .quiz-explanation {
+            display: none; margin-top: 14px; padding: 12px;
+            border-radius: 10px; background: #FFF4E0; font-size: 13px;
+        }
+
+        /* ==========================================================================
+           11. ПОРТФОЛИО РАБОТ И ДИПЛОМЫ (ВСЕ 12 БЛОКОВ ЗАПОЛНЕНЫ ФОТО)
+           ========================================================================== */
+        .portfolio-grid, .diplomas-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 44px;
+        }
+
+        .portfolio-card, .diploma-card {
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 5px solid #FFF;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            aspect-ratio: 4/3.6;
+            transition: var(--transition-bounce);
+            position: relative;
+            cursor: pointer;
+            background: #F5EBE1;
+        }
+
+        .diploma-card {
+            aspect-ratio: 3/3.8;
+            border: 5px solid #FFFFFF;
+        }
+
+        .portfolio-card img, .diploma-card img {
+            width: 100%; height: 100%; object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .portfolio-card:hover, .diploma-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(229, 169, 60, 0.3);
+        }
+
+        .portfolio-card:hover img, .diploma-card:hover img { transform: scale(1.06); }
+
+        .card-caption-badge {
+            position: absolute;
+            bottom: 14px; left: 14px; right: 14px;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-main);
+            text-align: center;
+        }
+
+        /* ==========================================================================
+           12. ВСПЛЫВАЮЩЕЕ ОКНО ОПЛАТЫ И LIGHTBOX
+           ========================================================================== */
+        .fab-btn {
+            position: fixed;
+            bottom: 30px; right: 30px; z-index: 900;
+            background: var(--accent-gradient); color: #fff;
+            border: none; border-radius: 100px; padding: 18px 30px;
+            font-family: 'Manrope', sans-serif; font-size: 14px;
+            font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
+            cursor: pointer; box-shadow: 0 12px 30px rgba(229, 169, 60, 0.45);
+            transition: var(--transition-bounce);
+        }
+
+        .fab-btn:hover { transform: translateY(-5px) scale(1.05); }
+
+        .popup-overlay {
+            display: none; position: fixed; inset: 0;
+            background: rgba(25, 20, 18, 0.65); backdrop-filter: blur(8px);
+            z-index: 2000; align-items: center; justify-content: center; padding: 20px;
+        }
+        .popup-overlay.active { display: flex; }
+
+        .popup-box {
+            background: #fff; border-radius: var(--radius-xl);
+            padding: 44px 40px; max-width: 520px; width: 100%;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.2); position: relative;
+        }
+
+        .popup-close {
+            position: absolute; top: 18px; right: 22px;
+            background: none; border: none; font-size: 28px; cursor: pointer; color: var(--text-muted);
+        }
+
+        .form-group { margin-bottom: 16px; }
+        .form-group label {
+            display: block; font-size: 11px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.08em;
+            color: var(--text-muted); margin-bottom: 6px;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%; padding: 15px 18px;
+            border: 2px solid #EFEAE4; border-radius: 14px;
+            font-family: 'Manrope', sans-serif; font-size: 15px;
+            color: var(--text-main); outline: none; background: #FAFAFA;
+        }
+
+        .lightbox {
+            display: none; position: fixed; inset: 0;
+            background: rgba(0,0,0,0.88); z-index: 2500;
+            align-items: center; justify-content: center; padding: 24px; cursor: zoom-out;
+        }
+        .lightbox.active { display: flex; }
+        .lightbox img { max-width: 92%; max-height: 90vh; border-radius: 16px; border: 4px solid #FFF; }
+
+        .reveal {
+            opacity: 0; transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 980px) {
+            .nav-links {
+                display: none; position: absolute; top: 70px; left: 0; width: 100%;
+                background: #FFFFFF; flex-direction: column; padding: 24px;
+                border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            }
+            .nav-links.mobile-open { display: flex; }
+            .mobile-menu-btn { display: block; }
+            .hero-grid, .philosophy-grid, .reels-grid, .method-grid, .courses-grid, .payment-steps-grid, .quiz-grid {
+                grid-template-columns: 1fr;
+            }
+            .portfolio-grid, .diplomas-grid { grid-template-columns: repeat(2, 1fr); }
+            .hero { padding-top: 120px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- ================= ШАПКА САЙТА ================= -->
+    <header>
+        <a href="#" class="logo">Anna Mikhailenko</a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#about" onclick="closeMobileMenu()">Обо мне</a></li>
+            <li><a href="#philosophy" onclick="closeMobileMenu()">Подход</a></li>
+            <li><a href="#reels" onclick="closeMobileMenu()">Практика</a></li>
+            <li><a href="#method" onclick="closeMobileMenu()">Методика</a></li>
+            <li><a href="#courses" onclick="closeMobileMenu()">Курсы и Оплата</a></li>
+            <li><a href="#portfolio" onclick="closeMobileMenu()">Портфолио</a></li>
+            <li><a href="#diplomas" onclick="closeMobileMenu()">Эстетика & База</a></li>
+        </ul>
+        <div style="display: flex; align-items: center; gap: 12px;">
+            <button onclick="openPopup('Консультация / Запись в кабинет')" class="btn btn-primary" style="padding: 12px 22px; font-size: 12px;">Записаться</button>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+        </div>
+    </header>
+
+    <!-- ================= БЛОК 1: ГЛАВНЫЙ ЭКРАН (HERO) ================= -->
+    <section class="hero" id="about">
+        <div class="container hero-grid reveal">
+            <div>
+                <span class="tag-pill">✦ Эстетика «тихой роскоши» и доказательная медицина</span>
+                <h1>Анна Михайленко — <span class="italic-accent">врач-косметолог</span>, эстетист и преподаватель</h1>
+                <p style="font-size: 18px; color: var(--text-muted); margin: 20px 0 28px;">
+                    Более 7 лет клинической практики. Моя цель — не просто эстетика снаружи, а здоровая и ухоженная кожа в долгосрочной перспективе без агрессии. Обучаю косметологов читать кожу, понимать биохимию кислот и сочетать космецевтику с аппаратной реабилитацией.
+                </p>
+                <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+                    <a href="#courses" class="btn btn-primary">Выбрать курс или пособие →</a>
+                    <a href="#practice-quiz" class="btn btn-outline">Пройти клинический тест</a>
+                </div>
+
+                <div class="stats-strip">
+                    <div class="stat-box">
+                        <div class="stat-num">7+ лет</div>
+                        <div style="font-size: 12px; color: var(--text-muted);">в медицине и эстетической косметологии</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-num">180+ ч.</div>
+                        <div style="font-size: 12px; color: var(--text-muted);">глубина методологии и практики 1 на 1</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-num">25 стр.</div>
+                        <div style="font-size: 12px; color: var(--text-muted);">авторская настольная книга-руководство</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ГЛАВНОЕ ФОТО (Новая ссылка Dribbble 46835740) -->
+            <div class="hero-photo-wrapper" onclick="openLightbox(this.querySelector('img').src)">
+                <img src="https://cdn.dribbble.com/userupload/44547991/file/8cd98c899443cc263225689fdc1c28c7.png?resize=1200x900&vertical=center" referrerpolicy="no-referrer" alt="Анна Михайленко — Косметология и обучение">
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= БЕГУЩАЯ СТРОКА КОСМЕЦЕВТИКИ ================= -->
+    <div class="marquee-bar">
+        <div class="marquee-track">
+            <span class="marquee-item"><span>✦</span> Skin Synergy</span>
+            <span class="marquee-item"><span>✦</span> AngioPharm</span>
+            <span class="marquee-item"><span>✦</span> GIGI Cosmetic Labs</span>
+            <span class="marquee-item"><span>✦</span> Geltek</span>
+            <span class="marquee-item"><span>✦</span> Factology & TT Cosmeceutical</span>
+            <span class="marquee-item"><span>✦</span> M.Aklive • Cypher • Derma Factory</span>
+            <span class="marquee-item"><span>✦</span> Bioderma • Uriage • Avène • Topicrem</span>
+            <span class="marquee-item"><span>✦</span> Skin Synergy</span>
+            <span class="marquee-item"><span>✦</span> AngioPharm</span>
+            <span class="marquee-item"><span>✦</span> GIGI Cosmetic Labs</span>
+            <span class="marquee-item"><span>✦</span> Geltek</span>
+        </div>
+    </div>
+
+    <!-- ================= БЛОК 2: ФИЛОСОФИЯ И СИСТЕМНЫЙ ПОДХОД ================= -->
+    <section id="philosophy">
+        <div class="container philosophy-grid">
+            <!-- КОЛЛАЖ ФОТОГРАФИЙ (Новые ссылки 6297c0 и 7a8bfb) -->
+            <div class="photo-collage reveal">
+                <div class="collage-img" onclick="openLightbox(this.querySelector('img').src)">
+                    <img src="https://i.pinimg.com/1200x/62/97/c0/6297c0a5366767a621a0b9a01caaf5ef.jpg" referrerpolicy="no-referrer" alt="Эстетика ухода">
+                </div>
+                <div class="collage-img offset" onclick="openLightbox(this.querySelector('img').src)">
+                    <img src="https://i.pinimg.com/1200x/7a/8b/fb/7a8bfb74643828f2cf4c7c99484725e1.jpg" referrerpolicy="no-referrer" alt="Сияющая здоровая кожа">
+                </div>
+            </div>
+
+            <div class="reveal">
+                <span class="tag-pill">✦ Системная диагностика и МКБ-10</span>
+                <h2 class="section-title">Кожа — отражение <span class="italic-accent">внутреннего здоровья</span></h2>
+                <p style="color: var(--text-muted); margin-bottom: 24px;">
+                    Невозможно вылечить тяжелое акне, розацеа или пигментацию исключительно мазями, если организм находится в дефиците. Мы работаем на стыке корнеотерапии, нутрицевтики и доказательной медицины.
+                </p>
+
+                <div class="feature-card">
+                    <h3 style="font-size: 24px; margin-bottom: 6px; color: var(--accent-bright);">Ось «Кишечник — Кожа» и H. pylori</h3>
+                    <p style="font-size: 15px;">Застой желчи и дисбактериоз мгновенно отражаются на нижней трети лица. А скрытая бактерия <em>Helicobacter pylori</em> в желудке выделяет токсины, вызывающие стойкую эритему и обострение розацеа.</p>
+                </div>
+                <div class="feature-card">
+                    <h3 style="font-size: 24px; margin-bottom: 6px; color: var(--accent-bright);">Иммунология акне и нутрицевтика</h3>
+                    <p style="font-size: 15px;">Бактерии <em>C. acnes</em> активируют Toll-подобные рецепторы (TLR2), запуская каскад воспаления. Мы блокируем его снаружи (цинк, салициловая и азелаиновая кислоты) и восполняем дефициты изнутри (ферритин, витамин D, Омега-3).</p>
+                </div>
+                <div class="feature-card">
+                    <h3 style="font-size: 24px; margin-bottom: 6px; color: var(--accent-bright);">Корнеотерапия вместо агрессии</h3>
+                    <p style="font-size: 15px;">Мы бережем липидный цемент рогового слоя и натуральный увлажняющий фактор (NMF), восстанавливая кожу ламеллярными эмульсиями и маслами бурачника, энотеры и черной смородины.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= БЛОК 3: ПРАКТИКА И ПОСТАНОВКА РУКИ ================= -->
+    <section id="reels" style="background: rgba(255,255,255,0.45);">
+        <div class="container reveal">
+            <div style="text-align: center; max-width: 720px; margin: 0 auto;">
+                <span class="tag-pill">✦ Постановка руки 1 на 1</span>
+                <h2 class="section-title">Атмосфера и <span class="italic-accent">клиническая практика</span></h2>
+                <p style="color: var(--text-muted);">Индивидуальная работа с каждым учеником, разбор сложных анамнезов и искусство миксовать профессиональные бренды.</p>
+            </div>
+            
+            <div class="reels-grid">
+                <div class="reel-card" onclick="openLightbox(this.querySelector('img').src)">
+                    <img src="https://i.pinimg.com/736x/ce/1e/42/ce1e425ee0fe332a7cbcae841313dd94.jpg" referrerpolicy="no-referrer" alt="Клиническая практика">
+                    <div class="reel-overlay">
+                        <h4 class="serif-font" style="font-size: 28px;">Клиническая практика</h4>
+                        <p style="font-size: 13px; opacity: 0.9;">Многоступенчатые протоколы Skin Synergy & AngioPharm</p>
+                    </div>
+                </div>
+
+                <div class="reel-card" onclick="openLightbox(this.querySelector('img').src)">
+                    <img src="https://i.pinimg.com/736x/72/29/8b/72298ba7ac1632ea14bf6ac11050d53d.jpg" referrerpolicy="no-referrer" alt="Постановка руки">
+                    <div class="reel-overlay">
+                        <h4 class="serif-font" style="font-size: 28px;">Постановка руки</h4>
+                        <p style="font-size: 13px; opacity: 0.9;">Ювелирная работа УЗ-скрабером и инструментами без травм</p>
+                    </div>
+                </div>
+
+                <div class="reel-card" onclick="openLightbox(this.querySelector('img').src)">
+                    <img src="https://i.pinimg.com/736x/73/b0/b5/73b0b5c54b65b4e5540149371645b6df.jpg" referrerpolicy="no-referrer" alt="Аппаратная синергия">
+                    <div class="reel-overlay">
+                        <h4 class="serif-font" style="font-size: 28px;">Аппаратная синергия</h4>
+                        <p style="font-size: 13px; opacity: 0.9;">Микротоковый лимфодренаж и озонирование Дарсонвалем</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= БЛОК 4: ИНТЕРАКТИВНЫЙ ПРОТОКОЛ ЧИСТКИ И ЛАЙФХАКИ ================= -->
+    <section id="method">
+        <div class="container method-grid">
+            <div class="reveal">
+                <span class="tag-pill">✦ Авторское Ноу-Хау Анны Михайленко</span>
+                <h2 class="section-title">Чистая кожа <span class="italic-accent">без красного лица</span></h2>
+                <p style="margin-bottom: 24px; color: var(--text-muted);">
+                    Нажимай на этапы ниже, чтобы изучить мой фирменный протокол комбинированной чистки и преподавательские секреты (иллюстрация справа меняется автоматически):
+                </p>
+                
+                <div class="protocol-tabs">
+                    <button class="tab-btn active" onclick="showProtocolStep(0, this)">1. Пилинг ДО чистки</button>
+                    <button class="tab-btn" onclick="showProtocolStep(1, this)">2. Холодное гидрирование</button>
+                    <button class="tab-btn" onclick="showProtocolStep(2, this)">3. Зональный УЗ-пилинг</button>
+                    <button class="tab-btn" onclick="showProtocolStep(3, this)">4. Экстракция (Правило 2 нажатий)</button>
+                    <button class="tab-btn" onclick="showProtocolStep(4, this)">5. Дарсонваль + Микротоки</button>
+                    <button class="tab-btn" onclick="showProtocolStep(5, this)">6. Санация и Ламеллярный финал</button>
+                </div>
+
+                <div class="protocol-display">
+                    <h3 id="stepTitle" style="font-size: 30px; color: var(--accent-bright); margin-bottom: 10px;">Этап 1. Двойное очищение и Пред-эксфолиация</h3>
+                    <p id="stepDesc" style="font-size: 16px; color: var(--text-main);">
+                        Перед началом работы мы смываем липидную пленку и наносим энзимный пилинг (папаин и бромелаин Skin Synergy) или BioRePeelCl3 ДО чистки. Ферменты работают как «умные ножницы» при pH 5.5, растворяя белковые мостики и размягчая верхушки комедонов.
+                    </p>
+                    <div class="lifehack-banner" id="stepLifehack">
+                        <strong>💡 Секретный лайфхак Анны:</strong> Классически BioRePeel наносят отдельно, но я обожаю наносить его ДО ручной чистки на 3–5 минут! Он растворяет сальные пробки и дает мгновенный лифтинг, после чего комедоны выходят от легкого прикосновения без синяков.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Карточка-превью -->
+            <div class="schema-card reveal">
+                <img id="stepImage" src="https://cdn.dribbble.com/userupload/16967702/file/original-9d7b8be3f12eaa3e20f6a54209c44f2e.png?resize=752x&vertical=center" referrerpolicy="no-referrer" alt="Методическое пособие Анны Михайленко" onclick="openLightbox(this.src)">
+                <span class="course-badge" style="margin-bottom: 8px;">Сделано Анной Михайленко</span>
+                <h3 class="serif-font" id="stepImageCaption" style="font-size: 26px; margin-bottom: 8px;">Настольная книга косметолога (25 стр.)</h3>
+                <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+                    Полные таблицы протоколов, разбор AHA/BHA/PHA кислот, алгоритмы при акне и розацеа, рецепты домашнего ухода.
+                </p>
+                <button onclick="openPopup('Настольная книга-пособие (4 900 ₽)')" class="btn btn-outline" style="width: 100%; padding: 14px;">Приобрести пособие</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= БЛОК 5: КУРСЫ С ОБЛОЖКАМИ + ОПЛАТА И ВЫДАЧА ================= -->
+    <section id="courses" style="background: rgba(255,255,255,0.5);">
+        <div class="container reveal">
+            <div style="text-align: center; max-width: 780px; margin: 0 auto;">
+                <span class="tag-pill">✦ Образовательные продукты и Наставничество</span>
+                <h2 class="section-title">Программы обучения и <span class="italic-accent">выдача материалов</span></h2>
+                <p style="color: var(--text-muted); font-size: 17px;">
+                    Каждая программа включает глубокую теоретическую базу, клинические алгоритмы, секреты сочетания брендов (Skin Synergy, AngioPharm, Geltek, TT Cosmeceutical) и проверку знаний.
+                </p>
+            </div>
+
+            <div class="courses-grid">
+                <!-- Продукт 1 -->
+                <div class="course-card">
+                    <div>
+                        <img class="course-img-thumb" src="https://cdn.dribbble.com/userupload/16967702/file/original-9d7b8be3f12eaa3e20f6a54209c44f2e.png?resize=752x&vertical=center" referrerpolicy="no-referrer" alt="Настольная книга-пособие">
+                        <span class="course-badge">Цифровой продукт • Мгновенная выдача</span>
+                        <h3 style="font-size: 28px;">Настольная книга-пособие (20–25 стр.)</h3>
+                        <div class="course-price">4 900 ₽</div>
+                        <ul class="course-list">
+                            <li>Полная теория строения кожи, NMF и корнеотерапии</li>
+                            <li>Глубокий разбор гликолевой, пировиноградной, молочной, азелаиновой, салициловой и лактобионовой кислот</li>
+                            <li>Пошаговые таблицы комбинированной чистки и пилингов ДО/ПОСЛЕ</li>
+                            <li>Готовые схемы домашнего ухода (аптека + маркетплейсы)</li>
+                        </ul>
+                    </div>
+                    <button onclick="openPopup('Настольная книга-пособие (4 900 ₽)')" class="btn btn-outline" style="width: 100%;">Оплатить и скачать пособие</button>
+                </div>
+
+                <!-- Продукт 2 -->
+                <div class="course-card featured">
+                    <div>
+                        <img class="course-img-thumb" src="https://cdn.dribbble.com/userupload/46835740/file/c605ec0eb996a8c0053ea992a630f543.png?resize=752x&vertical=center" referrerpolicy="no-referrer" alt="Базовый курс косметологии">
+                        <span class="course-badge" style="background: var(--accent-gradient); color: #FFF;">★ Хит • Индивидуально 1 на 1</span>
+                        <h3 style="font-size: 30px;">Базовый курс: «Искусство чистой кожи и Пилинги»</h3>
+                        <div class="course-price">29 900 ₽</div>
+                        <ul class="course-list">
+                            <li><strong>В подарок:</strong> Полное авторское пособие (25 страниц) до старта практики</li>
+                            <li>Отработка холодного гидрирования, УЗ-скрабера (угол 45°), петли Видаля и ложки Уно без травм</li>
+                            <li>Практика работы с двухфазными системами (BioRePeelCl3, Peach Peel)</li>
+                            <li><strong>Аппаратное ноу-хау:</strong> закрытие чистки Дарсонвалем и Микротоковым лимфодренажем</li>
+                            <li>Именной сертификат и поддержка в чате с Анной</li>
+                        </ul>
+                    </div>
+                    <button onclick="openPopup('Базовый курс: Искусство чистой кожи и Пилинги (29 900 ₽)')" class="btn btn-primary" style="width: 100%;">Перейти к оплате / Бронированию</button>
+                </div>
+
+                <!-- Продукт 3 -->
+                <div class="course-card">
+                    <div>
+                        <img class="course-img-thumb" src="https://i.pinimg.com/736x/3a/1b/4d/3a1b4d5270981f9b06d9d76ef3bd0356.jpg" referrerpolicy="no-referrer" alt="Продвинутый курс">
+                        <span class="course-badge">Повышение квалификации • Диагностика</span>
+                        <h3 style="font-size: 28px;">Продвинутый курс: «Внутреннее здоровье и Нутрициология»</h3>
+                        <div class="course-price">24 900 ₽</div>
+                        <ul class="course-list">
+                            <li>Ось «Кишечник — Кожа»: дисбактериоз, желчеотток и диагностика <em>Helicobacter pylori</em> при розацеа</li>
+                            <li>Эндокринология для эстетиста: андрогены, СПКЯ, инсулинорезистентность и гипотиреоз</li>
+                            <li>Чек-ап пациента: как читать анализы (ферритин, витамин D, цинк, белок)</li>
+                            <li>Подбор нутрицевтиков (Омега-3, пробиотики, коллаген) в синергии с процедурами</li>
+                        </ul>
+                    </div>
+                    <button onclick="openPopup('Продвинутый курс: Внутреннее здоровье и Нутрициология (24 900 ₽)')" class="btn btn-outline" style="width: 100%;">Записаться и оплатить</button>
+                </div>
+            </div>
+
+            <!-- 4 ШАГА ОПЛАТЫ И ВЫДАЧИ -->
+            <div style="margin-top: 70px;">
+                <h3 class="serif-font" style="font-size: 36px; text-align: center; margin-bottom: 12px;">Как проходит оплата и получение курса</h3>
+                <div class="payment-steps-grid">
+                    <div class="pay-step-card">
+                        <div class="pay-step-num">01</div>
+                        <h4 style="font-size: 22px; margin-bottom: 8px;">Выбор формата и Заявка</h4>
+                        <p style="font-size: 14px; color: var(--text-muted);">Вы выбираете курс или пособие и заполняете форму с вашим Telegram и телефоном.</p>
+                    </div>
+                    <div class="pay-step-card">
+                        <div class="pay-step-num">02</div>
+                        <h4 style="font-size: 22px; margin-bottom: 8px;">Безопасная оплата</h4>
+                        <p style="font-size: 14px; color: var(--text-muted);">Оплата картой / СБП (или оформление рассрочки). Система мгновенно фиксирует ваш платеж.</p>
+                    </div>
+                    <div class="pay-step-card">
+                        <div class="pay-step-num">03</div>
+                        <h4 style="font-size: 22px; margin-bottom: 8px;">Мгновенная выдача пособия</h4>
+                        <p style="font-size: 14px; color: var(--text-muted);">Бот отправляет вам в Telegram авторское методическое пособие и чек-листы для изучения теории дома.</p>
+                    </div>
+                    <div class="pay-step-card">
+                        <div class="pay-step-num">04</div>
+                        <h4 style="font-size: 22px; margin-bottom: 8px;">Практика и Сертификат</h4>
+                        <p style="font-size: 14px; color: var(--text-muted);">Согласуем удобный день для индивидуальной постановки руки на моделях и вручаем именной сертификат.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= БЛОК 6: ИНТЕРАКТИВНЫЙ ТРЕНАЖЕР ================= -->
+    <section id="practice-quiz">
+        <div class="container reveal">
+            <div class="quiz-container">
+                <span class="tag-pill">✦ Интерактивный модуль из курса</span>
+                <h2 class="section-title" style="font-size: 42px;">Проверьте свое <span class="italic-accent">клиническое мышление</span></h2>
+                <p style="color: var(--text-muted);">Решите 3 реальные задачи из врачебной практики:</p>
+
+                <div class="quiz-grid">
+                    <div class="quiz-card" id="qCard1">
+                        <div style="font-size: 12px; font-weight: 700; color: var(--accent-bright); text-transform: uppercase;">Клинический кейс №1</div>
+                        <h4 style="font-size: 22px; margin: 8px 0 12px;">Пациент с розацеа и стойкой эритемой</h4>
+                        <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 12px;">Что КАТЕГОРИЧЕСКИ запрещено делать такому пациенту?</p>
+                        <button class="quiz-opt" onclick="checkQuiz(1, this, false)">А) Микротоковый лимфодренаж по гелю с центеллой</button>
+                        <button class="quiz-opt" onclick="checkQuiz(1, this, true)">Б) Вакуумная чистка, распаривание и пилинг Джесснера</button>
+                        <button class="quiz-opt" onclick="checkQuiz(1, this, false)">В) Лактобионовый пилинг (PHA) и крем с ангиогенином</button>
+                        <div class="quiz-explanation" id="exp1">
+                            <strong>Верно!</strong> Вакуум, пар и агрессивные кислоты разрушат капилляры. Также направляем на тест <em>Helicobacter pylori</em>!
+                        </div>
+                    </div>
+
+                    <div class="quiz-card" id="qCard2">
+                        <div style="font-size: 12px; font-weight: 700; color: var(--accent-bright); text-transform: uppercase;">Клинический кейс №2</div>
+                        <h4 style="font-size: 22px; margin: 8px 0 12px;">Сбор анамнеза перед пилингом</h4>
+                        <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 12px;">Клиентка 3 месяца назад закончила курс системных ретиноидов (Роаккутан) и просит срединный пилинг:</p>
+                        <button class="quiz-opt" onclick="checkQuiz(2, this, false)">А) Сделать ТСА-пилинг в 1 слой</button>
+                        <button class="quiz-opt" onclick="checkQuiz(2, this, false)">Б) Распарить кожу вапоризатором</button>
+                        <button class="quiz-opt" onclick="checkQuiz(2, this, true)">В) Отказать в агрессивном пилинге (риск рубцов!) и сделать корнеотерапию</button>
+                        <div class="quiz-explanation" id="exp2">
+                            <strong>Блестяще!</strong> После системных ретиноидов минимум 6 месяцев запрещены травмирующие чистки и срединные пилинги.
+                        </div>
+                    </div>
+
+                    <div class="quiz-card" id="qCard3">
+                        <div style="font-size: 12px; font-weight: 700; color: var(--accent-bright); text-transform: uppercase;">Клинический кейс №3</div>
+                        <h4 style="font-size: 22px; margin: 8px 0 12px;">Снятие отека после экстракции</h4>
+                        <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 12px;">Какая аппаратная связка позволяет клиенту встать с кушетки без красного опухшего лица?</p>
+                        <button class="quiz-opt" onclick="checkQuiz(3, this, true)">А) Дарсонвализация по тальку (озон) + Микротоковая терапия</button>
+                        <button class="quiz-opt" onclick="checkQuiz(3, this, false)">Б) Вакуумный массаж по маслу</button>
+                        <button class="quiz-opt" onclick="checkQuiz(3, this, false)">В) Протирание кубиками льда и спиртовым лосьоном</button>
+                        <div class="quiz-explanation" id="exp3">
+                            <strong>Точно в цель!</strong> Дарсонваль стерилизует поры озоном, а микротоки за 10 минут «сдувают» посттравматический отек.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= БЛОК 7: ПОРТФОЛИО РАБОТ ================= -->
+    <section id="portfolio" style="background: rgba(255,255,255,0.45);">
+        <div class="container reveal">
+            <div style="text-align: center;">
+                <span class="tag-pill">✦ Доказательная эстетика • Нажмите на фото для увеличения</span>
+                <h2 class="section-title">Портфолио и <span class="italic-accent">эстетика работ</span></h2>
+                <p style="color: var(--text-muted); font-size: 17px; max-width: 620px; margin: 0 auto;">
+                    Все карточки заполнены твоими новыми изображениями — нажми на любую для просмотра во весь экран.
+                </p>
+            </div>
+            
+            <div class="portfolio-grid">
+                <div class="portfolio-card" onclick="openLightbox(this.querySelector('img').src)">
+                    <img src="https://i.pinimg.com/736x/3a/1b/4d/3a1b4d5270981f9b06d9d76ef3bd0356.jpg" referrerpolicy="no-referrer" alt="Эстетика чистой кожи">
+                </div>
+                <div class="portfolio-card" onclick="openLightbox(this.querySelector('img').src)">
+                    <img src="https://i.pinimg.com/1200x/62/97/c0/6297c0a5366767a621a0b9a01caaf5ef.jpg" referrerpolicy="no-referrer" alt="Корнеотерапия и сияние">
+                </div>
+                <div class="portfolio-card" onclick="openLightbox(this.querySelector('img').src)">
+                    <img src="https://i.pinimg.com/1200x/7a/8b/fb/7a8bfb74643828f2cf4c7c99484725e1.jpg" referrerpolicy="no-referrer" alt="Деликатная эксфолиация">
+                </div>
+                <div class="portfolio-card" onclick="openLightbox(this.querySelector('img').src)">
+                    <img src="https://i.pinimg.com/736x/ce/1e/42/ce1e425ee0fe332a7cbcae841313dd94.jpg" referrerpolicy="no-referrer" alt="Многоступенчатый уход">
+                </div>
+                <div class="portfolio-card" onclick="openLightbox(this.querySelector('img').src)">
+                    <img src="https://i.pinimg.com/736x/72/29/8b/72298ba7ac1632ea14bf6ac11050d53d.jpg" referrerpolicy="no-referrer" alt="Восстановление барьера">
+                </div>
+                <div class="portfolio-card" onclick="openLightbox(this.querySelector('img').src)">
+                    <img src="https://i.pinimg.com/736x/73/b0/b5/73b0b5c54b65b4e5540149371645b6df.jpg" referrerpolicy="no-referrer" alt="Аппаратный лимфодренаж">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= БЛОК 8: МЕТОДИЧЕСКАЯ БАЗА И КВАЛИФИКАЦИЯ ================= -->
+    <section id="diplomas">
+        <div class="container reveal">
+            <div style="text-align: center;">
+                <span class="tag-pill">✦ Образование, космецевтика и квалификация</span>
+                <h2 class="section-title">Методическая база и <span class="italic-accent">сертификация</span></h2>
+                <p style="color: var(--text-muted); font-size: 17px; max-width: 640px; margin: 0 auto;">
+                    Каждый блок заполнен визуальными материалами твоих курсов, дипломов и профессиональных протоколов.
+                </p>
+            </div>
+
+            <div class="diplomas-grid">
+                <div class="diploma-card" onclick="openLightbox(this.querySelector('img').src)">
+                    <img src="https://cdn.dribbble.com/userupload/46835740/file/c605ec0eb996a8c0053ea992a630f543.png?resize=752x&vertical=center" referrerpolicy="no-referrer" alt="Сертификация и обучение 1">
+                    <div class="card-caption-badge">Авторские протоколы чисток</div>
+                </div>
+                <div class="diploma-card" onclick="openLightbox(this.querySelector('img').src)">
+                    <img src="https://cdn.dribbble.com/userupload/16967702/file/original-9d7b8be3f12eaa3e20f6a54209c44f2e.png?resize=752x&vertical=center" referrerpolicy="no-referrer" alt="Сертификация и обучение 2">
+                    <div class="card-caption-badge">Методическое руководство (25 стр.)</div>
+                </div>
+                <div class="diploma-card" onclick="openLightbox(this.querySelector('img').src)">
+                    <img src="https://cdn.dribbble.com/userupload/44547991/file/8cd98c899443cc263225689fdc1c28c7.png?resize=1905x1429&vertical=center" referrerpolicy="no-referrer" alt="Сертификация и обучение 3">
+                    <div class="card-caption-badge">Системная нутрициология и ЖКТ</div>
+                </div>
+                <div class="diploma-card" onclick="openLightbox(this.querySelector('img').src)">
+                    <img src="https://cdn.dribbble.com/userupload/8999043/file/original-0e6afbddeb3892e4f50c97b38555576d.jpg?resize=1600x1200&vertical=center" referrerpolicy="no-referrer" alt="Сертификация и обучение 4">
+                    <div class="card-caption-badge">Химические пилинги AHA / BHA / PHA</div>
+                </div>
+                <div class="diploma-card" onclick="openLightbox(this.querySelector('img').src)">
+                    <img src="https://cdn.dribbble.com/userupload/21099778/file/original-0b75367819775e54ecde3571f2287dd0.png?resize=800x600&vertical=center" referrerpolicy="no-referrer" alt="Сертификация и обучение 5">
+                    <div class="card-caption-badge">Корнеотерапия и микротоки</div>
+                </div>
+                <div class="diploma-card" onclick="openLightbox(this.querySelector('img').src)">
+                    <img src="https://i.pinimg.com/736x/fe/b8/7e/feb87e760ba7e5303fa6373feac19906.jpg" referrerpolicy="no-referrer" alt="Сертификация и обучение 6">
+                    <div class="card-caption-badge">Именной сертификат специалиста</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= ПОДВАЛ САЙТА (FOOTER) ================= -->
+    <footer style="padding: 64px 0; background: rgba(255,255,255,0.7); text-align: center; border-top: 1px solid var(--border-soft);">
+        <div class="container">
+            <p class="logo" style="font-size: 34px; margin-bottom: 10px;">Anna Mikhailenko</p>
+            <p style="color: var(--text-muted); margin-bottom: 24px;">Врач-косметолог · Эстетист · Преподаватель авторских курсов</p>
+            <button onclick="openPopup('Запись на обучение / Консультацию')" class="btn btn-primary">Оформить обучение или записаться</button>
+            <p style="color: var(--text-muted); font-size: 13px; margin-top: 36px;">
+                Сделано Анной Михайленко • Все права на учебные материалы и методики защищены © 2026
+            </p>
+        </div>
+    </footer>
+
+    <!-- Плавающая кнопка быстрой записи -->
+    <button class="fab-btn" onclick="openPopup('Быстрая запись / Покупка курса')">
+        ✦ Купить курс / Записаться
+    </button>
+
+    <!-- ================= LIGHTBOX (ПРОСМОТР ФОТО ВО ВЕСЬ ЭКРАН) ================= -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <img id="lightboxImg" src="" referrerpolicy="no-referrer" alt="Увеличенное фото">
+    </div>
+
+    <!-- ================= ВСПЛЫВАЮЩЕЕ ОКНО ОПЛАТЫ И ЗАПИСИ ================= -->
+    <div class="popup-overlay" id="popupOverlay" onclick="handleOverlayClick(event)">
+        <div class="popup-box" role="dialog" aria-modal="true">
+            <button class="popup-close" onclick="closePopup()">×</button>
+
+            <div id="formContent">
+                <h3 style="font-size: 34px; margin-bottom: 6px;">Оформление и <span class="italic-accent">запись</span></h3>
+                <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 22px;">
+                    Выберите продукт и способ оплаты. Доступ к пособию или подтверждение бронирования придет вам в Telegram.
+                </p>
+
+                <form id="enrollForm" onsubmit="handleSubmit(event)">
+                    <div class="form-group">
+                        <label for="fieldProduct">Выбранный курс / услуга</label>
+                        <select id="fieldProduct" name="product">
+                            <option value="Базовый курс: Искусство чистой кожи и Пилинги (29 900 ₽)">Базовый курс: «Искусство чистой кожи и Пилинги» (29 900 ₽)</option>
+                            <option value="Продвинутый курс: Внутреннее здоровье и Нутрициология (24 900 ₽)">Продвинутый курс: «Внутреннее здоровье и Нутрициология» (24 900 ₽)</option>
+                            <option value="Настольная книга-пособие (4 900 ₽)">Настольная книга-пособие (4 900 ₽)</option>
+                            <option value="Консультация / Запись в кабинет">Консультация / Запись на процедуру</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="fieldName">Ваше имя</label>
+                        <input type="text" id="fieldName" name="name" placeholder="Например, Екатерина" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fieldPhone">Телефон или @ник в Telegram (для выдачи доступа)</label>
+                        <input type="text" id="fieldPhone" name="phone" placeholder="+7 (999) 000-00-00 или @username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fieldPayMethod">Предпочтительный способ оплаты</label>
+                        <select id="fieldPayMethod" name="payMethod">
+                            <option value="Оплата картой / СБП">Быстрая оплата по СБП / Картой РФ</option>
+                            <option value="Рассрочка без переплат">Оформить рассрочку на курс</option>
+                            <option value="Сначала задать вопрос Анне">Сначала задать вопрос Анне в Telegram</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 8px;">
+                        Подтвердить и получить реквизиты / доступ →
+                    </button>
+                </form>
+            </div>
+
+            <div id="formSuccess" style="display: none; text-align: center; padding: 16px 0;">
+                <div style="font-size: 52px; margin-bottom: 12px;">✨</div>
+                <h4 style="font-size: 32px; margin-bottom: 8px;">Заявка сформирована!</h4>
+                <p style="color: var(--text-muted); font-size: 15px; margin-bottom: 20px;">
+                    Сейчас откроется диалог с Анной в Telegram для мгновенного получения ссылки на оплату и выдачи методического пособия.
+                </p>
+                <button onclick="closePopup()" class="btn btn-outline">Закрыть окно</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= JAVASCRIPT: ВСЯ ЛОГИКА САЙТА ================= -->
+    <script>
+        const SITE_CONFIG = {
+            TELEGRAM_USERNAME: 'anna_cosmetolog_pro',
+            BOT_TOKEN: 'YOUR_BOT_TOKEN_HERE',
+            CHAT_ID:   'YOUR_CHAT_ID_HERE',
+            N8N_WEBHOOK_URL: ''
+        };
+
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('error', function() {
+                if (!this.dataset.fallbackApplied) {
+                    this.dataset.fallbackApplied = 'true';
+                    this.src = 'https://cdn.dribbble.com/userupload/46835740/file/c605ec0eb996a8c0053ea992a630f543.png?resize=752x&vertical=center';
+                }
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            document.getElementById('scrollProgress').style.width = ((winScroll / height) * 100) + '%';
+        });
+
+        function toggleMobileMenu() { document.getElementById('navLinks').classList.toggle('mobile-open'); }
+        function closeMobileMenu() { document.getElementById('navLinks').classList.remove('mobile-open'); }
+
+        const protocolSteps = [
+            {
+                title: "Этап 1. Двойное очищение и Пред-эксфолиация (Пилинг ДО)",
+                desc: "Перед началом давления мы растворяем «клей» между роговыми чешуйками. Используем энзимную пудру (Skin Synergy с папаином и бромелаином) под пленку на 10 минут либо легкий миндальный/салициловый пилинг.",
+                hack: "💡 Секретный лайфхак Анны: Я обожаю наносить двухфазный BioRePeelCl3 ДО мануальной чистки на 3–5 минут! Он растворяет сальные пробки и дает лифтинг, после чего комедоны выходят легко и без травмы.",
+                img: "https://cdn.dribbble.com/userupload/16967702/file/original-9d7b8be3f12eaa3e20f6a54209c44f2e.png?resize=752x&vertical=center",
+                caption: "Этап 1: Энзимная пред-эксфолиация"
+            },
+            {
+                title: "Этап 2. Холодное гидрирование (Никакого пара!)",
+                desc: "Мы категорически против горячих вапоризаторов, которые разрушают сосуды и провоцируют купероз. Наносим гель-дезинкрустант (Geltek с алоэ вера и мочевиной) плотным слоем под пищевую пленку на 15 минут.",
+                hack: "💡 Секретный лайфхак Анны: Под пленкой запускается процесс сапонификации (омыления) — плотный окисленный жир внутри пор превращается в мягкую мыльную эмульсию без нагрева сосудов.",
+                img: "https://i.pinimg.com/736x/ce/1e/42/ce1e425ee0fe332a7cbcae841313dd94.jpg",
+                caption: "Этап 2: Холодное гидрирование Geltek"
+            },
+            {
+                title: "Этап 3. Зональный Ультразвуковой пилинг (Кавитация)",
+                desc: "Работаем УЗ-скрабером строго под углом 45 градусов против массажных линий по обильно смоченной коже (водный лосьон). Микропузырьки взрываются и безболезненно вымывают размягченный себум.",
+                hack: "💡 Секретный лайфхак Анны: Никогда не снимайте пленку со всего лица сразу! Открываем строго по одной зоне (сначала лоб, затем нос, затем щеки), иначе гель высохнет и поры закроются.",
+                img: "https://i.pinimg.com/736x/72/29/8b/72298ba7ac1632ea14bf6ac11050d53d.jpg",
+                caption: "Этап 3: УЗ-пилинг под углом 45°"
+            },
+            {
+                title: "Этап 4. Бережная инструментальная экстракция",
+                desc: "Глубокие закрытые комедоны прорабатываем ложечкой Уно и стерильными салфетками, а милиумы вскрываем параллельно коже иглой Видаля. Обязательная антисептика водным хлоргексидином 0,05%.",
+                hack: "💡 Золотое правило безопасности: Если комедон не выходит после 2 аккуратных нажатий — оставьте его! Иначе вы раздавите стенку фолликула и получите синюшное пятно постакне.",
+                img: "https://i.pinimg.com/736x/73/b0/b5/73b0b5c54b65b4e5540149371645b6df.jpg",
+                caption: "Этап 4: Атравматичная экстракция"
+            },
+            {
+                title: "Этап 5. Аппаратная реабилитация (Дарсонваль + Микротоки)",
+                desc: "Наше главное ноу-хау: сначала обрабатываем лицо стеклянным электродом Дарсонваля по тальку (3–5 минут), а затем проводим микротоковую терапию по проводящему гелю.",
+                hack: "💡 Почему нет красного лица: Дарсонваль выделяет газ озон, который мгновенно убивает бактерии в пустых порах. А микротоки за 10 минут «сдувают» посттравматический отек!",
+                img: "https://i.pinimg.com/1200x/62/97/c0/6297c0a5366767a621a0b9a01caaf5ef.jpg",
+                caption: "Этап 5: Дарсонваль и Микротоки"
+            },
+            {
+                title: "Этап 6. Точечная санация кислотами и Ламеллярный барьер",
+                desc: "Точечно наносим деликатный азелаиновый пилинг (TT Cosmeceutical) на 3–5 минут для гашения воспалений, закрываем поросуживающей маской с цинком/каолином или альгинатом.",
+                hack: "💡 Правильный финал: Создаём «искусственный барьер» — наносим ламеллярный крем с церамидами и ангиогенином (AngioPharm / Topicrem) + SPF 30–50.",
+                img: "https://i.pinimg.com/1200x/7a/8b/fb/7a8bfb74643828f2cf4c7c99484725e1.jpg",
+                caption: "Этап 6: Восстановление липидного барьера"
+            }
+        ];
+
+        function showProtocolStep(index, btnElement) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btnElement.classList.add('active');
+            document.getElementById('stepTitle').textContent = protocolSteps[index].title;
+            document.getElementById('stepDesc').textContent = protocolSteps[index].desc;
+            document.getElementById('stepLifehack').innerHTML = protocolSteps[index].hack;
+            document.getElementById('stepImage').src = protocolSteps[index].img;
+            document.getElementById('stepImageCaption').textContent = protocolSteps[index].caption;
+        }
+
+        function checkQuiz(cardNum, btnElement, isCorrect) {
+            const card = document.getElementById('qCard' + cardNum);
+            card.querySelectorAll('.quiz-opt').forEach(b => b.disabled = true);
+            btnElement.classList.add(isCorrect ? 'correct' : 'wrong');
+            document.getElementById('exp' + cardNum).style.display = 'block';
+        }
+
+        function openLightbox(srcUrl) {
+            document.getElementById('lightboxImg').src = srcUrl;
+            document.getElementById('lightbox').classList.add('active');
+        }
+        function closeLightbox() { document.getElementById('lightbox').classList.remove('active'); }
+
+        function openPopup(preselectedProduct) {
+            if (preselectedProduct) {
+                const select = document.getElementById('fieldProduct');
+                for (let i = 0; i < select.options.length; i++) {
+                    if (select.options[i].value.includes(preselectedProduct) || preselectedProduct.includes(select.options[i].value)) {
+                        select.selectedIndex = i;
+                        break;
+                    }
+                }
+            }
+            document.getElementById('popupOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePopup() {
+            document.getElementById('popupOverlay').classList.remove('active');
+            document.body.style.overflow = '';
+            setTimeout(() => {
+                document.getElementById('formContent').style.display = '';
+                document.getElementById('formSuccess').style.display = 'none';
+                document.getElementById('enrollForm').reset();
+            }, 300);
+        }
+
+        function handleOverlayClick(e) {
+            if (e.target === document.getElementById('popupOverlay')) closePopup();
+        }
+
+        async function handleSubmit(e) {
+            e.preventDefault();
+            const product   = document.getElementById('fieldProduct').value;
+            const name      = document.getElementById('fieldName').value.trim();
+            const phone     = document.getElementById('fieldPhone').value.trim();
+            const payMethod = document.getElementById('fieldPayMethod').value;
+
+            const text = `📩 Новая заявка с сайта!\n🎓 Продукт: ${product}\n👤 Имя: ${name}\n📞 Контакт: ${phone}\n💳 Оплата: ${payMethod}`;
+
+            try {
+                if (SITE_CONFIG.BOT_TOKEN !== 'YOUR_BOT_TOKEN_HERE') {
+                    await fetch(`https://api.telegram.org/bot${SITE_CONFIG.BOT_TOKEN}/sendMessage`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ chat_id: SITE_CONFIG.CHAT_ID, text })
+                    });
+                }
+            } catch (err) { console.warn('Telegram API:', err); }
+
+            try {
+                if (SITE_CONFIG.N8N_WEBHOOK_URL !== '') {
+                    await fetch(SITE_CONFIG.N8N_WEBHOOK_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ product, name, phone, payMethod, date: new Date().toISOString() })
+                    });
+                }
+            } catch (err) { console.warn('n8n Webhook:', err); }
+
+            document.getElementById('formContent').style.display = 'none';
+            document.getElementById('formSuccess').style.display = 'block';
+
+            const directMsg = `Здравствуйте, Анна! Меня зовут ${name} (${phone}). Хочу оформить: «${product}». Способ оплаты: ${payMethod}.`;
+            setTimeout(() => {
+                window.open(`https://t.me/${SITE_CONFIG.TELEGRAM_USERNAME}?text=${encodeURIComponent(directMsg)}`, '_blank');
+            }, 700);
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

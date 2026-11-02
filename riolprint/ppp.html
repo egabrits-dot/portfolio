@@ -1,0 +1,1122 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riol Print — Типография полного цикла в Москве</title>
+    
+    <style>
+        /* ==========================================================================
+           1. БАЗОВЫЕ ПЕРЕМЕННЫЕ, ШРИФТЫ И ЕДИНЫЙ ФОН САЙТА
+           ========================================================================== */
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@400;500;600;700;800&display=swap');
+
+        :root {
+            --unified-bg: #14151a;
+            --card-surface: #1c1e26;
+            --green: #009b48;
+            --green-dark: #007a38;
+            --lime-accent: #d4f85a;
+            --red: #e31e24;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --font-main: 'Manrope', sans-serif;
+            --font-display: 'Unbounded', sans-serif;
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-main); background-color: var(--unified-bg);
+            color: var(--text-main); margin: 0; padding: 0; overflow-x: hidden;
+        }
+        * { box-sizing: border-box; }
+
+        /* ==========================================================================
+           2. ВЕРХНЯЯ НАВИГАЦИЯ (ЧИСТЫЙ ТЕКСТ БЕЗ ПЕРЕКРЫТИЯ КЛИКОВ)
+           ========================================================================== */
+        .glass-header {
+            position: fixed; top: 0; left: 0; width: 100%; padding: 20px 36px;
+            display: flex; align-items: center; justify-content: space-between; z-index: 100;
+            background: linear-gradient(180deg, rgba(14,15,19,0.88) 0%, rgba(14,15,19,0) 100%);
+            pointer-events: none;
+        }
+        .header-content, .header-right-group {
+            display: flex; align-items: center; gap: 20px; flex-wrap: wrap; pointer-events: auto;
+        }
+        .frog-logo {
+            width: 38px; height: 38px; border-radius: 8px; object-fit: cover;
+            cursor: pointer; border: 1.5px solid var(--lime-accent); transition: transform 0.25s;
+        }
+        .frog-logo:hover { transform: scale(1.08); }
+
+        .nav-link {
+            background: none; border: none; padding: 4px 0; color: #fff;
+            font-family: var(--font-display); font-weight: 500; font-size: 11px;
+            letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none;
+            cursor: pointer; position: relative; transition: color 0.2s; white-space: nowrap;
+        }
+        .nav-link::after {
+            content: ''; position: absolute; left: 0; bottom: -2px; width: 0%; height: 1.5px;
+            background: var(--lime-accent); transition: width 0.25s;
+        }
+        .nav-link:hover, .nav-link:focus-visible { color: var(--lime-accent); outline: none; }
+        .nav-link:hover::after, .nav-link:focus-visible::after { width: 100%; }
+        .nav-link.accent-link { color: var(--lime-accent); font-weight: 700; }
+
+        .header-phone {
+            font-family: var(--font-display); color: #fff; font-weight: 700; font-size: 11.5px;
+            text-decoration: none; letter-spacing: 0.04em; white-space: nowrap; transition: color 0.2s;
+        }
+        .header-phone:hover { color: var(--lime-accent); }
+
+        /* ==========================================================================
+           3. ПЕРВЫЙ ЭКРАН — ЧИСТОЕ ПОЛНОЭКРАННОЕ ВИДЕО (БЕЗ ЦЕНТРАЛЬНОЙ НАДПИСИ)
+           ========================================================================== */
+        .hero-fullscreen {
+            position: relative; width: 100%; height: 100vh; min-height: 580px;
+            overflow: hidden; background: var(--unified-bg);
+        }
+        .hero-bg-video {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: 1; opacity: 0.88;
+        }
+        .hero-video-filter {
+            position: absolute; inset: 0; z-index: 2; pointer-events: none;
+            background: linear-gradient(180deg, rgba(20,21,26,0.35) 0%, rgba(20,21,26,0.05) 60%, var(--unified-bg) 100%);
+        }
+
+        /* ==========================================================================
+           4. КРУПНЫЕ РАЗНОЦВЕТНЫЕ ПАРЯЩИЕ КАРТОЧКИ
+           ========================================================================== */
+        .section-container { max-width: 1360px; margin: 0 auto; padding: 0 24px; }
+        .vivid-cards-section { padding: 50px 0 40px; }
+        .section-title-minimal {
+            font-family: var(--font-display); font-size: 2rem; font-weight: 700;
+            color: #fff; margin: 0 0 8px; letter-spacing: -0.02em;
+        }
+        .section-sub-minimal { color: var(--text-muted); font-size: 0.95rem; margin: 0 0 30px; }
+
+        .services-2row-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 18px; }
+        .vivid-card {
+            position: relative; background: var(--card-surface); border-radius: 22px; min-height: 260px;
+            padding: 20px 18px 22px; display: flex; flex-direction: column; justify-content: space-between;
+            cursor: pointer; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s, box-shadow 0.35s;
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.28);
+        }
+        .vivid-card::before {
+            content: ''; position: absolute; top: -40px; right: -40px; width: 200px; height: 200px; border-radius: 50%;
+            background: repeating-radial-gradient(circle at center, transparent 0, transparent 14px, rgba(255, 255, 255, 0.03) 15px, transparent 16px);
+            pointer-events: none;
+        }
+        .vivid-card::after {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(circle at 75% 20%, var(--c1), transparent 55%), radial-gradient(circle at 20% 95%, var(--c2), transparent 60%);
+            opacity: 0.34; transition: opacity 0.35s; pointer-events: none;
+        }
+        .vivid-card:hover { transform: translateY(-8px) rotate(-1deg); border-color: var(--c1); box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5), 0 0 25px var(--c2); }
+        .vivid-card:hover::after { opacity: 0.58; }
+
+        .vivid-graphic-wrap {
+            position: relative; z-index: 2; width: 86px; height: 86px; border-radius: 22px;
+            background: linear-gradient(135deg, var(--c1) 0%, var(--c2) 100%);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4), inset 0 2px 6px rgba(255, 255, 255, 0.65), inset 0 -4px 10px rgba(0, 0, 0, 0.35);
+            display: flex; align-items: center; justify-content: center;
+            transform: rotate(-8deg); transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1); margin-bottom: 16px; overflow: hidden;
+        }
+        .vivid-graphic-wrap::before {
+            content: ''; position: absolute; top: -30%; left: -30%; width: 120%; height: 80%;
+            background: linear-gradient(180deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 100%);
+            transform: rotate(-25deg); pointer-events: none;
+        }
+        .vivid-card:hover .vivid-graphic-wrap { transform: rotate(0deg) scale(1.08); }
+        .vivid-graphic-emoji { font-size: 38px; filter: drop-shadow(0 6px 8px rgba(0,0,0,0.3)); }
+
+        .vivid-text-box { position: relative; z-index: 2; text-align: left; }
+        .vivid-title { font-family: var(--font-display); font-size: 14px; font-weight: 700; color: #fff; margin: 0 0 6px; line-height: 1.25; }
+        .vivid-desc { font-size: 12px; color: #b8bcc6; margin: 0; line-height: 1.4; }
+
+        /* ==========================================================================
+           5. ЖУРНАЛЬНОЕ ПОРТФОЛИО
+           ========================================================================== */
+        #portfolio-section { padding: 50px 0 40px; }
+        .portfolio-editorial-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 28px; align-items: stretch; }
+        
+        .editorial-main-card {
+            position: relative; border-radius: 16px; overflow: hidden;
+            min-height: 520px; background: var(--card-surface); cursor: pointer; border: 1px solid rgba(255,255,255,0.1);
+        }
+        .editorial-main-card img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; transition: transform 0.5s; }
+        .editorial-main-card:hover img { transform: scale(1.03); }
+
+        .editorial-main-overlay {
+            position: absolute; bottom: 0; left: 0; width: 100%; background: rgba(20, 22, 28, 0.78);
+            backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+            padding: 24px 28px 18px; color: #fff; border-top: 1px solid rgba(255,255,255,0.18);
+        }
+        .editorial-main-overlay h3 { font-family: var(--font-display); font-size: 1.45rem; font-weight: 700; margin: 0 0 12px; line-height: 1.2; }
+        .editorial-main-meta { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.18); padding-top: 10px; font-size: 12px; color: rgba(255,255,255,0.85); gap: 15px; flex-wrap: wrap; }
+
+        .editorial-side-list { display: flex; flex-direction: column; justify-content: space-between; }
+        .editorial-side-item { display: grid; grid-template-columns: 165px 1fr; gap: 18px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1); cursor: pointer; transition: transform 0.2s; }
+        .editorial-side-item:first-child { padding-top: 0; }
+        .editorial-side-item:hover { transform: translateX(4px); }
+        .editorial-side-thumb { width: 165px; height: 105px; border-radius: 12px; overflow: hidden; background: var(--card-surface); border: 1px solid rgba(255,255,255,0.1); }
+        .editorial-side-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.35s; }
+        .editorial-side-item:hover .editorial-side-thumb img { transform: scale(1.06); }
+
+        .editorial-side-info { display: flex; flex-direction: column; justify-content: space-between; padding: 2px 0; }
+        .editorial-side-title { font-family: var(--font-display); font-size: 0.92rem; font-weight: 600; color: #fff; margin: 0; line-height: 1.35; }
+        .editorial-side-item:hover .editorial-side-title { color: var(--lime-accent); }
+        .editorial-side-meta { font-size: 12px; color: var(--text-muted); display: flex; gap: 16px; }
+
+        .editorial-bottom-bar { display: flex; justify-content: flex-end; align-items: center; padding-top: 14px; }
+        .editorial-all-btn { display: inline-flex; align-items: center; gap: 10px; background: transparent; border: none; color: #fff; font-family: var(--font-display); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; cursor: pointer; padding: 0; }
+        .editorial-all-btn:hover { color: var(--lime-accent); }
+        .arrow-square { width: 34px; height: 34px; border-radius: 6px; background: var(--lime-accent); color: #111; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 900; transition: 0.25s; }
+        .editorial-all-btn:hover .arrow-square { background: #fff; transform: scale(1.08); }
+
+        /* ==========================================================================
+           6. ПРЕИМУЩЕСТВА, ЭТАПЫ РАБОТЫ И КОНТАКТЫ
+           ========================================================================== */
+        .modules-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin: 30px 0 50px; }
+        .module-mini, .process-step-card {
+            background: var(--card-surface); border-radius: 18px; padding: 22px 18px;
+            border: 1px solid rgba(255,255,255,0.08); transition: 0.25s;
+        }
+        .module-mini { border-top: 3px solid var(--green); }
+        .module-mini:hover, .process-step-card:hover { transform: translateY(-4px); border-color: var(--lime-accent); }
+        .module-mini h4, .process-step-card h4 { font-family: var(--font-display); margin: 0 0 8px; font-size: 0.9rem; font-weight: 700; color: #fff; }
+        .module-mini p, .process-step-card p { margin: 0; font-size: 0.83rem; color: var(--text-muted); line-height: 1.45; }
+
+        .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 60px; }
+        .step-num-badge { font-family: var(--font-display); display: inline-block; background: var(--lime-accent); color: #111; font-weight: 700; font-size: 10.5px; padding: 4px 10px; border-radius: 6px; margin-bottom: 12px; }
+
+        #contacts-section { padding-bottom: 70px; }
+        .map-contact-wrapper { display: grid; grid-template-columns: 1fr 1.6fr; gap: 24px; background: var(--card-surface); border-radius: 22px; padding: 26px; border: 1px solid rgba(255,255,255,0.09); }
+        .contact-info-box { padding: 10px; display: flex; flex-direction: column; justify-content: space-between; }
+        .contact-detail { margin-bottom: 14px; }
+        .contact-detail strong { display: block; font-size: 11px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 3px; }
+        .contact-detail span, .contact-detail a { font-size: 15px; font-weight: 600; color: #fff; text-decoration: none; }
+        .route-hint { background: rgba(0, 155, 72, 0.12); border-left: 3px solid var(--lime-accent); padding: 12px; border-radius: 10px; font-size: 12.5px; color: #e5e7eb; line-height: 1.45; margin-bottom: 15px; }
+        .map-frame-box { width: 100%; height: 390px; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
+        .map-frame-box iframe { width: 100%; height: 100%; border: 0; }
+
+        /* ==========================================================================
+           7. ВИДЖЕТ JIVO И МОДАЛЬНЫЕ ОКНА
+           ========================================================================== */
+        .jivo-trigger-tab { position: fixed; bottom: 0; right: 30px; background: linear-gradient(90deg, #009b48 0%, #11b85c 100%); color: #fff; padding: 12px 22px; border-radius: 16px 16px 0 0; font-weight: 700; font-size: 13.5px; cursor: pointer; z-index: 999; display: flex; align-items: center; gap: 10px; box-shadow: 0 -4px 20px rgba(0,155,72,0.3); }
+        .jivo-online-dot { width: 9px; height: 9px; background: var(--lime-accent); border-radius: 50%; }
+        .jivo-brand-tag { font-size: 11px; font-weight: 800; background: rgba(0,0,0,0.2); padding: 2px 7px; border-radius: 6px; }
+
+        .jivo-chat-window { position: fixed; bottom: 0; right: 30px; width: 340px; background: #fff; color: #111; border-radius: 18px 18px 0 0; box-shadow: 0 -8px 35px rgba(0,0,0,0.35); z-index: 1000; display: none; flex-direction: column; overflow: hidden; border: 1px solid #ddd; }
+        .jivo-header { background: var(--green); color: #fff; padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; }
+        .jivo-agent-info { display: flex; align-items: center; gap: 10px; }
+        .jivo-avatar { width: 38px; height: 38px; border-radius: 50%; background: #fff; color: var(--green); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 15px; }
+        .jivo-messages { height: 240px; padding: 14px; overflow-y: auto; background: #f5f7f6; display: flex; flex-direction: column; gap: 8px; }
+        .jivo-msg-operator { background: #fff; padding: 10px 13px; border-radius: 14px 14px 14px 2px; font-size: 12.5px; color: #222; border: 1px solid #e5eae7; line-height: 1.4; }
+        .jivo-msg-user { background: var(--green); color: #fff; padding: 10px 13px; border-radius: 14px 14px 2px 14px; font-size: 12.5px; align-self: flex-end; word-break: break-word; }
+        .jivo-quick-topics { display: flex; gap: 6px; padding: 8px 10px; background: #eef2ef; overflow-x: auto; }
+        .jivo-topic-btn { background: #fff; border: 1px solid #d5dfd8; border-radius: 8px; padding: 5px 10px; font-size: 11px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+        .jivo-topic-btn:hover { background: var(--green); color: #fff; }
+        .jivo-input-area { display: flex; border-top: 1px solid #eee; padding: 8px 10px; background: #fff; }
+        .jivo-input-area input { flex-grow: 1; border: none; outline: none; font-size: 13px; padding: 6px; }
+        .jivo-input-area button { background: var(--green); color: #fff; border: none; border-radius: 8px; padding: 7px 14px; font-weight: 700; font-size: 12px; cursor: pointer; }
+
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(10, 12, 16, 0.82); z-index: 1000; justify-content: center; align-items: center; padding: 20px; overflow-y: auto; }
+        .modal-content {
+            background: linear-gradient(135deg, rgba(235, 245, 239, 0.97) 0%, rgba(214, 234, 222, 0.99) 100%);
+            color: #111; padding: 32px; border-radius: 24px; width: 100%; max-width: 840px; max-height: 90vh; overflow-y: auto;
+            position: relative; margin: auto; box-shadow: 0 25px 60px rgba(0,0,0,0.45); border: 1px solid #fff;
+        }
+        .close-btn { position: absolute; top: 16px; right: 22px; font-size: 28px; color: #445; cursor: pointer; font-weight: 700; line-height: 1; background: none; border: none; }
+        .close-btn:hover { color: var(--red); }
+        .modal-content h3 { font-family: var(--font-display); margin: 0 0 14px; font-size: 1.4rem; font-weight: 700; border-bottom: 2px solid rgba(0,155,72,0.2); padding-bottom: 10px; color: #006b31; }
+        
+        .input-field { width: 100%; padding: 12px 15px; border: 1px solid rgba(0,155,72,0.3); border-radius: 10px; font-size: 14px; outline: none; background: #fff; color: #111; margin-bottom: 10px; font-family: inherit; }
+        .btn-modal { font-family: var(--font-display); background: var(--green); color: #fff; padding: 13px 20px; border-radius: 10px; font-weight: 600; border: none; cursor: pointer; width: 100%; text-transform: uppercase; font-size: 11.5px; letter-spacing: 0.04em; transition: 0.2s; }
+        .btn-modal:hover { background: var(--green-dark); }
+
+        .req-text { font-size: 0.94rem; color: #1e2923; line-height: 1.55; }
+        .service-info-box { background: rgba(255,255,255,0.94); border: 1px solid #fff; border-radius: 14px; padding: 16px 20px; margin-bottom: 15px; }
+        
+        .tariff-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 12px 0; }
+        .tariff-card { background: #fff; border: 1px solid rgba(0,155,72,0.25); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; justify-content: space-between; }
+        .tariff-card h5 { margin: 0 0 6px; font-size: 14px; color: var(--green); }
+        .tariff-price { font-size: 15px; font-weight: 800; margin-top: 8px; padding-top: 6px; border-top: 1px dashed #ccc; }
+
+        .catalog-list { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+        .catalog-list li { padding: 10px 16px; background: #fff; border-radius: 10px; font-size: 13.5px; font-weight: 600; cursor: pointer; border: 1px solid rgba(0,155,72,0.22); color: #111; transition: 0.2s; }
+        .catalog-list li:hover { background: var(--green); color: #fff; }
+
+        .client-name-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 10px; margin-top: 12px; }
+        .client-name-card { background: #fff; border: 1px solid rgba(0,155,72,0.25); border-radius: 10px; padding: 12px 14px; font-weight: 700; font-size: 13px; color: #1e2923; text-align: center; }
+
+        .modal-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: 12px; margin-top: 15px; }
+        .modal-gallery img { width: 100%; height: 175px; object-fit: contain; border-radius: 10px; border: 2px solid #fff; background: #fff; padding: 4px; cursor: pointer; transition: transform 0.2s; }
+        .modal-gallery img:hover { transform: scale(1.04); border-color: var(--green); }
+
+        .review-card { background: #fff; padding: 16px 18px; border-radius: 14px; border-left: 4px solid var(--green); margin-bottom: 12px; color: #111; }
+        .review-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+        .review-author { font-weight: 800; color: #111; font-size: 14.5px; }
+        .review-stars { color: #f5b800; font-size: 16px; }
+
+        footer { text-align: center; padding: 35px 20px; font-size: 13px; color: var(--text-muted); border-top: 1px solid rgba(255,255,255,0.08); background: var(--unified-bg); }
+
+        @media (max-width: 1150px) {
+            .services-2row-grid, .modules-row { grid-template-columns: repeat(3, 1fr); }
+            .portfolio-editorial-grid, .map-contact-wrapper, .tariff-grid { grid-template-columns: 1fr; }
+            .process-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 650px) {
+            .glass-header { padding: 12px 16px; }
+            .header-content { gap: 12px; }
+            .services-2row-grid { grid-template-columns: repeat(2, 1fr); }
+            .modules-row, .process-grid { grid-template-columns: 1fr; }
+            .editorial-side-item { grid-template-columns: 120px 1fr; }
+            .editorial-side-thumb { width: 120px; height: 85px; }
+            .header-right-group { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ВЕРХНЯЯ ПАНЕЛЬ -->
+    <header class="glass-header">
+        <nav class="header-content" aria-label="Главное меню">
+            <img src="8e2k1p57tyb9m22aro35kt1ok7af5qv7.png" class="frog-logo" alt="Логотип Riol Print" onclick="window.scrollTo({top:0, behavior:'smooth'})" title="На главную">
+            <button type="button" class="nav-link" onclick="openInfoModal('about')">О компании</button>
+            <button type="button" class="nav-link accent-link" onclick="openModal('requestModal')">Заявка</button>
+            <button type="button" class="nav-link" onclick="openModal('calcModal')">Калькулятор</button>
+            <button type="button" class="nav-link" onclick="openInfoModal('requirements')">Требования к макетам</button>
+            <button type="button" class="nav-link" onclick="openInfoModal('equipment')">Оборудование</button>
+            <button type="button" class="nav-link" onclick="openInfoModal('clients')">Клиенты и партнеры</button>
+            <button type="button" class="nav-link" onclick="openInfoModal('catalog')">Каталог</button>
+            <button type="button" class="nav-link" onclick="openInfoModal('diplomas')">Дипломы и отзывы</button>
+        </nav>
+        <div class="header-right-group">
+            <a href="#contacts-section" class="nav-link">Контакты</a>
+            <a href="tel:+74959227218" class="header-phone">+7 (495) 922-72-18</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- 1. ПЕРВЫЙ ЭКРАН: ЧИСТОЕ ПОЛНОЭКРАННОЕ ВИДЕО (БЕЗ ЦЕНТРАЛЬНОЙ НАДПИСИ) -->
+        <section class="hero-fullscreen" aria-label="Видеопрезентация Riol Print">
+            <video id="heroVideo" class="hero-bg-video" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1518182170546-076616fd46ea?q=80&w=1600&auto=format&fit=crop">
+                <source src="riol.mp4" type="video/mp4">
+                <source src="riol.mp4.mp4" type="video/mp4">
+            </video>
+            <div class="hero-video-filter"></div>
+        </section>
+
+        <!-- 2. 12 КРАСОЧНЫХ ПАРЯЩИХ КАРТОЧЕК (ГЕНЕРИРУЮТСЯ АВТОМАТИЧЕСКИ ИЗ МАССИВА) -->
+        <section class="vivid-cards-section section-container">
+            <h1 class="section-title-minimal">Направления и технологии печати Riol Print</h1>
+            <p class="section-sub-minimal">Нажмите на любую карточку, чтобы открыть характеристики, цены и примеры работ</p>
+            <div class="services-2row-grid" id="vividCardsContainer"></div>
+        </section>
+
+        <!-- 3. ЖУРНАЛЬНОЕ ПОРТФОЛИО (ВКЛЮЧАЯ НОВЫЕ ДИПЛОМЫ diplom1.jpg - diplom6.jpg) -->
+        <section class="section-container" id="portfolio-section">
+            <h2 class="section-title-minimal">Портфолио и дипломы Riol Print</h2>
+            <p class="section-sub-minimal">Нажмите на проект справа для предпросмотра или кликните по главному кадру для открытия галереи</p>
+
+            <div class="portfolio-editorial-grid">
+                <div class="editorial-main-card" onclick="openPortfolioTarget(currentMainPortfolioService)">
+                    <img id="editorialMainImg" src="riol_work1.jpg" onerror="this.onerror=null;this.src='https://riolprint.ru/upload/iblock/795/j219idgyihnry1d2xia4cuopdeejbnng.jpg'" alt="Главное фото портфолио">
+                    <div class="editorial-main-overlay">
+                        <h3 id="editorialMainTitle">Фирменные настольные и квартальные календари</h3>
+                        <div class="editorial-main-meta">
+                            <span id="editorialMainDesc">Дизайнерский картон, тиснение золотой фольгой и пружина под серебро</span>
+                            <div>
+                                <span id="editorialMainTag" style="margin-right: 14px;">Тираж от 50 шт.</span>
+                                <strong>Нажмите для просмотра серии ↗</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="editorial-side-list">
+                    <div class="editorial-side-item" onclick="switchEditorialMain('riol_work2.jpg', 'Фирменные бумажные и крафтовые пакеты с логотипом', 'Мелованная бумага, дизайнерский картон и крафт с укрепленным дном и люверсами', 'Шелкография и тиснение', 'Бумажные пакеты')">
+                        <div class="editorial-side-thumb"><img src="riol_work2.jpg" onerror="this.onerror=null;this.src='https://riolprint.ru/upload/iblock/f34/pukqq7vqfqslsrej3wlwxpgz9ozqj5rz.jpg'" loading="lazy" alt="Бумажные пакеты"></div>
+                        <div class="editorial-side-info">
+                            <h4 class="editorial-side-title">Изготовление фирменных бумажных и крафтовых пакетов с тиснением</h4>
+                            <div class="editorial-side-meta"><span>Укрепленные ручки</span><span>Корпоративный стиль</span></div>
+                        </div>
+                    </div>
+
+                    <div class="editorial-side-item" onclick="switchEditorialMain('riol_work3.jpg', 'Кашированные подарочные коробки и индивидуальная упаковка', 'Припрессовка лайнера к переплетному картону 1,5–3 мм, высечка и ложементы', 'Полный цикл сборки', 'Каширование коробок')">
+                        <div class="editorial-side-thumb"><img src="riol_work3.jpg" onerror="this.onerror=null;this.src='https://riolprint.ru/upload/iblock/d90/qtgpvsu1eop0iz3sainctwgwoeynvt6b.jpg'" loading="lazy" alt="Каширование коробок"></div>
+                        <div class="editorial-side-info">
+                            <h4 class="editorial-side-title">Каширование премиальных коробок «крышка-дно» и шкатулок на магнитах</h4>
+                            <div class="editorial-side-meta"><span>Тиснение фольгой</span><span>Упаковка</span></div>
+                        </div>
+                    </div>
+
+                    <div class="editorial-side-item" onclick="switchEditorialMain('riol_work4.jpg', 'Представительские визитки и кубарики для записей', 'Плотная бумага 250–350 г/м², дизайнерский картон, кубарики 90х90 с логотипом', 'От 100 штук', 'Визитки')">
+                        <div class="editorial-side-thumb"><img src="riol_work4.jpg" onerror="this.onerror=null;this.src='https://riolprint.ru/upload/iblock/4af/7tw8fawkms8jtc1xacm9v7xuv006tqfj.jpg'" loading="lazy" alt="Визитки и кубарики"></div>
+                        <div class="editorial-side-info">
+                            <h4 class="editorial-side-title">Печать представительских визиток, бланков и фирменных кубариков</h4>
+                            <div class="editorial-side-meta"><span>Дизайнерские бумаги</span><span>Деловая серия</span></div>
+                        </div>
+                    </div>
+
+                    <div class="editorial-side-item" onclick="switchEditorialMain('diplom1.jpg', 'Наши дипломы, награды и благодарственные письма', 'Галерея официальных дипломов и благодарностей от постоянных заказчиков (diplom1.jpg – diplom6.jpg)', '6 дипломов в галерее', 'MODAL:diplomas')">
+                        <div class="editorial-side-thumb"><img src="diplom1.jpg" loading="lazy" alt="Наши дипломы и благодарности"></div>
+                        <div class="editorial-side-info">
+                            <h4 class="editorial-side-title">Наши дипломы, почетные грамоты и благодарности клиентов</h4>
+                            <div class="editorial-side-meta"><span>Официальные награды</span><span>Смотреть все 6 шт.</span></div>
+                        </div>
+                    </div>
+
+                    <div class="editorial-bottom-bar">
+                        <button type="button" class="editorial-all-btn" onclick="openInfoModal('allPortfolio')">
+                            <span>ВСЕ РАБОТЫ И ДИПЛОМЫ</span>
+                            <span class="arrow-square">↗</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. ПРЕИМУЩЕСТВА И ЭТАПЫ ПРОИЗВОДСТВА -->
+        <section class="section-container">
+            <div class="modules-row">
+                <div class="module-mini"><h4>Гарантия качества</h4><p>Строгий технологический контроль цветопередачи и постпечатной отделки каждого тиража.</p></div>
+                <div class="module-mini"><h4>Минимальные сроки</h4><p>Оперативное выполнение даже самых срочных и объемных заказов без задержек.</p></div>
+                <div class="module-mini"><h4>Современное производство</h4><p>Собственный парк из более чем 20 печатных и отделочных машин мировых брендов.</p></div>
+                <div class="module-mini"><h4>Полный технологический цикл</h4><p>Все этапы в одном месте: от дизайн-бюро и вывода форм до вырубки и каширования.</p></div>
+                <div class="module-mini"><h4>Скидки рекламным агентствам</h4><p>Выгодные партнерские цены для РА и скидка 10–15% новым клиентам сайта.</p></div>
+            </div>
+
+            <h2 class="section-title-minimal">Как мы создаём ваш тираж</h2>
+            <p class="section-sub-minimal">Прозрачный производственный цикл в собственном комплексе в Москве</p>
+            <div class="process-grid">
+                <div class="process-step-card"><span class="step-num-badge">ШАГ 01</span><h4>Заявка и расчёт за 15 мин</h4><p>Вы оставляете параметры тиража на сайте или в Telegram. Технолог подбирает оптимальную бумагу и технологию печати.</p></div>
+                <div class="process-step-card"><span class="step-num-badge">ШАГ 02</span><h4>Проверка и подготовка макета</h4><p>Проверяем файл на соответствие стандартам PDF/X и CMYK, при необходимости разрабатываем и верстаем дизайн.</p></div>
+                <div class="process-step-card"><span class="step-num-badge">ШАГ 03</span><h4>Печать и постпечатная отделка</h4><p>Запускаем тираж в собственном цеху: офсет, цифра, шелкография, УФ/DTF, ламинация, тиснение фольгой, высечка и кашировка.</p></div>
+                <div class="process-step-card"><span class="step-num-badge">ШАГ 04</span><h4>Контроль качества и доставка</h4><p>Бережно упаковываем готовый тираж и доставляем курьером или грузовым транспортом по Москве, либо выдаем в офисе.</p></div>
+            </div>
+        </section>
+
+        <!-- 5. КОНТАКТЫ И КАРТА -->
+        <section class="section-container" id="contacts-section">
+            <h2 class="section-title-minimal">Контакты и схема проезда</h2>
+            <p class="section-sub-minimal">Офис и производственный комплекс типографии «Риол Принт»</p>
+            <div class="map-contact-wrapper">
+                <div class="contact-info-box">
+                    <div>
+                        <h3 style="font-family:var(--font-display); margin:0 0 15px; font-size:1.2rem;">Контакты типографии</h3>
+                        <div class="contact-detail"><strong>Точный адрес:</strong><span>г. Москва, ул. 2-я Кабельная, д. 2, стр. 39</span></div>
+                        <div class="contact-detail"><strong>Ближайшее метро:</strong><span>🚇 м. Авиамоторная, МЦК Андроновка, м. Нижегородская</span></div>
+                        <div class="contact-detail"><strong>Телефон:</strong><a href="tel:+74959227218">+7 (495) 922-72-18</a></div>
+                        <div class="contact-detail"><strong>Почта:</strong><a href="mailto:info@riolprint.ru">info@riolprint.ru</a></div>
+                        <div class="route-hint">
+                            <strong>Как добраться и пропускной режим:</strong> Мы располагаемся на территории комплекса «Москабельмет» (ул. 2-я Кабельная, д. 2, стр. 39), удобный проход и подъезд от <strong>м. Авиамоторная, МЦК Андроновка, м. Нижегородская</strong>. Позвоните нам заранее или оставьте заявку на сайте для оформления разового пропуска!
+                        </div>
+                    </div>
+                    <button type="button" class="btn-modal" onclick="orderCustom('Заказ пропуска на территорию (ул. 2-я Кабельная, д. 2, стр. 39)')">Заказать пропуск / Связаться</button>
+                </div>
+                <div class="map-frame-box">
+                    <iframe src="https://yandex.ru/map-widget/v1/?ll=37.717586%2C55.741806&z=17&pt=37.717586,55.741806,pm2gnm" allowfullscreen="true" loading="lazy" title="Карта проезда Риол Принт"></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p><strong>+7 (495) 922-72-18</strong> | info@riolprint.ru | г. Москва, ул. 2-я Кабельная, д. 2, стр. 39 (м. Авиамоторная, МЦК Андроновка, м. Нижегородская)</p>
+        <p>© 1999–2026 Riol Print. Московская типография полного цикла.</p>
+    </footer>
+
+    <!-- ВИДЖЕТ ЧАТА JIVO -->
+    <div class="jivo-trigger-tab" id="jivoTriggerTab" onclick="toggleJivoChat()">
+        <span class="jivo-online-dot"></span><span>Напишите нам, мы онлайн!</span><span class="jivo-brand-tag">jivo</span>
+    </div>
+    <div class="jivo-chat-window" id="jivoChatWindow">
+        <div class="jivo-header">
+            <div class="jivo-agent-info"><div class="jivo-avatar">РП</div><div><div style="font-weight:800; font-size:13.5px;">Менеджер «Риол Принт»</div><div style="font-size:11px; color:#d0f5df;">Консультант онлайн</div></div></div>
+            <button type="button" style="cursor:pointer; font-size:24px; background:none; border:none; color:#fff;" onclick="toggleJivoChat()" aria-label="Закрыть чат">×</button>
+        </div>
+        <div class="jivo-messages" id="jivoMessages">
+            <div class="jivo-msg-operator">Здравствуйте! 👋 Добро пожаловать в типографию «Риол Принт». Чем я могу помочь вам сегодня?</div>
+        </div>
+        <div class="jivo-quick-topics">
+            <button type="button" class="jivo-topic-btn" onclick="sendJivoQuick('Хочу рассчитать стоимость тиража')">💰 Расчет</button>
+            <button type="button" class="jivo-topic-btn" onclick="sendJivoQuick('Интересует УФ-печать на сувенирах')">✨ УФ-печать</button>
+            <button type="button" class="jivo-topic-btn" onclick="sendJivoQuick('Интересуют кубарики для записей')">🗒️ Кубарики</button>
+        </div>
+        <div class="jivo-input-area">
+            <input type="text" id="jivoInput" placeholder="Введите сообщение..." aria-label="Сообщение в чат" onkeypress="if(event.key==='Enter') sendJivoMessage()">
+            <button type="button" onclick="sendJivoMessage()">Отправить</button>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+         МОДАЛЬНЫЕ ОКНА
+         ========================================================================== -->
+
+    <!-- 1. ЕДИНОЕ ДИНАМИЧЕСКОЕ ОКНО ДЛЯ ВСЕХ ИНФОРМАЦИОННЫХ РАЗДЕЛОВ И УСЛУГ -->
+    <div id="infoModal" class="modal-overlay" onclick="closeOutside(event, 'infoModal')">
+        <div class="modal-content">
+            <button type="button" class="close-btn" onclick="closeModal('infoModal')" aria-label="Закрыть">×</button>
+            <h3 id="infoModalTitle">Заголовок</h3>
+            <div id="infoModalBody" class="req-text"></div>
+            <div id="infoModalGalleryWrap" style="display:none;">
+                <h4 style="margin:16px 0 8px;">Фотографии, дипломы и примеры работ:</h4>
+                <div class="modal-gallery" id="infoModalGallery"></div>
+            </div>
+            <div id="infoModalActions" style="display:flex; gap:10px; margin-top:20px;">
+                <button type="button" class="btn-modal" id="infoModalOrderBtn" style="flex:2; background:var(--green);">Заявка на расчет</button>
+                <button type="button" class="btn-modal" style="flex:1; background:#23202e;" onclick="closeModal('infoModal'); openModal('calcModal');">Калькулятор</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. ЗАЯВКА НА РАСЧЕТ -->
+    <div id="requestModal" class="modal-overlay" onclick="closeOutside(event, 'requestModal')">
+        <div class="modal-content" style="max-width:520px;">
+            <button type="button" class="close-btn" onclick="closeModal('requestModal')" aria-label="Закрыть">×</button>
+            <h3>Заявка на расчет</h3>
+            <div id="orderFormBlock">
+                <input type="text" id="req-name" class="input-field" placeholder="Ваше имя или компания *" aria-label="Ваше имя">
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                    <input type="tel" id="req-phone" class="input-field" placeholder="Ваш телефон *" aria-label="Ваш телефон">
+                    <input type="email" id="req-email" class="input-field" placeholder="Ваш Email" aria-label="Ваш Email">
+                </div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                    <input type="text" id="req-promo" class="input-field" placeholder="Промокод (RIOL15)" style="font-weight:700; color:var(--green);" aria-label="Промокод">
+                    <select id="req-delivery-method" class="input-field" aria-label="Способ связи">
+                        <option value="Звонок">По телефону</option>
+                        <option value="Мессенджер">В Telegram / WhatsApp</option>
+                        <option value="Email">На Email</option>
+                    </select>
+                </div>
+                <textarea id="req-details" class="input-field" placeholder="Опишите тираж, формат и пожелания..." style="height:95px; resize:none;" aria-label="Детали заказа"></textarea>
+                <button type="button" class="btn-modal" style="background:var(--green);" onclick="submitSmartOrder()">Отправить заявку</button>
+                
+                <div style="text-align:center; margin-top:16px; padding-top:14px; border-top: 1px dashed rgba(0,155,72,0.3);">
+                    <span style="font-size:12px; color:#333; font-weight: 600;">Быстрая привязка Telegram-бота для приема заявок:</span>
+                    <div style="display: flex; gap: 8px; margin-top: 8px;">
+                        <input type="password" id="tg-token-input" class="input-field" placeholder="Токен от @BotFather" style="margin:0; font-size:12px;" aria-label="Токен бота">
+                        <button type="button" class="btn-modal" style="width:auto; padding:0 14px; background:#0077cc; font-size:11px;" onclick="autoDetectTelegramChatId()">🔍 Найти ID</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="orderSuccessBlock" style="display:none; text-align:center;">
+                <h4 style="color:var(--green);">✅ Заявка №<span id="orderNumberSpan">101</span> принята!</h4>
+                <p id="orderSummaryText" class="req-text"></p>
+                <div id="tgStatusInfo" style="background:#fff; padding:10px; border-radius:10px; margin:12px 0; font-size:13px; color:var(--green-dark); font-weight:600;"></div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                    <button type="button" class="btn-modal" style="background:#25D366;" onclick="sendViaWhatsApp()">💬 В WhatsApp</button>
+                    <button type="button" class="btn-modal" style="background:#0077ff;" onclick="sendViaMailto()">✉️ На Почту</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. ОНЛАЙН-КАЛЬКУЛЯТОР -->
+    <div id="calcModal" class="modal-overlay" onclick="closeOutside(event, 'calcModal')">
+        <div class="modal-content" style="max-width:680px;">
+            <button type="button" class="close-btn" onclick="closeModal('calcModal')" aria-label="Закрыть">×</button>
+            <h3>Онлайн-калькулятор тиража</h3>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                <select id="calc-format" class="input-field" aria-label="Вид продукции">
+                    <option value="5">Визитка 90х50 (от 5 руб)</option>
+                    <option value="35">Диплом / Грамота А4, А5 (от 35 руб)</option>
+                    <option value="65">Кубарики для записей 90х90 (от 65 руб)</option>
+                    <option value="18">Буклет А6, А5, А4, евро (от 18 руб)</option>
+                    <option value="12">Листовка (от 12 руб)</option>
+                    <option value="20">Флаер евро 100х210 (от 20 руб)</option>
+                    <option value="50">Плакат / Широкоформатная печать А3 (от 50 руб)</option>
+                    <option value="150">Каталог / Брошюра А4 (от 150 руб)</option>
+                    <option value="95">Бумажный пакет с логотипом (от 95 руб)</option>
+                    <option value="40">Пакет ПВД 40х50 (от 40 руб)</option>
+                    <option value="180">Квартальный календарь (от 180 руб)</option>
+                    <option value="160">Кашированная коробка (от 160 руб)</option>
+                </select>
+                <select id="calc-paper" class="input-field" aria-label="Материал">
+                    <option value="1">Мелованная матовая/глянцевая 130г (x1)</option>
+                    <option value="1.1">Офсетная бумага 80г для кубариков/бланков (x1.1)</option>
+                    <option value="1.3">Бумага 170–200г (x1.3)</option>
+                    <option value="1.5">Плотная бумага 250–350г / Картон (x1.5)</option>
+                    <option value="3">Дизайнерская бумага / Кашировка (x3)</option>
+                    <option value="2">Самоклеящаяся пленка / ПВД / Баннер (x2)</option>
+                </select>
+                <select id="calc-color" class="input-field" aria-label="Цветность">
+                    <option value="1">Цветная 4+0 (x1)</option>
+                    <option value="1.3">Двусторонняя 4+4 (x1.3)</option>
+                    <option value="0.7">Черно-белая / 1+0 (x0.7)</option>
+                </select>
+                <select id="calc-lamination" class="input-field" aria-label="Ламинация">
+                    <option value="0">Без ламинации (+0 руб)</option>
+                    <option value="4">Матовая / Глянцевая (+4 руб)</option>
+                    <option value="6">Soft Touch (+6 руб)</option>
+                </select>
+                <select id="calc-corners" class="input-field" aria-label="Отделка">
+                    <option value="0">Без постпечатной отделки</option>
+                    <option value="2">Биговка / Фальцовка / Сквозная нумерация (+2 руб)</option>
+                    <option value="10">УФ-печать / Выборочный 3D УФ-лак (+10 руб)</option>
+                    <option value="15">Тиснение фольгой / Конгрев (+15 руб)</option>
+                </select>
+                <input type="number" id="calc-quantity" class="input-field" value="100" min="1" placeholder="Тираж (шт)" aria-label="Тираж">
+                <button type="button" class="btn-modal" style="grid-column:span 2;" onclick="calculateComplexPrice()">Рассчитать стоимость</button>
+            </div>
+            <div id="calc-result-main" style="text-align:center; font-size:21px; font-weight:800; color:#006b31; margin-top:15px;">Итого: 0 руб.</div>
+            <button type="button" id="calcToOrderBtn" class="btn-modal" style="margin-top:12px; background:var(--green); display:none;" onclick="transferCalcToOrder()">Оформить заявку с этим расчетом →</button>
+        </div>
+    </div>
+
+    <!-- 4. ОКНО СКИДКИ 10-15% -->
+    <div id="promoModal" class="modal-overlay" onclick="closeOutside(event, 'promoModal')">
+        <div class="modal-content" style="max-width:480px; text-align:center;">
+            <button type="button" class="close-btn" onclick="closeModal('promoModal')" aria-label="Закрыть">×</button>
+            <h3>🎁 Персональная скидка 10–15%!</h3>
+            <div id="promoStepForm">
+                <p class="req-text">Дарим купон посетителям сайта: <strong>10%</strong> на малые тиражи и <strong>15%</strong> при заказе от 10 000 ₽! Введите ваш Email для закрепления скидки:</p>
+                <input type="text" id="promo-user-name" class="input-field" placeholder="Ваше имя" aria-label="Ваше имя">
+                <input type="email" id="promo-user-email" class="input-field" placeholder="Ваш Email" aria-label="Ваш Email">
+                <button type="button" class="btn-modal" style="background:var(--green);" onclick="activatePersonalPromo()">Активировать промокод RIOL15</button>
+            </div>
+            <div id="promoStepSuccess" style="display:none;">
+                <div class="service-info-box"><strong style="font-size:22px; color:var(--green);">RIOL15</strong><p style="margin:6px 0 0;">Скидка 10–15% автоматически добавлена в калькулятор и заявку!</p></div>
+                <button type="button" class="btn-modal" style="background:var(--green);" onclick="closeModal('promoModal'); openModal('requestModal');">Перейти к заявке</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+         ОПТИМИЗИРОВАННАЯ ПРОГРАММНАЯ ЛОГИКА (JAVASCRIPT)
+         ========================================================================== -->
+    <script>
+        /* --- 1. КОНФИГУРАЦИЯ САЙТА --- */
+        const SITE_CONFIG = {
+            DISCOUNT_SMALL: 10,
+            DISCOUNT_LARGE: 15,
+            DISCOUNT_THRESHOLD: 10000,
+            PROMO_CODE: "RIOL15",
+            POPUP_DELAY_SECONDS: 45,
+            MANAGER_EMAIL: "info@riolprint.ru",
+            MANAGER_WHATSAPP: "74959227218"
+        };
+
+        let currentMainPortfolioService = 'Печать календарей';
+        let lastCalculationSummary = "";
+        let lastSubmittedOrder = null;
+
+        /* --- 2. КОМПАКТНЫЙ МАССИВ 12 ПАРЯЩИХ КАРТОЧЕК (ОПТИМИЗАЦИЯ HTML) --- */
+        const servicesData = [
+            { title: "Календари", desc: "Квартальные, перекидные, настольные «домики» тиражом от 50 шт.", emoji: "📅", c1: "#ff9900", c2: "#ff3300", action: "SERVICE:Печать календарей" },
+            { title: "Каширование коробок", desc: "Жесткие коробки «крышка-дно», магнитные шкатулки и ложементы.", emoji: "🎁", c1: "#ff2a5f", c2: "#990033", action: "SERVICE:Каширование коробок" },
+            { title: "Упаковка", desc: "Фирменные коробки из картона 220–350 г/м², подарочные тубусы и высечка.", emoji: "📦", c1: "#00e676", c2: "#007a38", action: "SERVICE:Упаковка" },
+            { title: "Сувениры и Мерч", desc: "Футболки из 100% хлопка, поло, толстовки, ручки, флешки и бизнес-наборы.", emoji: "👕", c1: "#b347ff", c2: "#4a00e0", action: "SERVICE:Сувениры" },
+            { title: "Цифровая печать", desc: "Срочный выпуск тиражей от 1 экземпляра день в день с яркой цветопередачей.", emoji: "🖨️", c1: "#00d2ff", c2: "#0052d4", action: "SERVICE:Цифровая печать" },
+            { title: "Широкоформатная печать", desc: "Интерьерная и наружная печать 720–1440 dpi, холсты, стенды Roll-Up и ПВХ.", emoji: "📐", c1: "#ff6b35", c2: "#d62828", action: "SERVICE:Широкоформатная печать" },
+            { title: "Баннеры", desc: "Постеры, рекламные растяжки, пресс-воллы и самоклеящаяся пленка.", emoji: "🏙️", c1: "#00f5d4", c2: "#0077b6", action: "SERVICE:Баннеры" },
+            { title: "Бумажные пакеты", desc: "Мелованные с ламинацией, крафтовые и дизайнерские пакеты с люверсами.", emoji: "🛍️", c1: "#ffd166", c2: "#f77f00", action: "SERVICE:Бумажные пакеты" },
+            { title: "Шелкография", desc: "Трафаретная печать красками Pantone на темных бумагах, пакетах и ткани.", emoji: "🎨", c1: "#ff4d94", c2: "#800040", action: "SERVICE:Шелкография" },
+            { title: "Деловая полиграфия", desc: "Визитки, дипломы, кубарики, буклеты, каталоги на КБС, брошюры и бланки.", emoji: "💼", c1: "#4cc9f0", c2: "#3a0ca3", action: "MODAL:businessPoly" },
+            { title: "Рекламная полиграфия", desc: "Пакеты ПВД с логотипом, виниловые магниты, плакаты, флаеры и этикетки.", emoji: "📣", c1: "#aacc00", c2: "#2b9348", action: "MODAL:promoPoly" },
+            { title: "Услуги типографии", desc: "УФ-печать на сувенирах, DTF-печать, тиснение, конгрев, гравировка и дизайн.", emoji: "⚙️", c1: "#ffb703", c2: "#9b2226", action: "MODAL:servicesPoly" }
+        ];
+
+        function renderVividCards() {
+            const container = document.getElementById('vividCardsContainer');
+            if (!container) return;
+            container.innerHTML = servicesData.map(item => `
+                <div class="vivid-card" style="--c1: ${item.c1}; --c2: ${item.c2};" onclick="handleCardAction('${item.action}')">
+                    <div class="vivid-graphic-wrap"><span class="vivid-graphic-emoji">${item.emoji}</span></div>
+                    <div class="vivid-text-box">
+                        <h3 class="vivid-title">${item.title}</h3>
+                        <p class="vivid-desc">${item.desc}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function handleCardAction(actionStr) {
+            const [type, key] = actionStr.split(':');
+            if (type === 'MODAL') openInfoModal(key);
+            else openServiceGallery(key);
+        }
+
+        /* --- 3. МАССИВ ДИПЛОМОВ И БАЗА ФОТОГРАФИЙ --- */
+        const diplomaFiles = ['diplom1.jpg', 'diplom2.jpg', 'diplom3.jpg', 'diplom4.jpg', 'diplom5.jpg', 'diplom6.jpg'];
+
+        const serviceGalleryImages = {
+            'Печать каталогов': ['https://riolprint.ru/upload/iblock/a46/lu32qv1fp65931x0bkc0g1tc56kh540n.jpg', 'https://riolprint.ru/upload/iblock/80c/lijks3rlsvohoha42g3za38hy5gs2vcv.jpg', 'https://riolprint.ru/upload/iblock/27d/atdaimlvc7h309ry5qerojjhqd67v0qc.jpg', 'https://riolprint.ru/upload/iblock/3f9/gnuog0rg02tvvnnhp2x59nqr0xtooctq.jpg'],
+            'Печать календарей': ['0.jpg', '2.jpg', '22.jpg', 'https://riolprint.ru/upload/iblock/e63/rt9pcdnmbuof5l1e53cyzxvzcqk9ub1w.jpg'],
+            'Печать настенных календарей': ['0.jpg', '2.jpg', '22.jpg', 'https://riolprint.ru/upload/iblock/e63/rt9pcdnmbuof5l1e53cyzxvzcqk9ub1w.jpg'],
+            'Печать на пакетах ПВД': ['1.jpg', '66.jpg', '33.jpg', '123.jpg'],
+            'Бумажные пакеты': ['1.jpg', '33.jpg', '123.jpg', '66.jpg'],
+            'Каширование коробок': ['4.jpg', '44.jpg', '234.jpg', 'e.jpg'],
+            'Упаковка': ['4.jpg', '44.jpg', '234.jpg', 'e.jpg'],
+            'Сувениры': ['4567.jpg', '5556.jpg', '6.jpg', '77.jpg'],
+            'DTF-печать': ['4567.jpg', '6.jpg', '77.jpg', '5556.jpg'],
+            'УФ-печать': ['4567.jpg', '5556.jpg', '6.jpg', '77.jpg'],
+            'УФ-печать на сувенирах': ['4567.jpg', '5556.jpg', '6.jpg', '77.jpg'],
+            'Цифровая печать': ['7.jpg', '789.jpg', '88.jpg', 'r.jpg'],
+            'Печать дипломов и грамот': ['7.jpg', '88.jpg', ...diplomaFiles],
+            'Печать буклетов': ['66.jpg', '3.jpg', '456.jpg', 'io.jpg'],
+            'Баннеры': ['5.jpg', '55.jpg', '345.jpg', 'y.jpg'],
+            'Широкоформатная печать': ['5.jpg', '55.jpg', '345.jpg', 'y.jpg'],
+            'Визитки': ['8.jpg', '90.jpg', '889.jpg', 'q.jpg'],
+            'Кубарики для записей': ['8.jpg', '7.jpg', '90.jpg'],
+            'Шелкография': ['11.jpg', '9.jpg', '89.jpg', 't.jpg']
+        };
+
+        /* --- 4. БАЗА ИНФОРМАЦИОННЫХ ОКОН (С ДИПЛОМАМИ В ПОРТФОЛИО И В НАГРАДАХ) --- */
+        const infoModalsDB = {
+            'allPortfolio': {
+                title: 'Все работы портфолио и дипломы Riol Print',
+                html: `<div class="service-info-box"><p>Примеры готовой продукции и официальные дипломы производственного комплекса «Риол Принт»:</p></div>`,
+                photos: ['0.jpg', '1.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg', '8.jpg', '9.jpg', '11.jpg', '22.jpg', '33.jpg', ...diplomaFiles]
+            },
+            'about': {
+                title: 'Московская типография полного цикла «Риол Принт»',
+                html: `<div class="service-info-box"><p>Рекламно-производственная фирма «Риол Принт» успешно работает на полиграфическом рынке Москвы с декабря 1999 года. В настоящее время наша компания — это уникальная типография полного цикла, включающая собственное дизайн-бюро, отдел вывода печатных форм, офсетный цех, отдел оперативной цифровой печати, участок каширования и высечки, цех шелкографии, УФ и DTF-печати, а также цех широкоформатной печати.</p></div>`
+            },
+            'requirements': {
+                title: 'Требования к макетам',
+                html: `<div class="service-info-box"><ul>
+                    <li><strong>Офсетная и цифровая печать:</strong> файлы <strong>PDF/X-1a:2001</strong>, цветовая модель CMYK, сумма красок до 324%, вылеты под обрез по 3 мм, черный текст строго C0-M0-Y0-K100.</li>
+                    <li><strong>Шелкография, тиснение, гравировка, пакеты ПВД:</strong> векторные файлы <strong>.ai, .eps, .cdr</strong> (шрифты в кривых, палитра Pantone).</li>
+                    <li><strong>DTF и УФ-печать:</strong> файлы TIFF, PNG или PDF (300 dpi) на прозрачном фоне либо вектор с отдельным слоем под белую подложку и выборочный лак.</li>
+                </ul></div>`
+            },
+            'equipment': {
+                title: 'Производственная база и оборудование',
+                html: `<div class="service-info-box"><p>В нашей типографии установлено более 20 единиц современного печатного и постпечатного оборудования: высокоскоростные листовые офсетные и цифровые машины, фальцевальная система <strong>MBO T45</strong> (до 6 сгибов, биговка и перфорация), резальные и листоподборочные комплексы, широкоформатные плоттеры (720–1440 dpi), станки для УФ и DTF-печати, а также автоматические линии для УФ-лакирования, высечки, ламинации, сквозной нумерации (до 9 знаков), КБС, брошюровки и каширования коробок.</p></div>`,
+                photos: ['https://riolprint.ru/upload/medialibrary/9b1/8e2k1p57tyb9m22aro35kt1ok7af5qv7.png', 'https://riolprint.ru/upload/medialibrary/cba/iw72hq18xel6uxtw8uav1qq53uc2x6dj.png', 'https://riolprint.ru/upload/medialibrary/d3a/yqay2dko3tb336vv0205ydtza7grhmvw.png', 'https://riolprint.ru/upload/medialibrary/036/r549pqx75qoczljq10aw8mt1e4g42wx8.png']
+            },
+            'clients': {
+                title: 'Клиенты и партнеры типографии «Риол Принт»',
+                html: `<div class="service-info-box">
+                    <p>С 1999 года нашими постоянными заказчиками и партнерами стали сотни организаций Москвы и России. Ниже перечислены отрасли и наименования компаний, для которых мы изготавливали полиграфическую продукцию (текстовый перечень без использования товарных знаков):</p>
+                    <div class="client-name-grid">
+                        <div class="client-name-card">Производственный комплекс «Москабельмет»</div>
+                        <div class="client-name-card">Строительные и инжиниринговые холдинги</div>
+                        <div class="client-name-card">Финансовые организации и банки</div>
+                        <div class="client-name-card">Медицинские и фармацевтические центры</div>
+                        <div class="client-name-card">Рекламные и коммуникационные агентства</div>
+                        <div class="client-name-card">Организаторы выставок и форумов</div>
+                        <div class="client-name-card">Государственные и образовательные учреждения</div>
+                        <div class="client-name-card">Торговые и дистрибьюторские компании</div>
+                    </div>
+                </div>`
+            },
+            'diplomas': {
+                title: 'Наши дипломы, благодарности и отзывы',
+                html: `
+                    <div class="review-card">
+                        <div class="review-header"><span class="review-author">Отдел маркетинга и закупок (Производственный холдинг)</span><span class="review-stars">★★★★★</span></div>
+                        <div>«Выражаем благодарность коллективу типографии "Риол Принт" за оперативное и качественное изготовление новогоднего тиража квартальных и перекидных календарей, а также фирменных бумажных пакетов с тиснением. Все работы выполнены точно в оговоренные договором сроки!»</div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-header"><span class="review-author">Рекламно-коммуникационное агентство (г. Москва)</span><span class="review-stars">★★★★★</span></div>
+                        <div>«Сотрудничаем с типографией "Риол Принт" как постоянные партнеры. Заказываем здесь многостраничные каталоги на КБС, фирменные бланки, кубарики и кашированные коробки. Отдельно благодарим технологов за внимательную проверку макетов перед запуском тиражей.»</div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-header"><span class="review-author">Дирекция выставочных мероприятий</span><span class="review-stars">★★★★★</span></div>
+                        <div>«Регулярно заказываем в "Риол Принт" брендирование пакетов ПВД методом шелкографии, УФ-печать на сувенирах, печать дипломов и широкоформатных баннеров для выставок. Отличное качество и быстрая доставка в офис!»</div>
+                    </div>
+                `,
+                photos: diplomaFiles
+            },
+            'catalog': {
+                title: 'Полный каталог услуг типографии',
+                html: `<div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                    <button type="button" class="btn-modal" onclick="openInfoModal('businessPoly')">💼 Деловая полиграфия</button>
+                    <button type="button" class="btn-modal" onclick="openInfoModal('promoPoly')">📣 Рекламная полиграфия</button>
+                    <button type="button" class="btn-modal" style="grid-column:span 2;" onclick="openInfoModal('servicesPoly')">⚙️ Услуги и технологии типографии</button>
+                </div>`
+            },
+            'businessPoly': {
+                title: 'Деловая полиграфия',
+                html: `<p>Выберите нужный раздел для просмотра характеристик:</p><ul class="catalog-list">
+                    <li onclick="openServiceGallery('Визитки')">💳 Печать визиток</li>
+                    <li onclick="openServiceGallery('Печать дипломов и грамот')">🎓 Печать дипломов и грамот</li>
+                    <li onclick="openServiceGallery('Кубарики для записей')">🗒️ Кубарики для записей</li>
+                    <li onclick="openServiceGallery('Печать каталогов')">📘 Печать каталогов</li>
+                    <li onclick="openServiceGallery('Печать брошюр')">📗 Печать брошюр</li>
+                    <li onclick="openServiceGallery('Печать буклетов')">📖 Печать буклетов</li>
+                    <li onclick="openServiceGallery('Печать листовок')">📄 Печать листовок</li>
+                    <li onclick="openServiceGallery('Печать бланков (в том числе печать самокопирующихся бланков)')">📝 Печать бланков (в том числе печать самокопирующихся бланков)</li>
+                    <li onclick="openServiceGallery('Печать конвертов')">✉️ Печать конвертов (С4, С5, Е65)</li>
+                    <li onclick="openServiceGallery('Печать блокнотов с логотипом')">📓 Печать блокнотов с логотипом</li>
+                </ul>`
+            },
+            'promoPoly': {
+                title: 'Рекламная полиграфия',
+                html: `<p>Выберите интересующий раздел:</p><ul class="catalog-list">
+                    <li onclick="openServiceGallery('Бумажные пакеты')">🛍️ Бумажные пакеты с логотипом</li>
+                    <li onclick="openServiceGallery('Печать на пакетах ПВД')">👜 Печать на пакетах ПВД</li>
+                    <li onclick="openServiceGallery('Печать настенных календарей')">🗓️ Настенные перекидные календари</li>
+                    <li onclick="openServiceGallery('Печать календарей')">📅 Все виды календарей + Акции Эконом №1–3</li>
+                    <li onclick="openServiceGallery('Печать плакатов')">🖼️ Печать плакатов любых форматов</li>
+                    <li onclick="openServiceGallery('Печать магнитов на холодильник')">🧲 Магниты на холодильник (0.4 и 0.7 мм)</li>
+                    <li onclick="openServiceGallery('Печать флаеров')">🎟️ Печать флаеров (Евро, А5, А6)</li>
+                    <li onclick="openServiceGallery('Печать этикеток')">🏷️ Печать этикеток, наклеек и стикеров</li>
+                </ul>`
+            },
+            'servicesPoly': {
+                title: 'Услуги и технологии типографии',
+                html: `<p>Выберите производственную технологию:</p><ul class="catalog-list">
+                    <li onclick="openServiceGallery('DTF-печать')">🖨️ DTF-печать на текстиле</li>
+                    <li onclick="openServiceGallery('УФ-печать')">💎 УФ-печать (Ультрафиолетовая)</li>
+                    <li onclick="openServiceGallery('УФ-печать на сувенирах')">🎁 УФ-печать на сувенирах</li>
+                    <li onclick="openServiceGallery('Каширование коробок')">📦 Каширование коробок</li>
+                    <li onclick="openServiceGallery('Гравировка на сувенирах')">⚡ Лазерная гравировка на изделиях</li>
+                    <li onclick="openServiceGallery('Дизайн полиграфии')">✏️ Дизайн и верстка полиграфии</li>
+                    <li onclick="openServiceGallery('Термотрансфер')">👕 Термотрансфер на текстиле</li>
+                    <li onclick="openServiceGallery('Тиснение')">🏅 Тиснение (фольгой, блинт, конгрев)</li>
+                    <li onclick="openServiceGallery('Шелкография')">🎨 Шелкография (трафаретная печать)</li>
+                    <li onclick="openServiceGallery('Широкоформатная печать')">📐 Широкоформатная печать (720–1440 dpi)</li>
+                </ul>`
+            }
+        };
+
+        /* --- 5. ПОЛНАЯ БАЗА ОПИСАНИЙ УСЛУГ (ДОПОЛНЕНА КУБАРИКАМИ И УФ-ПЕЧАТЬЮ) --- */
+        const serviceContentDB = {
+            'Печать дипломов и грамот': `<div class="service-info-box">
+                <p><strong>Печать дипломов, почетных грамот, сертификатов и благодарностей:</strong></p>
+                <ul>
+                    <li><strong>Форматы:</strong> <strong>А4 и А5</strong>.</li>
+                    <li><strong>Материалы:</strong> <strong>мелованная бумага 250–350 г/м² или картон</strong> (включая фактурные дизайнерские сорта картона).</li>
+                    <li><strong>Отделка:</strong> горячее тиснение золотой и серебряной фольгой (гербы, логотипы), конгревное объемное тиснение, шелкография и ламинация.</li>
+                </ul>
+            </div>`,
+
+            'Кубарики для записей': `<div class="service-info-box">
+                <p><strong>Изготовление фирменных кубариков (блоков для записей) с логотипом:</strong></p>
+                <ul>
+                    <li><strong>Форматы:</strong> классический <strong>90×90 мм</strong>, а также <strong>80×80 мм</strong>, <strong>100×100 мм</strong> и нестандартные размеры.</li>
+                    <li><strong>Бумага:</strong> высококачественная белая или тонированная в массе <strong>офсетная бумага 80 г/м²</strong>.</li>
+                    <li><strong>Высота стопы (объем):</strong> <strong>300, 500 или 900 листов</strong> (высота 3, 5 или 9 см).</li>
+                    <li><strong>Виды исполнения:</strong> со склейкой по одному торцу (отрывные), без склейки в пластиковом или кашированном картонном боксе (диспенсере), с косым срезом или фигурной вырубкой.</li>
+                    <li><strong>Цветность печати:</strong> от экономичной печати в 1–2 краски по шкале Pantone (1+0, 2+0) до полноцветной печати CMYK (4+0) на каждом листе.</li>
+                </ul>
+                <div class="tariff-grid">
+                    <div class="tariff-card"><h5>Кубарик 90×90×50 мм</h5><div style="font-size:12px;">500 листов, бумага офсетная 80 г/м², печать логотипа 1+0 / 4+0, термоусадочная упаковка.</div><div class="tariff-price">От 65 ₽/шт.</div></div>
+                    <div class="tariff-card"><h5>Кубарик 90×90×90 мм</h5><div style="font-size:12px;">900 листов, бумага офсетная 80 г/м², печать логотипа на каждом листе, склейка по торцу.</div><div class="tariff-price">От 110 ₽/шт.</div></div>
+                    <div class="tariff-card"><h5>Кубарик в картонном боксе</h5><div style="font-size:12px;">Блок 90×90 мм + брендированный короб из плотного картона с ламинацией или тиснением.</div><div class="tariff-price">От 165 ₽/шт.</div></div>
+                </div>
+            </div>`,
+
+            'Печать буклетов': `<div class="service-info-box">
+                <p><strong>Офсетная и цифровая печать буклетов (лифлетов):</strong></p>
+                <ul>
+                    <li><strong>Форматы:</strong> <strong>А6, А5, А4, евро</strong>.</li>
+                    <li><strong>Бумага:</strong> матовая или глянцевая мелованная бумага (130–150 г/м² для массовых тиражей; 170, 200 и 250 г/м² для представительских буклетов).</li>
+                    <li><strong>Технология:</strong> при плотности от 170 г/м² выполняется предварительная биговка перед фальцовкой на машине <strong>MBO T45</strong> (до 6 сгибов без заломов).</li>
+                </ul>
+            </div>`,
+
+            'Печать листовок': `<div class="service-info-box">
+                <p><strong>Печать рекламных и информационных листовок:</strong></p>
+                <ul>
+                    <li><strong>Бумага:</strong> <strong>матовая и глянцевая мелованная бумага</strong> плотностью 115–150 г/м², а также плотная бумага 250–300 г/м² с ламинацией для долговечных прайс-листов и раздаточных материалов.</li>
+                </ul>
+            </div>`,
+
+            'Печать бланков (в том числе печать самокопирующихся бланков)': `<div class="service-info-box">
+                <p><strong>Печать фирменных и самокопирующихся бланков (2–4 слойных):</strong></p>
+                <ul>
+                    <li><strong>Слои:</strong> самокопирующиеся бланки изготавливаются из <strong>2, 3 или 4 слоев</strong> специальной самокопирующейся бумаги различных цветов, склеенных по краю клеем.</li>
+                    <li><strong>Нумерация:</strong> наше оборудование выполняет автоматическую <strong>сквозную нумерацию</strong> бланков (до 9 знаков).</li>
+                </ul>
+            </div>`,
+
+            'УФ-печать на сувенирах': `<div class="service-info-box">
+                <p><strong>УФ-печать на сувенирах и корпоративных подарках:</strong></p>
+                <ul>
+                    <li><strong>Технология:</strong> прямая полноцветная печать УФ-отверждаемыми чернилами (<strong>CMYK + Белый цвет + Выборочный лак</strong>), мгновенно полимеризующимися под ультрафиолетовыми лампами.</li>
+                    <li><strong>Изделия под нанесение:</strong> пластиковые и металлические ручки, зажигалки, флешки, пауэрбанки (внешние аккумуляторы), ежедневники из кожи и кожзама, визитницы, термокружки, бутылки для воды, часы, брелоки и наградные плакетки.</li>
+                    <li><strong>Преимущества:</strong> фотографическая четкость мелких деталей и градиентов, печать плотной белой подложкой на темных и прозрачных поверхностях, устойчивость к истиранию и отсутствие необходимости выводить клише на малых тиражах.</li>
+                </ul>
+            </div>`,
+
+            'УФ-печать': `<div class="service-info-box">
+                <p><strong>Промышленная прямая УФ-печать (CMYK + White + 3D Varnish):</strong></p>
+                <ul>
+                    <li><strong>Материалы:</strong> пластик ПВХ, оргстекло (акрил), дерево и фанера, металл, композитные панели, кожа, экокожа, стекло и дизайнерский картон.</li>
+                    <li><strong>Спецэффекты:</strong> печать с белой подложкой, глянцевое или матовое лакирование, а также многослойный <strong>объемный 3D-лак</strong> (эффект тактильного рельефа и шрифта Брайля).</li>
+                    <li><strong>Применение:</strong> представительские ежедневники, подарочные футляры, офисные таблички, бейджи, POS-материалы, приборные панели и эксклюзивная полиграфия.</li>
+                </ul>
+            </div>`,
+
+            'Бумажные пакеты': `<div class="service-info-box"><p><strong>Фирменные бумажные пакеты с логотипом:</strong> изготавливаются из мелованной бумаги (170–250 г/м²) с глянцевой, матовой или Soft-Touch ламинацией, из фактурных дизайнерских бумаг (Эфалин, Имитлин, Touch Cover) или крафт-бумаги. Укрепленное картоном дно и подручники, металлические люверсы и шнуры/ленты под цвет бренда.</p></div>`,
+            'Каширование коробок': `<div class="service-info-box"><p><strong>Каширование коробок и премиальной упаковки:</strong> припрессовка запечатанного лайнера (с ламинацией, тиснением фольгой или УФ-лаком) к жесткому переплетному картону (1,5–3 мм) или микрогофрокартону. Изготавливаем коробки «крышка-дно», шкатулки на магнитах, футляры с ложементами.</p></div>`,
+            'DTF-печать': `<div class="service-info-box"><p><strong>DTF-печать (Direct to Film):</strong> полноцветный термоперенос изображений любой сложности на хлопок, синтетику, флис и спецодежду. Принт эластичный, не трескается и выдерживает десятки стирок. Наносим на футболки, худи, бейсболки, шопперы, зонты и рукава/карманы.</p></div>`,
+            'Печать настенных календарей': `<div class="service-info-box"><p><strong>Перекидные настенные календари (А4, А3, А2):</strong> 6 или 12 листов с односторонней или двусторонней печатью. Блок — бумага <strong>170 г/м²</strong>, обложка и подложка — картон <strong>280 г/м²</strong>. Сборка на металлическую пружину с ригелем.</p></div>`,
+            'Печать плакатов': `<div class="service-info-box"><p><strong>Печать плакатов любых форматов:</strong> на мелованной бумаге, самоклеящейся бумаге или виниловой пленке. Доступна защитная матовая/глянцевая ламинация и УФ-лакировка.</p></div>`,
+            'Печать магнитов на холодильник': `<div class="service-info-box"><p><strong>Рекламные магниты из 3 слоев:</strong> красочный лайнер на мелованной бумаге + магнитный винил толщиной <strong>0,4 мм или 0,7 мм</strong> + защитная ламинация и выборочный УФ-лак.</p></div>`,
+            'Печать на пакетах ПВД': `<div class="service-info-box"><p><strong>Пакеты ПВД с логотипом (укрепленная ручка и донная складка):</strong> размеры 20×30, 30×40, 40×50 и 50×60 см. Плотность <strong>50, 70 и 80 мкм</strong>. Нанесение методом шелкографии красками PANTONE (до 4 цветов). На цветных пакетах +1 цвет (белая подложка). Макеты в векторе (.ai, .eps, .cdr).</p></div>`,
+            'Печать флаеров': `<div class="service-info-box"><p><strong>Печать флаеров:</strong> мелованная бумага <strong>115 или 130 г/м²</strong>. Форматы: Евро <strong>100×210 мм (1/3 А4)</strong>, <strong>А5 (148×210 мм)</strong> и <strong>А6 (148×105 мм)</strong>.</p></div>`,
+            'Печать этикеток': `<div class="service-info-box"><p><strong>Этикетки, наклейки и стикеры с высечкой любой формы:</strong> влагостойкая и вержированная винная бумага, самоклеящаяся бумага и пленка (с постоянным или съемным клеем). Офсетная печать, фолиевые краски и шелкография.</p></div>`,
+            'Печать календарей': `<div class="service-info-box"><p><strong>Офсетная и цифровая печать календарей от 50 штук:</strong> квартальные, карманные, настольные «домики» (180×120 и 100×200 мм), перекидные и с часами.</p>
+                <div class="tariff-grid">
+                    <div class="tariff-card"><h5>Эконом №1</h5><div style="font-size:12px;">Топ 297×220 (картон 300г, ламинация), блок 297 мм (90г), 1–3 рекламных поля, пикколо, курсор.</div><div class="tariff-price">От 210 ₽/шт.</div></div>
+                    <div class="tariff-card"><h5>Эконом №2</h5><div style="font-size:12px;">Топ 297×220 (картон 300г, ламинация), блок 297 мм (90г), 1 рекламное поле, пикколо, курсор.</div><div class="tariff-price">От 180 ₽/шт.</div></div>
+                    <div class="tariff-card"><h5>Эконом №3</h5><div style="font-size:12px;">Топ 350×220 (картон 300г), широкий блок 320 мм (90г), 3 рекламных поля, пикколо, курсор.</div><div class="tariff-price">От 100 ₽/шт.</div></div>
+                </div></div>`,
+            'Печать каталогов': `<div class="service-info-box"><p><strong>Многостраничные каталоги (А4, от 16 полос):</strong> блок от 130 г/м², обложка от 170 г/м². До 48 полос — скрепление на 2 скобы, свыше 56 полос — прочное клеевое бесшвейное скрепление (КБС).</p></div>`,
+            'Печать брошюр': `<div class="service-info-box"><p><strong>Печать брошюр (А5 и А4):</strong> от экономичных тиражей в 1–2 краски до полноцветных изданий на дизайнерской бумаге со сшивкой на скобу.</p></div>`,
+            'Печать конвертов': `<div class="service-info-box"><p><strong>Фирменные конверты (С4, С5, Е65):</strong> офсетная печать на готовых конвертах, шелкография на дизайнерских бумагах и вырубка индивидуальным штампом.</p></div>`,
+            'Печать блокнотов с логотипом': `<div class="service-info-box"><p><strong>Блокноты с логотипом (А7–А4, популярные А5 и А6):</strong> 50 или 100 листов офсетной бумаги 80 г/м², скрепление на пружину или клей, фигурная вырубка обложки под ручку.</p></div>`,
+            'Визитки': `<div class="service-info-box"><p><strong>Визитки от 100 шт.:</strong> цифровая, офсетная печать, шелкография, тиснение фольгой и конгрев, ламинация Soft-Touch, фигурная вырубка и термоподнятие краски.</p></div>`,
+            'Гравировка на сувенирах': `<div class="service-info-box"><p><strong>Лазерная гравировка:</strong> нестираемое нанесение логотипов на ручки, флешки, кружки, шильды и бизнес-подарки (макеты в векторе .eps, .cdr, .ai).</p></div>`,
+            'Дизайн полиграфии': `<div class="service-info-box"><p><strong>Дизайн-бюро «Риол Принт»:</strong> разработка макетов с нуля, многостраничная верстка каталогов и брошюр, допечатная подготовка файлов.</p></div>`,
+            'Термотрансфер': `<div class="service-info-box"><p><strong>Термотрансфер на текстиле:</strong> перенос логотипов по палитре Pantone на бейсболки, футболки, ветровки и сложные элементы кроя.</p></div>`,
+            'Тиснение': `<div class="service-info-box"><p><strong>Тиснение металлическим клише:</strong> тиснение цветной фольгой, глубокое блинтовое (слепое) тиснение на ежедневниках и объемное конгревное тиснение.</p></div>`,
+            'Шелкография': `<div class="service-info-box"><p><strong>Трафаретная печать (от 50 шт., до 1000 оттисков в день):</strong> текстиль, промо-одежда, пакеты ПВД и дизайнерские бумажные пакеты, визитки, зонты, кружки и шары.</p></div>`,
+            'Широкоформатная печать': `<div class="service-info-box"><p><strong>Широкоформатная печать (720–1440 dpi):</strong> качественная печать для наружного и интерьерного применения на бумаге, холсте, самоклеящейся пленке, баннерной ткани и пластике ПВХ. Собственное производство мобильных стендов Roll-Up, пресс-воллов, лайтбоксов, информационных стендов, табличек и указателей.</p></div>`,
+            'Баннеры': `<div class="service-info-box"><p><strong>Баннеры и широкоформатные конструкции:</strong> интерьерная печать (720/1440 dpi) и наружная печать (360/720 dpi) на баннерной ткани, самоклеящейся пленке, холсте и ПВХ с установкой люверсов и ламинацией.</p></div>`,
+            'Упаковка': `<div class="service-info-box"><p><strong>Индивидуальная и подарочная упаковка:</strong> коробки для конфет, шоколада, тубусы для шампанского и подарочная упаковка из мелованного картона 220–350 г/м² или кашированного микрогофрокартона с высечкой.</p></div>`,
+            'Сувениры': `<div class="service-info-box"><p><strong>Сувениры и промо-одежда из 100% хлопка:</strong> футболки, рубашки-поло, толстовки и ветровки с нанесением шелкографией, DTF, термотрансфером, УФ-печатью на сувенирах или блестящей фольгой!</p></div>`,
+            'Цифровая печать': `<div class="service-info-box"><p><strong>Оперативная цифровая печать:</strong> срочный выпуск малых и средних тиражей от 1 экземпляра с точной цветопередачей.</p></div>`
+        };
+
+        /* --- 6. УПРАВЛЕНИЕ ПОРТФОЛИО И МОДАЛЬНЫМИ ОКНАМИ --- */
+        function switchEditorialMain(imgSrc, title, desc, tag, serviceKey) {
+            document.getElementById('editorialMainImg').src = imgSrc;
+            document.getElementById('editorialMainTitle').textContent = title;
+            document.getElementById('editorialMainDesc').textContent = desc;
+            document.getElementById('editorialMainTag').textContent = tag;
+            currentMainPortfolioService = serviceKey;
+        }
+
+        function openPortfolioTarget(targetKey) {
+            if (targetKey.startsWith('MODAL:')) openInfoModal(targetKey.replace('MODAL:', ''));
+            else openServiceGallery(targetKey);
+        }
+
+        function openModal(modalId) {
+            const el = document.getElementById(modalId);
+            if (el) el.style.display = 'flex';
+        }
+        function closeModal(modalId) {
+            const el = document.getElementById(modalId);
+            if (el) el.style.display = 'none';
+        }
+        function closeOutside(event, modalId) {
+            if (event.target.id === modalId) closeModal(modalId);
+        }
+
+        // Закрытие любого открытого модального окна по клавише Escape
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                ['infoModal', 'requestModal', 'calcModal', 'promoModal'].forEach(closeModal);
+            }
+        });
+
+        function renderGallery(photos) {
+            const galWrap = document.getElementById('infoModalGalleryWrap');
+            const galGrid = document.getElementById('infoModalGallery');
+            if (photos && photos.length > 0) {
+                galGrid.innerHTML = photos.map(src => `<img src="${src}" loading="lazy" alt="Пример работы Riol Print" onclick="window.open('${src}', '_blank', 'noopener,noreferrer')">`).join('');
+                galWrap.style.display = 'block';
+            } else {
+                galWrap.style.display = 'none';
+            }
+        }
+
+        function openInfoModal(key) {
+            const data = infoModalsDB[key];
+            if (!data) return;
+            document.getElementById('infoModalTitle').textContent = data.title;
+            document.getElementById('infoModalBody').innerHTML = data.html;
+            renderGallery(data.photos);
+            document.getElementById('infoModalOrderBtn').onclick = () => { closeModal('infoModal'); orderCustom(data.title); };
+            openModal('infoModal');
+        }
+
+        function openServiceGallery(serviceName) {
+            document.getElementById('infoModalTitle').textContent = serviceName;
+            document.getElementById('infoModalBody').innerHTML = serviceContentDB[serviceName] || `<div class="service-info-box"><p>Изготовление продукции по разделу «${serviceName}».</p></div>`;
+            renderGallery(serviceGalleryImages[serviceName]);
+            document.getElementById('infoModalOrderBtn').onclick = () => { closeModal('infoModal'); orderCustom(serviceName); };
+            openModal('infoModal');
+        }
+
+        function orderCustom(topic) {
+            resetOrderModal();
+            openModal('requestModal');
+            document.getElementById('req-details').value = `Интересует расчет: ${topic}`;
+        }
+
+        /* --- 7. ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ СТРАНИЦЫ --- */
+        window.addEventListener('DOMContentLoaded', () => {
+            renderVividCards();
+
+            const savedPromo = localStorage.getItem('riol_active_promo');
+            if (savedPromo) document.getElementById('req-promo').value = savedPromo;
+
+            setTimeout(() => {
+                if (!sessionStorage.getItem('riol_promo_shown') && !localStorage.getItem('riol_active_promo')) {
+                    sessionStorage.setItem('riol_promo_shown', 'true');
+                    openModal('promoModal');
+                }
+            }, SITE_CONFIG.POPUP_DELAY_SECONDS * 1000);
+        });
+
+        function activatePersonalPromo() {
+            const name = document.getElementById('promo-user-name').value.trim() || "Клиент";
+            const email = document.getElementById('promo-user-email').value.trim();
+            if (!email.includes('@')) { alert("Введите корректный Email!"); return; }
+            localStorage.setItem('riol_active_promo', SITE_CONFIG.PROMO_CODE);
+            document.getElementById('req-name').value = name;
+            document.getElementById('req-email').value = email;
+            document.getElementById('req-promo').value = SITE_CONFIG.PROMO_CODE;
+            sendToTelegram(`🎁 Активирован купон RIOL15: ${name} (${email})`);
+            document.getElementById('promoStepForm').style.display = 'none';
+            document.getElementById('promoStepSuccess').style.display = 'block';
+        }
+
+        /* --- 8. КАЛЬКУЛЯТОР И ОТПРАВКА ЗАЯВОК --- */
+        function calculateComplexPrice() {
+            const f = document.getElementById('calc-format');
+            const p = document.getElementById('calc-paper');
+            const c = document.getElementById('calc-color');
+            const l = document.getElementById('calc-lamination');
+            const k = document.getElementById('calc-corners');
+            const qty = parseInt(document.getElementById('calc-quantity').value, 10) || 0;
+            const res = document.getElementById('calc-result-main');
+            if (qty < 1) { res.textContent = "Укажите тираж!"; return; }
+
+            const raw = Math.round(((parseFloat(f.value) * parseFloat(p.value) * parseFloat(c.value)) + parseFloat(l.value) + parseFloat(k.value)) * qty);
+            let finalCost = raw;
+            const promo = (localStorage.getItem('riol_active_promo') || document.getElementById('req-promo').value.trim()).toUpperCase();
+
+            if (promo === SITE_CONFIG.PROMO_CODE) {
+                const disc = (raw >= SITE_CONFIG.DISCOUNT_THRESHOLD) ? SITE_CONFIG.DISCOUNT_LARGE : SITE_CONFIG.DISCOUNT_SMALL;
+                finalCost = Math.round(raw * (1 - disc / 100));
+                res.innerHTML = `<span style="text-decoration:line-through; color:#666; font-size:16px;">${raw.toLocaleString('ru-RU')} ₽</span> &nbsp; Со скидкой -${disc}%: ${finalCost.toLocaleString('ru-RU')} руб.`;
+            } else {
+                res.textContent = `Итого: ${finalCost.toLocaleString('ru-RU')} руб.`;
+            }
+            lastCalculationSummary = `Расчет: ${f.options[f.selectedIndex].text}, ${p.options[p.selectedIndex].text}, тираж ${qty} шт. Сумма: ${finalCost.toLocaleString('ru-RU')} руб.`;
+            document.getElementById('calcToOrderBtn').style.display = 'block';
+        }
+
+        function transferCalcToOrder() {
+            closeModal('calcModal');
+            orderCustom(lastCalculationSummary);
+        }
+
+        function sendToTelegram(text, cb) {
+            const token = localStorage.getItem('riol_tg_token');
+            const chatId = localStorage.getItem('riol_tg_chat_id');
+            if (!token || !chatId) { if (cb) cb(false); return; }
+            fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ chat_id: chatId, text })
+            }).then(r => r.json()).then(d => { if (cb) cb(Boolean(d.ok)); }).catch(() => { if (cb) cb(false); });
+        }
+
+        function autoDetectTelegramChatId() {
+            const token = document.getElementById('tg-token-input').value.trim();
+            if (!token) { alert("Сначала вставьте Токен бота от @BotFather!"); return; }
+            localStorage.setItem('riol_tg_token', token);
+
+            fetch(`https://api.telegram.org/bot${token}/getUpdates`)
+                .then(r => r.json())
+                .then(data => {
+                    if (data.ok && data.result && data.result.length > 0) {
+                        const lastMsg = data.result[data.result.length - 1];
+                        const chatObj = (lastMsg.message && lastMsg.message.chat) || (lastMsg.my_chat_member && lastMsg.my_chat_member.chat);
+                        if (chatObj && chatObj.id) {
+                            localStorage.setItem('riol_tg_chat_id', String(chatObj.id));
+                            sendToTelegram("✅ Бот типографии Riol Print успешно подключен!", () => {
+                                alert("Успешно! ID найден, тестовое сообщение отправлено в ваш Telegram!");
+                            });
+                            return;
+                        }
+                    }
+                    alert("Напишите вашему боту любое слово в Telegram (например, «Старт») и нажмите эту кнопку снова!");
+                })
+                .catch(() => alert("Ошибка соединения с Telegram API. Проверьте правильность Токена!"));
+        }
+
+        function submitSmartOrder() {
+            const name = document.getElementById('req-name').value.trim();
+            const phone = document.getElementById('req-phone').value.trim();
+            const email = document.getElementById('req-email').value.trim();
+            const promo = document.getElementById('req-promo').value.trim().toUpperCase() || "Без промокода";
+            const details = document.getElementById('req-details').value.trim();
+            if (!name || !phone) { alert("Укажите Имя и Телефон!"); return; }
+
+            const savedOrder = { id: Math.floor(Math.random() * 900) + 100, name, phone, email, promo, details };
+            lastSubmittedOrder = savedOrder;
+            sendToTelegram(`🔥 Заявка №${savedOrder.id} (Riol Print)\n👤 ${name}\n📞 ${phone}\n🎁 ${promo}\n📝 ${details}`, ok => {
+                document.getElementById('tgStatusInfo').textContent = ok
+                    ? "✈️ Мгновенно доставлено в Telegram типографии!"
+                    : "💾 Заявка принята! Вы можете продублировать её в мессенджер или на почту:";
+            });
+            document.getElementById('orderNumberSpan').textContent = String(savedOrder.id);
+            document.getElementById('orderSummaryText').textContent = `Спасибо, ${name}! Менеджер свяжется с вами по номеру ${phone}.`;
+            document.getElementById('orderFormBlock').style.display = 'none';
+            document.getElementById('orderSuccessBlock').style.display = 'block';
+        }
+
+        function resetOrderModal() {
+            document.getElementById('orderFormBlock').style.display = 'block';
+            document.getElementById('orderSuccessBlock').style.display = 'none';
+        }
+
+        function sendViaWhatsApp() {
+            if (!lastSubmittedOrder) return;
+            const text = `Заявка №${lastSubmittedOrder.id}: ${lastSubmittedOrder.name}, ${lastSubmittedOrder.phone}, ${lastSubmittedOrder.details}`;
+            window.open(`https://wa.me/${SITE_CONFIG.MANAGER_WHATSAPP}?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
+        }
+
+        function sendViaMailto() {
+            if (!lastSubmittedOrder) return;
+            const body = `${lastSubmittedOrder.name}\n${lastSubmittedOrder.phone}\n${lastSubmittedOrder.details}`;
+            window.location.href = `mailto:${SITE_CONFIG.MANAGER_EMAIL}?subject=${encodeURIComponent(`Заявка №${lastSubmittedOrder.id}`)}&body=${encodeURIComponent(body)}`;
+        }
+
+        /* --- 9. БЕЗОПАСНЫЙ ВИДЖЕТ ЧАТА JIVO (ЗАЩИТА ОТ XSS ЧЕРЕЗ textContent) --- */
+        function toggleJivoChat() {
+            const w = document.getElementById('jivoChatWindow');
+            const t = document.getElementById('jivoTriggerTab');
+            const open = w.style.display === 'flex';
+            w.style.display = open ? 'none' : 'flex';
+            t.style.display = open ? 'flex' : 'none';
+        }
+
+        function sendJivoQuick(txt) {
+            document.getElementById('jivoInput').value = txt;
+            sendJivoMessage();
+        }
+
+        function sendJivoMessage() {
+            const inp = document.getElementById('jivoInput');
+            const raw = inp.value.trim();
+            if (!raw) return;
+            const box = document.getElementById('jivoMessages');
+
+            // Безопасная вставка пользовательского текста через textContent (защита от XSS)
+            const userMsg = document.createElement('div');
+            userMsg.className = 'jivo-msg-user';
+            userMsg.textContent = raw;
+            box.appendChild(userMsg);
+
+            inp.value = "";
+            sendToTelegram(`💬 Чат Jivo: ${raw}`);
+
+            setTimeout(() => {
+                const botMsg = document.createElement('div');
+                botMsg.className = 'jivo-msg-operator';
+                botMsg.textContent = "Спасибо! Передал вопрос технологу. Оставьте телефон в открывшемся окне для быстрого расчета!";
+                box.appendChild(botMsg);
+                box.scrollTop = box.scrollHeight;
+                orderCustom(raw);
+            }, 400);
+        }
+    </script>
+</body>
+</html>
