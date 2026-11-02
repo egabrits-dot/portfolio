@@ -91,6 +91,60 @@
             pointer-events: none;
         }
 
+        /* AMBIENT LUMINOUS GLOW BLOBS (REFERENCE 1 MOTIF) */
+        .ambient-glow-orb {
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(110px);
+            opacity: 0.38;
+            transition: opacity 1s ease;
+        }
+
+        .ambient-glow-orb.orb-1 {
+            top: -12%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 720px;
+            height: 720px;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.28) 0%, rgba(168, 85, 247, 0.16) 42%, transparent 70%);
+            animation: orbFloat1 18s ease-in-out infinite alternate;
+        }
+
+        .ambient-glow-orb.orb-2 {
+            top: 42%;
+            right: -10%;
+            width: 620px;
+            height: 620px;
+            background: radial-gradient(circle, rgba(245, 158, 11, 0.18) 0%, rgba(239, 68, 68, 0.12) 45%, transparent 70%);
+            animation: orbFloat2 22s ease-in-out infinite alternate;
+        }
+
+        .ambient-glow-orb.orb-3 {
+            bottom: 6%;
+            left: -8%;
+            width: 660px;
+            height: 660px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.22) 0%, rgba(56, 189, 248, 0.12) 45%, transparent 70%);
+            animation: orbFloat3 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes orbFloat1 {
+            0% { transform: translateX(-50%) translateY(0) scale(1); }
+            100% { transform: translateX(-46%) translateY(55px) scale(1.08); }
+        }
+
+        @keyframes orbFloat2 {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(-65px) scale(1.12); }
+        }
+
+        @keyframes orbFloat3 {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(45px) scale(1.06); }
+        }
+
         .app-wrapper {
             position: relative;
             z-index: 1;
@@ -212,26 +266,29 @@
         }
 
         .btn-header-cta {
-            background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(220,230,255,0.85));
-            color: #030305;
+            background: #ffffff !important;
+            color: #030408 !important;
             font-family: var(--font-main);
-            font-weight: 600;
+            font-weight: 700;
             font-size: 13.5px;
             padding: 9px 20px;
             border-radius: var(--radius-full);
-            border: none;
+            border: 1px solid rgba(255, 255, 255, 0.95);
             cursor: pointer;
             transition: var(--transition-normal);
-            box-shadow: 0 0 20px rgba(255,255,255,0.2);
+            box-shadow: 0 0 22px rgba(255, 255, 255, 0.28), 0 4px 14px rgba(0, 0, 0, 0.6);
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 7px;
+            white-space: nowrap;
+            text-decoration: none;
         }
 
         .btn-header-cta:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 0 28px rgba(126, 232, 250, 0.4);
-            background: #ffffff;
+            transform: translateY(-1.5px) scale(1.02);
+            box-shadow: 0 0 32px rgba(126, 232, 250, 0.6), 0 6px 18px rgba(0, 0, 0, 0.8);
+            background: #ffffff !important;
+            color: #030408 !important;
         }
 
         /* HERO */
@@ -362,28 +419,41 @@
         }
 
         .btn-glass-secondary {
-            background: rgba(255, 255, 255, 0.05);
-            color: #ffffff;
+            background: rgba(14, 18, 28, 0.65);
+            color: #f1f5f9;
             font-family: var(--font-main);
-            font-size: 15px;
+            font-size: 14.5px;
             font-weight: 500;
-            padding: 14px 28px;
+            padding: 13px 24px;
             border-radius: var(--radius-full);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 9px;
             transition: var(--transition-normal);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 4px 16px rgba(0,0,0,0.4);
             cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn-glass-secondary svg {
+            transition: transform 0.25s ease, stroke 0.25s ease;
+            color: var(--cyan-glow);
+            flex-shrink: 0;
         }
 
         .btn-glass-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.35);
+            background: rgba(24, 30, 48, 0.85);
+            border-color: rgba(126, 232, 250, 0.45);
             transform: translateY(-2px);
-            color: var(--cyan-glow);
+            color: #ffffff;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 8px 24px rgba(0,0,0,0.6), 0 0 30px rgba(126, 232, 250, 0.22);
+        }
+
+        .btn-glass-secondary:hover svg {
+            transform: scale(1.1);
         }
 
 
@@ -2665,29 +2735,292 @@
             border-color: rgba(16, 185, 129, 0.3);
             box-shadow: 0 0 16px rgba(16, 185, 129, 0.18);
         }
-        .tile-micro-snippet {
-            background: rgba(3, 4, 8, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            border-radius: 8px;
-            padding: 8px 12px;
+        /* =====================================================
+           AUTHENTIC & DETAILED TILE HUD COMPONENTS (REF 1 & 2)
+        ===================================================== */
+        .tile-hud-box {
+            background: linear-gradient(180deg, rgba(8, 10, 18, 0.92) 0%, rgba(4, 5, 10, 0.98) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 13px 14px;
+            margin-bottom: 16px;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 8px 22px rgba(0, 0, 0, 0.55);
+            display: flex;
+            flex-direction: column;
+            gap: 11px;
+            transition: var(--transition-normal);
+        }
+
+        .about-card:hover .tile-hud-box {
+            border-color: rgba(255, 255, 255, 0.16);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 12px 28px rgba(0, 0, 0, 0.65);
+        }
+
+        /* 01. GAUGE & METRICS */
+        .hud-score-row {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+        }
+
+        .hud-gauge {
+            position: relative;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .hud-gauge svg {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
+
+        .hud-gauge .gauge-bg {
+            stroke: rgba(255, 255, 255, 0.08);
+            stroke-width: 3.5;
+            fill: none;
+        }
+
+        .hud-gauge .gauge-fill {
+            stroke: var(--emerald-glow);
+            stroke-width: 3.5;
+            stroke-linecap: round;
+            fill: none;
+            stroke-dasharray: 99, 100;
+            filter: drop-shadow(0 0 6px rgba(16, 185, 129, 0.6));
+        }
+
+        .hud-gauge-val {
+            position: absolute;
+            font-family: var(--font-heading);
+            font-weight: 800;
+            font-size: 15px;
+            color: #ffffff;
+        }
+
+        .hud-meta-col {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            flex-grow: 1;
+        }
+
+        .hud-label {
+            font-family: var(--font-mono);
+            font-size: 9.5px;
+            letter-spacing: 0.08em;
+            color: var(--cyan-glow);
+            font-weight: 700;
+        }
+
+        .hud-sub-stats {
+            display: flex;
+            align-items: center;
+            gap: 9px;
             font-family: var(--font-mono);
             font-size: 11px;
-            line-height: 1.5;
-            margin-bottom: 16px;
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+            color: var(--text-muted);
+            flex-wrap: wrap;
         }
-        .tile-micro-snippet .token-comment {
-            color: #64748b;
-        }
-        .tile-micro-snippet .token-kw {
-            color: var(--cyan-glow);
+
+        .hud-sub-stats b {
+            color: #ffffff;
             font-weight: 600;
         }
-        .tile-micro-snippet .token-key {
+
+        /* 02. DOCKER STACK LIST */
+        .docker-stack-list {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .docker-stack-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 5px 9px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            font-family: var(--font-mono);
+            font-size: 10.5px;
+            transition: var(--transition-normal);
+        }
+
+        .docker-stack-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        .docker-stack-item .item-left {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            color: #e2e8f0;
+        }
+
+        .stack-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .stack-dot.green {
+            background: var(--emerald-glow);
+            box-shadow: 0 0 8px var(--emerald-glow);
+            animation: pulseGlow 2s infinite ease-in-out;
+        }
+
+        .stack-dot.amber {
+            background: var(--amber-glow);
+            box-shadow: 0 0 8px var(--amber-glow);
+        }
+
+        .stack-dot.cyan {
+            background: var(--cyan-glow);
+            box-shadow: 0 0 8px var(--cyan-glow);
+        }
+
+        .stack-status-tag {
+            font-size: 9.5px;
+            color: var(--text-muted);
+            letter-spacing: 0.04em;
+        }
+
+        /* 03. AI MODELS CLUSTER */
+        .ai-models-cluster {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 5px;
+        }
+
+        .ai-chip-pill {
+            display: flex;
+            flex-direction: column;
+            padding: 5px 8px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 6px;
+            font-family: var(--font-mono);
+            transition: var(--transition-normal);
+        }
+
+        .ai-chip-pill:hover {
+            border-color: rgba(168, 85, 247, 0.45);
+            background: rgba(168, 85, 247, 0.09);
+            transform: translateY(-1px);
+        }
+
+        .ai-chip-pill .model-title {
+            font-size: 10.5px;
+            font-weight: 600;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .ai-chip-pill .model-role {
+            font-size: 9px;
+            color: var(--text-muted);
+            margin-top: 1px;
+        }
+
+        /* 04. TIMELINE HUD ROW */
+        .timeline-hud-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 6px 2px 2px;
+            position: relative;
+        }
+
+        .timeline-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            z-index: 2;
+        }
+
+        .step-badge {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 10.5px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 4px;
+            transition: var(--transition-normal);
+        }
+
+        .timeline-step.highlight .step-badge {
+            background: rgba(16, 185, 129, 0.16);
+            border-color: var(--emerald-glow);
+            color: var(--emerald-glow);
+            box-shadow: 0 0 16px rgba(16, 185, 129, 0.35);
+        }
+
+        .step-label {
+            font-family: var(--font-mono);
+            font-size: 9.5px;
+            color: var(--text-muted);
+        }
+
+        .timeline-step.highlight .step-label {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .timeline-connector {
+            flex-grow: 1;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), rgba(16, 185, 129, 0.4), rgba(255, 255, 255, 0.1));
+            margin: -14px 6px 0;
+            z-index: 1;
+        }
+
+        /* COMMON HUD STRIP */
+        .hud-status-strip {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 8px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            font-family: var(--font-mono);
+            font-size: 10px;
+        }
+
+        .hud-status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
             color: #cbd5e1;
         }
-        .tile-micro-snippet .token-val {
-            color: var(--amber-glow);
+
+        .hud-status-pill .dot-live {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--emerald-glow);
+            box-shadow: 0 0 6px var(--emerald-glow);
+        }
+
+        .hud-benchmark-tag {
+            color: var(--cyan-glow);
+            font-weight: 600;
         }
 
         /* SERVICE ICON BOXES */
@@ -3496,6 +3829,9 @@
 <body>
 
     <canvas id="starfieldCanvas"></canvas>
+    <div class="ambient-glow-orb orb-1"></div>
+    <div class="ambient-glow-orb orb-2"></div>
+    <div class="ambient-glow-orb orb-3"></div>
 
     <div class="toast-banner" id="toastNotification">
         <span id="toastIcon">✦</span>
@@ -3525,7 +3861,10 @@
                     <span id="soundIcon" class="sound-icon-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path class="sound-wave-1" d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path class="sound-wave-2" d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg></span> Звук: <span id="soundStateText">Вкл</span>
                 </button>
                 <button class="btn-header-cta" onclick="openContactModal()">
-                    <span>✦</span> Обсудить проект
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2l2.4 7.4h7.6l-6.2 4.5 2.4 7.4-6.2-4.5-6.2 4.5 2.4-7.4-6.2-4.5h7.6z"/>
+                    </svg>
+                    <span>Обсудить проект</span>
                 </button>
             </div>
         </header>
@@ -3561,16 +3900,38 @@
 
             <div class="hero-actions-row">
                 <a href="#projects" class="btn-luminous-primary" onclick="playUiSound('click')">
-                    <span>✦</span> Смотреть кейсы
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2l2.4 7.4h7.6l-6.2 4.5 2.4 7.4-6.2-4.5-6.2 4.5 2.4-7.4-6.2-4.5h7.6z"/>
+                    </svg>
+                    <span>Смотреть кейсы</span>
                 </a>
                 <a href="#about" class="btn-glass-secondary" onclick="playUiSound('click')">
-                    Об основателе
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <span>Об основателе</span>
                 </a>
                 <a href="#automations" class="btn-glass-secondary" onclick="playUiSound('click')">
-                    n8n Симулятор
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                    </svg>
+                    <span>n8n Симулятор</span>
                 </a>
                 <a href="#ai-assistants" class="btn-glass-secondary" onclick="playUiSound('click')">
-                    AI-Терминал
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+                        <rect x="9" y="9" width="6" height="6"></rect>
+                        <line x1="9" y1="1" x2="9" y2="4"></line>
+                        <line x1="15" y1="1" x2="15" y2="4"></line>
+                        <line x1="9" y1="20" x2="9" y2="23"></line>
+                        <line x1="15" y1="20" x2="15" y2="23"></line>
+                        <line x1="20" y1="9" x2="23" y2="9"></line>
+                        <line x1="20" y1="14" x2="23" y2="14"></line>
+                        <line x1="1" y1="9" x2="4" y2="9"></line>
+                        <line x1="1" y1="14" x2="4" y2="14"></line>
+                    </svg>
+                    <span>AI-Терминал</span>
                 </a>
             </div>
 
@@ -4148,7 +4509,12 @@
                         <!-- Поле ввода сообщения -->
                         <div class="chat-input-bar-wrap">
                             <input type="text" id="userChatInput" class="chat-input-field" placeholder="Задайте вопрос AI-ассистенту..." onkeydown="if(event.key==='Enter') sendChatMessage()">
-                            <button class="chat-send-btn" onclick="sendChatMessage()">➤</button>
+                            <button class="chat-send-btn" onclick="sendChatMessage()">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                                </svg>
+                            </button>
                         </div>
 
                     </div>
@@ -4255,10 +4621,14 @@
 
                     <div class="founder-cta-row">
                         <button class="btn-luminous-primary" onclick="openContactModal()">
-                            <span>✦</span> Обсудить задачу лично
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2l2.4 7.4h7.6l-6.2 4.5 2.4 7.4-6.2-4.5-6.2 4.5 2.4-7.4-6.2-4.5h7.6z"/>
+                            </svg>
+                            <span>Обсудить задачу лично</span>
                         </button>
                         <a href="https://t.me/xtulnss" target="_blank" rel="noopener" class="btn-glass-secondary" onclick="playUiSound('click')">
-                            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="display:inline-block; vertical-align:middle; margin-right:4px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.52 2.77-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg> Telegram: @xtulnss
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.52 2.77-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+                            <span>Telegram: @xtulnss</span>
                         </a>
                     </div>
                 </div>
@@ -4276,16 +4646,35 @@
                     </div>
                     <h3 class="about-tile-title">Скорость и чистая архитектура</h3>
                     <p class="about-tile-desc">
-                        Принципиальный отказ от медленных конструкторов вроде Tilda/WordPress. Чистый TypeScript, современный CSS и компонентный подход обеспечивают отклик до 0.5 секунды и 98+ баллов по Google PageSpeed.
+                        Принципиальный отказ от медленных конструкторов вроде Tilda/WordPress. Чистый TypeScript, современный CSS и компонентный подход обеспечивают моментальный отклик интерфейса.
                     </p>
-                    <div class="tile-micro-snippet">
-                        <span class="token-comment">// Core Web Vitals Benchmark</span><br>
-                        <span class="token-kw">const</span> perf = { <span class="token-key">score</span>: <span class="token-val">99</span>, <span class="token-key">tti</span>: <span class="token-val">"0.38s"</span> };
+                    <div class="tile-hud-box">
+                        <div class="hud-score-row">
+                            <div class="hud-gauge">
+                                <svg viewBox="0 0 36 36">
+                                    <path class="gauge-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                    <path class="gauge-fill" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                </svg>
+                                <span class="hud-gauge-val">99</span>
+                            </div>
+                            <div class="hud-meta-col">
+                                <div class="hud-label">GOOGLE PAGESPEED BENCHMARK</div>
+                                <div class="hud-sub-stats">
+                                    <span>TTI: <b>0.38s</b></span>
+                                    <span>LCP: <b>0.52s</b></span>
+                                    <span>CLS: <b>0.00</b></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hud-status-strip">
+                            <span class="hud-status-pill"><span class="dot-live"></span> 100% Native TypeScript</span>
+                            <span class="hud-benchmark-tag">Zero Bloat</span>
+                        </div>
                     </div>
                     <div class="about-tile-tags">
                         <span class="about-tile-tag">Next.js / TS</span>
                         <span class="about-tile-tag">Vanilla Canvas</span>
-                        <span class="about-tile-tag">PageSpeed 98+</span>
+                        <span class="about-tile-tag">PageSpeed 99+</span>
                         <span class="about-tile-tag">Mobile 100%</span>
                     </div>
                 </div>
@@ -4305,11 +4694,36 @@
                     </div>
                     <h3 class="about-tile-title">Автономия на вашем сервере</h3>
                     <p class="about-tile-desc">
-                        Развёртывание изолированных сценариев n8n в защищённых Docker-контейнерах на вашем собственном сервере. Ваши клиентские базы, сделки и токены защищены от внешних блокировок и не требуют ежемесячных подписок.
+                        Развёртывание изолированных сценариев n8n в защищённых Docker-контейнерах на вашем собственном VPS. Клиентские базы, сделки и токены защищены от внешних блокировок и утечек.
                     </p>
-                    <div class="tile-micro-snippet">
-                        <span class="token-comment">// Isolated Docker n8n instance</span><br>
-                        <span class="token-kw">docker</span> run -d --name n8n-vault --restart always
+                    <div class="tile-hud-box">
+                        <div class="docker-stack-list">
+                            <div class="docker-stack-item">
+                                <div class="item-left">
+                                    <span class="stack-dot green"></span>
+                                    <span>n8n-vault.production</span>
+                                </div>
+                                <span class="stack-status-tag">RUNNING · 0.01% CPU</span>
+                            </div>
+                            <div class="docker-stack-item">
+                                <div class="item-left">
+                                    <span class="stack-dot cyan"></span>
+                                    <span>postgres-db-encrypted</span>
+                                </div>
+                                <span class="stack-status-tag">AES-256 GCM</span>
+                            </div>
+                            <div class="docker-stack-item">
+                                <div class="item-left">
+                                    <span class="stack-dot amber"></span>
+                                    <span>webhook-ingress-proxy</span>
+                                </div>
+                                <span class="stack-status-tag">SSL · &lt;0.4s SLA</span>
+                            </div>
+                        </div>
+                        <div class="hud-status-strip">
+                            <span class="hud-status-pill"><span class="dot-live"></span> Dedicated VPS Vault</span>
+                            <span class="hud-benchmark-tag">0 ₽ Zapier Fee</span>
+                        </div>
                     </div>
                     <div class="about-tile-tags">
                         <span class="about-tile-tag">Self-hosted n8n</span>
@@ -4335,11 +4749,39 @@
                     </div>
                     <h3 class="about-tile-title">Флагманские нейросети с корпоративной памятью</h3>
                     <p class="about-tile-desc">
-                        Внедрение топовых нейросетей нового поколения: <b>Claude OPUS 5.5</b> (Deep Reasoning), <b>Claude Fable 5.1</b>, <b>Gemini Argon</b>, генеративной видеосистемы <b>VEO</b>, <b>OpenAI Codex 6.1</b>, <b>Kimi 3.1</b> (сверхдлинный контекст) и платформы <b>Antigravity</b> с векторным RAG-поиском по базе знаний компании.
+                        Внедрение топовых нейросетей нового поколения с векторным RAG-поиском по базе знаний компании: мгновенные ответы без галлюцинаций и интеграция в ваши бизнес-процессы.
                     </p>
-                    <div class="tile-micro-snippet">
-                        <span class="token-comment">// Multi-Agent Dispatch Matrix</span><br>
-                        <span class="token-kw">const</span> cluster = <span class="token-kw">await</span> Antigravity.route({ <span class="token-key">models</span>: [<span class="token-val">"claude-opus-5.5"</span>, <span class="token-val">"gemini-argon"</span>, <span class="token-val">"veo"</span>, <span class="token-val">"codex-6.1"</span>, <span class="token-val">"kimi-3.1"</span>] });
+                    <div class="tile-hud-box">
+                        <div class="ai-models-cluster">
+                            <div class="ai-chip-pill">
+                                <span class="model-title"><span class="stack-dot green"></span> Claude OPUS 5.5</span>
+                                <span class="model-role">Deep Reasoning</span>
+                            </div>
+                            <div class="ai-chip-pill">
+                                <span class="model-title"><span class="stack-dot cyan"></span> Claude Fable 5.1</span>
+                                <span class="model-role">UI & Creative</span>
+                            </div>
+                            <div class="ai-chip-pill">
+                                <span class="model-title"><span class="stack-dot amber"></span> Gemini Argon</span>
+                                <span class="model-role">Multimodal Fast</span>
+                            </div>
+                            <div class="ai-chip-pill">
+                                <span class="model-title"><span class="stack-dot green"></span> Google VEO</span>
+                                <span class="model-role">Video Gen AI</span>
+                            </div>
+                            <div class="ai-chip-pill">
+                                <span class="model-title"><span class="stack-dot cyan"></span> OpenAI Codex 6.1</span>
+                                <span class="model-role">Logic & Tool Calling</span>
+                            </div>
+                            <div class="ai-chip-pill">
+                                <span class="model-title"><span class="stack-dot amber"></span> Kimi 3.1 & Antigravity</span>
+                                <span class="model-role">1M RAG & Orchestration</span>
+                            </div>
+                        </div>
+                        <div class="hud-status-strip">
+                            <span class="hud-status-pill"><span class="dot-live"></span> Vector RAG Memory</span>
+                            <span class="hud-benchmark-tag">Zero Hallucinations</span>
+                        </div>
                     </div>
                     <div class="about-tile-tags">
                         <span class="about-tile-tag">Claude OPUS 5.5</span>
@@ -4349,7 +4791,6 @@
                         <span class="about-tile-tag">Codex 6.1</span>
                         <span class="about-tile-tag">Kimi 3.1</span>
                         <span class="about-tile-tag">Antigravity</span>
-                        <span class="about-tile-tag">RAG Matrix</span>
                     </div>
                 </div>
 
@@ -4370,14 +4811,33 @@
                     <p class="about-tile-desc">
                         Никаких аккаунт-менеджеров и испорченного телефона. Вы работаете напрямую с автором системы. Первый работающий кликабельный интерактивный прототип проекта готов уже через 48 часов после старта.
                     </p>
-                    <div class="tile-micro-snippet">
-                        <span class="token-comment">// Rapid Deployment Pipeline</span><br>
-                        <span class="token-kw">git</span> deploy --target production <span class="token-comment">// 48h SLA</span>
+                    <div class="tile-hud-box">
+                        <div class="timeline-hud-row">
+                            <div class="timeline-step">
+                                <div class="step-badge">00h</div>
+                                <div class="step-label">ТЗ & Логика</div>
+                            </div>
+                            <div class="timeline-connector"></div>
+                            <div class="timeline-step highlight">
+                                <div class="step-badge">48h</div>
+                                <div class="step-label">Рабочий MVP</div>
+                            </div>
+                            <div class="timeline-connector"></div>
+                            <div class="timeline-step">
+                                <div class="step-badge">VPS</div>
+                                <div class="step-label">Релиз & Код</div>
+                            </div>
+                        </div>
+                        <div class="hud-status-strip">
+                            <span class="hud-status-pill"><span class="dot-live"></span> 100% Передача Git</span>
+                            <span class="hud-benchmark-tag">Без посредников</span>
+                        </div>
                     </div>
                     <div class="about-tile-tags">
                         <span class="about-tile-tag">MVP за 48 часов</span>
                         <span class="about-tile-tag">Прозрачный код</span>
                         <span class="about-tile-tag">Полная передача прав</span>
+                        <span class="about-tile-tag">Direct Telegram</span>
                     </div>
                 </div>
 
