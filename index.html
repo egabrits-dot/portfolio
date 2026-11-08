@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>melevskiystudio — Инженерные сайты · Автоматизации n8n · Внедрение AI</title>
     <meta name="description" content="melevskiystudio — Архитектура премиальных сайтов, сквозных n8n автоматизаций и кастомных AI-ассистентов для бизнеса. Решения под ключ от Егора Мелевского.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:site_name" content="melevskiystudio">
+    <meta property="og:title" content="melevskiystudio — Инженерные сайты · Автоматизации n8n · Внедрение AI">
+    <meta property="og:description" content="Сайты с калькуляторами, сквозные n8n-автоматизации и AI-ассистенты для бизнеса. Решения под ключ от Егора Мелевского.">
+    <meta name="twitter:card" content="summary">
+    <meta name="theme-color" content="#020204">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23020204'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Arial,sans-serif' font-weight='700' font-size='17' fill='%23ffffff'%3Em%3C/text%3E%3Ccircle cx='25' cy='9' r='3' fill='%237ee8fa'/%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -242,27 +250,6 @@
             display: flex;
             align-items: center;
             gap: 14px;
-        }
-
-        .sound-toggle-btn {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid var(--border-subtle);
-            color: var(--text-body);
-            border-radius: var(--radius-full);
-            padding: 8px 14px;
-            font-size: 12px;
-            font-family: var(--font-mono);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            cursor: pointer;
-            transition: var(--transition-normal);
-        }
-
-        .sound-toggle-btn:hover {
-            background: rgba(255,255,255,0.08);
-            color: #fff;
-            border-color: rgba(255,255,255,0.2);
         }
 
         .btn-header-cta {
@@ -549,18 +536,6 @@
         }
 
         .project-card:hover .project-video,
-        .project-card:hover .project-img {
-            transform: scale(1.05);
-        }
-
-        .project-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: top center;
-            transition: transform 0.8s var(--ease-out);
-        }
-
         .project-card:hover .project-img {
             transform: scale(1.05);
         }
@@ -1751,39 +1726,6 @@
             line-height: 1.5;
         }
 
-        .code-snippet-box {
-            background: #030408;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: var(--radius-md);
-            padding: 16px;
-            font-family: var(--font-mono);
-            font-size: 12px;
-            color: var(--cyan-glow);
-            position: relative;
-            margin-bottom: 20px;
-            overflow-x: auto;
-        }
-
-        .btn-copy-code {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: #ffffff;
-            font-size: 11px;
-            font-family: var(--font-mono);
-            padding: 5px 12px;
-            border-radius: var(--radius-full);
-            cursor: pointer;
-            transition: var(--transition-normal);
-        }
-
-        .btn-copy-code:hover {
-            background: var(--cyan-glow);
-            color: #030305;
-        }
-
         .modal-benefits-list {
             display: flex;
             flex-direction: column;
@@ -1857,19 +1799,6 @@
             transform: translateY(-6px);
             border-color: rgba(255, 255, 255, 0.22);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 40px rgba(126, 232, 250, 0.1);
-        }
-
-        .service-icon-box {
-            width: 52px;
-            height: 52px;
-            border-radius: 14px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            margin-bottom: 22px;
         }
 
         .service-card-title {
@@ -2063,20 +1992,81 @@
             50% { transform: translateY(-10px); }
         }
 
+        .nav-burger {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            gap: 4px;
+            width: 40px;
+            height: 40px;
+            padding: 0 11px;
+            background: rgba(14, 18, 30, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            backdrop-filter: blur(12px);
+        }
+
+        .nav-burger span {
+            display: block;
+            height: 2px;
+            background: #ffffff;
+            border-radius: 2px;
+            transition: var(--transition-normal);
+        }
+
+        header.nav-header.menu-open .nav-burger span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+        header.nav-header.menu-open .nav-burger span:nth-child(2) { opacity: 0; }
+        header.nav-header.menu-open .nav-burger span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
         @media (max-width: 1024px) {
             header.nav-header { padding: 18px 24px; }
             .nav-center { display: none; }
+            .nav-burger { display: flex; }
+            header.nav-header.menu-open .nav-center {
+                display: flex;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 4px;
+                position: absolute;
+                top: calc(100% + 8px);
+                left: 16px;
+                right: 16px;
+                padding: 12px;
+                border-radius: var(--radius-lg);
+                background: rgba(8, 10, 18, 0.96);
+            }
+            header.nav-header.menu-open .nav-link {
+                padding: 12px 14px;
+                font-size: 15px;
+                border-radius: var(--radius-sm);
+            }
             .projects-grid { grid-template-columns: 1fr; }
-            .n8n-studio-body { grid-template-columns: 1fr; }
+            .n8n-studio-body { grid-template-columns: minmax(0, 1fr); }
             .n8n-visual-canvas { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
-            .ai-platform-workspace { grid-template-columns: 1fr; }
+            .ai-platform-workspace { grid-template-columns: minmax(0, 1fr); }
             .ai-agents-sidebar { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
             .services-grid { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 640px) {
+            header.nav-header, header.nav-header.scrolled { padding: 12px 16px; }
+            .btn-header-cta { display: none; }
+            .sound-label { display: none; }
             .nodes-flow-grid { grid-template-columns: 1fr; }
             .iphone-frame { width: 100%; max-width: 310px; }
+            .fab-contact-btn { right: 16px; bottom: 16px; }
+            .footer-bar { padding: 28px 16px 90px; }
+            .footer-links { flex-wrap: wrap; gap: 12px 20px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            html { scroll-behavior: auto; }
         }
     
         /* =====================================================
@@ -3074,7 +3064,7 @@
     <script>
         // Sound feedback
         let audioCtx = null;
-        let isAudioMuted = false;
+        let isAudioMuted = true;
 
         function initAudio() {
             if (!audioCtx) {
@@ -3141,6 +3131,7 @@
                 }
             }
             if (text) text.innerText = isAudioMuted ? 'Выкл' : 'Вкл';
+            document.getElementById('soundToggleBtn').classList.toggle('muted', isAudioMuted);
             if (!isAudioMuted) playUiSound('click');
         }
 
@@ -3643,7 +3634,8 @@
             const userRow = document.createElement('div');
             userRow.className = 'message-bubble-row user';
             userRow.innerHTML = '<div class="msg-avatar" style="background: rgba(56, 189, 248, 0.2);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div>' +
-                                '<div class="msg-bubble-card">' + text + '</div>';
+                                '<div class="msg-bubble-card"></div>';
+            userRow.querySelector('.msg-bubble-card').textContent = text;
             container.appendChild(userRow);
             container.scrollTop = container.scrollHeight;
 
@@ -3663,20 +3655,20 @@
                             '<span style="font-size: 10px;">Развернуть ▾</span>' +
                         '</button>' +
                         '<div class="cot-body-text open">' +
-                            '<div class="cot-step-item"><b>[1. Prompt Analysis]</b>: Распознан запрос: <i>"' + text + '"</i></div>' +
+                            '<div class="cot-step-item"><b>[1. Prompt Analysis]</b>: Распознан запрос: <i class="cot-user-query"></i></div>' +
                             '<div class="cot-step-item"><b>[2. Context Lookup]</b>: Найдено совпадение в локальном индексе RAG.</div>' +
                             '<div class="cot-step-item"><b>[3. Synthesis]</b>: Сгенерирован ответ в тоне бренда ' + agent.name + '.</div>' +
                         '</div>' +
                     '</div>' +
                     '<div class="msg-text-content stream-text"></div>' +
                 '</div>';
+            botRow.querySelector('.cot-user-query').textContent = `"${text}"`;
             container.appendChild(botRow);
             container.scrollTop = container.scrollHeight;
 
             const textEl = botRow.querySelector('.stream-text');
             for (let i = 0; i < answer.length; i++) {
-                textEl.innerText += answer[i];
-                if (i % 6 === 0) playUiSound('click');
+                textEl.textContent += answer[i];
                 container.scrollTop = container.scrollHeight;
                 await new Promise(r => setTimeout(r, 12));
             }
@@ -3692,18 +3684,6 @@
 
         function openEmbedModal() {
             playUiSound('click');
-            const agent = AGENTS_DATA[currentAgentIdx];
-            const slug = agent.name.toLowerCase().replace(/[^a-z0-9]/g, '-');
-            const snippet = '<!-- melevskiystudio Neural AI Widget -->\n' +
-                '<scr' + 'ipt \n' +
-                '  src="https://cdn.melevskiystudio.com/v1/widget.js" \n' +
-                '  data-agent-id="melevskiy-ai" \n' +
-                '  data-brand-theme="dark" \n' +
-                '  data-position="bottom-right" \n' +
-                '  async>\n' +
-                '</scr' + 'ipt>';
-            const block = document.getElementById('snippetCodeBlock');
-            if (block) block.innerText = snippet;
             const modal = document.getElementById('embedModalOverlay');
             if (modal) modal.classList.add('open');
         }
@@ -3714,22 +3694,11 @@
             if (modal) modal.classList.remove('open');
         }
 
-        function copySnippetCode(btn) {
+        function openContactModal(service) {
             playUiSound('click');
-            const codeEl = document.getElementById('snippetCodeBlock');
-            if (!codeEl) return;
-            const code = codeEl.innerText;
-            navigator.clipboard.writeText(code).then(() => {
-                if (btn) btn.innerText = 'Скопировано! ✓';
-                showToast("Код виджета скопирован в буфер обмена!", "✓");
-                setTimeout(() => { if (btn) btn.innerText = 'Копировать'; }, 2000);
-            }).catch(() => {
-                showToast("Код виджета скопирован!", "✓");
-            });
-        }
-
-        function openContactModal() {
-            playUiSound('click');
+            document.getElementById('portfolioContactForm').style.display = 'flex';
+            document.getElementById('formSuccessMessage').style.display = 'none';
+            if (typeof service === 'string') document.getElementById('formService').value = service;
             const modal = document.getElementById('contactModalOverlay');
             if (modal) modal.classList.add('open');
         }
@@ -3740,17 +3709,79 @@
             if (modal) modal.classList.remove('open');
         }
 
+        const TELEGRAM_USERNAME = 'xtulnss';
+
+        function buildLeadMessage() {
+            const field = id => document.getElementById(id).value.trim();
+            const lines = [
+                'Здравствуйте! Заявка с сайта melevskiystudio',
+                `Имя: ${field('formName')}`,
+                `Контакт: ${field('formContact')}`,
+                `Услуга: ${field('formService')}`
+            ];
+            const task = field('formTask');
+            if (task) lines.push(`Задача: ${task}`);
+            return lines.join('\n');
+        }
+
         function handleContactSubmit(e) {
             e.preventDefault();
             playUiSound('click');
-            
-            const form = document.getElementById('portfolioContactForm');
-            const msg = document.getElementById('formSuccessMessage');
-            if (form) form.style.display = 'none';
-            if (msg) msg.style.display = 'block';
 
+            const text = buildLeadMessage();
+            const url = `https://t.me/${TELEGRAM_USERNAME}?text=${encodeURIComponent(text)}`;
+            // Copy as a fallback: older Telegram clients ignore the ?text= prefill
+            if (navigator.clipboard) navigator.clipboard.writeText(text).catch(() => {});
+            window.open(url, '_blank', 'noopener');
+
+            document.getElementById('formTelegramLink').href = url;
+            document.getElementById('portfolioContactForm').style.display = 'none';
+            document.getElementById('formSuccessMessage').style.display = 'block';
             playUiSound('push');
-            showToast("Заявка успешно отправлена! Скоро свяжемся с вами.", "✓");
+        }
+
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        function toggleMobileNav(forceOpen) {
+            const nav = document.getElementById('navbar');
+            const isOpen = nav.classList.toggle('menu-open', forceOpen);
+            document.getElementById('navBurger').setAttribute('aria-expanded', String(isOpen));
+        }
+
+        function cablePath(fromEl, toEl, base) {
+            const from = fromEl.getBoundingClientRect();
+            const to = toEl.getBoundingClientRect();
+            const sameRow = Math.abs(from.top - to.top) < from.height / 2;
+            if (sameRow) {
+                const x1 = from.right - base.left, y1 = from.top + from.height / 2 - base.top;
+                const x2 = to.left - base.left, y2 = to.top + to.height / 2 - base.top;
+                const mx = (x1 + x2) / 2;
+                return `M ${x1} ${y1} C ${mx} ${y1}, ${mx} ${y2}, ${x2} ${y2}`;
+            }
+            const x1 = from.left + from.width / 2 - base.left, y1 = from.bottom - base.top;
+            const x2 = to.left + to.width / 2 - base.left, y2 = to.top - base.top;
+            const my = (y1 + y2) / 2;
+            return `M ${x1} ${y1} C ${x1} ${my}, ${x2} ${my}, ${x2} ${y2}`;
+        }
+
+        function drawFlowCables() {
+            const base = document.getElementById('n8nCanvas').getBoundingClientRect();
+            for (let i = 1; i <= 3; i++) {
+                const d = cablePath(document.getElementById(`simNode${i}`), document.getElementById(`simNode${i + 1}`), base);
+                document.getElementById(`cable${i}`).setAttribute('d', d);
+            }
+        }
+
+        function initLazyVideos() {
+            const videos = document.querySelectorAll('.project-video');
+            if (prefersReducedMotion || !('IntersectionObserver' in window)) return;
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.play().catch(() => {});
+                    else entry.target.pause();
+                });
+            }, { rootMargin: '200px 0px' });
+            videos.forEach(v => observer.observe(v));
         }
 
         // DOM Initialization
@@ -3798,10 +3829,13 @@
                         ctx.shadowColor = 'rgba(126, 232, 250, 0.8)';
                         ctx.fill();
                     });
-                    requestAnimationFrame(drawStars);
+                    if (!prefersReducedMotion) requestAnimationFrame(drawStars);
                 }
 
-                window.addEventListener('resize', resizeCanvas);
+                window.addEventListener('resize', () => {
+                    resizeCanvas();
+                    if (prefersReducedMotion) drawStars();
+                });
                 window.addEventListener('mousemove', (e) => {
                     mouseX = e.clientX;
                     mouseY = e.clientY;
@@ -3823,6 +3857,17 @@
             });
 
             renderQuickPrompts(AGENTS_DATA[0].prompts);
+
+            document.querySelectorAll('.nav-center .nav-link').forEach(link => {
+                link.addEventListener('click', () => toggleMobileNav(false));
+            });
+
+            drawFlowCables();
+            window.addEventListener('resize', drawFlowCables);
+            // Web fonts change card heights after DOMContentLoaded
+            window.addEventListener('load', drawFlowCables);
+
+            initLazyVideos();
         });
     </script>
 </head>
@@ -3857,14 +3902,17 @@
             </nav>
 
             <div class="nav-right">
-                <button class="sound-toggle-btn" id="soundToggleBtn" onclick="toggleAudioFeedback()">
-                    <span id="soundIcon" class="sound-icon-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path class="sound-wave-1" d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path class="sound-wave-2" d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg></span> Звук: <span id="soundStateText">Вкл</span>
+                <button class="sound-toggle-btn muted" id="soundToggleBtn" onclick="toggleAudioFeedback()" aria-label="Звук интерфейса">
+                    <span id="soundIcon" class="sound-icon-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg></span> <span class="sound-label">Звук: <span id="soundStateText">Выкл</span></span>
                 </button>
                 <button class="btn-header-cta" onclick="openContactModal()">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 2l2.4 7.4h7.6l-6.2 4.5 2.4 7.4-6.2-4.5-6.2 4.5 2.4-7.4-6.2-4.5h7.6z"/>
                     </svg>
                     <span>Обсудить проект</span>
+                </button>
+                <button class="nav-burger" id="navBurger" aria-label="Меню" aria-expanded="false" onclick="toggleMobileNav()">
+                    <span></span><span></span><span></span>
                 </button>
             </div>
         </header>
@@ -3974,9 +4022,8 @@
                         <span class="status-live"><span class="dot"></span> PRODUCTION LIVE</span>
                     </div>
                     <div class="project-image-box">
-                        <video class="project-video" autoplay loop muted playsinline preload="auto">
+                        <video class="project-video" loop muted playsinline preload="metadata">
                             <source src="assets/project-b2b.mp4" type="video/mp4">
-                            <source src="https://pub-86dc5b5484314368ac5436a674b0d919.r2.dev/designs/terrena-climate-landing.mp4" type="video/mp4">
                         </video>
                         <div class="project-badge-overlay">
                             <span class="dot"></span> B2B Платформа
@@ -4024,9 +4071,8 @@
                         <span class="status-live"><span class="dot"></span> PRODUCTION LIVE</span>
                     </div>
                     <div class="project-image-box">
-                        <video class="project-video" autoplay loop muted playsinline preload="auto">
+                        <video class="project-video" loop muted playsinline preload="metadata">
                             <source src="assets/project-cosmetic.mp4" type="video/mp4">
-                            <source src="https://pub-86dc5b5484314368ac5436a674b0d919.r2.dev/aaaf/mindora-hero.mp4" type="video/mp4">
                         </video>
                         <div class="project-badge-overlay">
                             <span class="dot"></span> 12 Блоков · Премиум
@@ -4074,9 +4120,8 @@
                         <span class="status-live"><span class="dot"></span> PRODUCTION LIVE</span>
                     </div>
                     <div class="project-image-box">
-                        <video class="project-video" autoplay loop muted playsinline preload="auto">
+                        <video class="project-video" loop muted playsinline preload="metadata">
                             <source src="assets/project-landing.mp4" type="video/mp4">
-                            <source src="https://pub-86dc5b5484314368ac5436a674b0d919.r2.dev/aaaf/facet-glass-hero.mp4" type="video/mp4">
                         </video>
                         <div class="project-badge-overlay">
                             <span class="dot"></span> Конверсия 18.4%
@@ -4124,9 +4169,8 @@
                         <span class="status-live"><span class="dot"></span> PRODUCTION LIVE</span>
                     </div>
                     <div class="project-image-box">
-                        <video class="project-video" autoplay loop muted playsinline preload="auto">
+                        <video class="project-video" loop muted playsinline preload="metadata">
                             <source src="assets/project-realestate.mp4" type="video/mp4">
-                            <source src="https://pub-86dc5b5484314368ac5436a674b0d919.r2.dev/aaaf/3darhcitectoure%20capcut.mp4" type="video/mp4">
                         </video>
                         <div class="project-badge-overlay">
                             <span class="dot"></span> Dark Gold Lux
@@ -4223,9 +4267,9 @@
                     <div class="n8n-visual-canvas" id="n8nCanvas">
                         
                         <svg class="cables-svg-layer" id="cablesSvg">
-                            <path id="cable1" class="flow-cable-path" d="M 230 75 C 290 75, 290 75, 340 75" stroke-dasharray="6 6" />
-                            <path id="cable2" class="flow-cable-path" d="M 450 120 C 450 170, 120 170, 120 220" stroke-dasharray="6 6" />
-                            <path id="cable3" class="flow-cable-path" d="M 230 270 C 290 270, 290 270, 340 270" stroke-dasharray="6 6" />
+                            <path id="cable1" class="flow-cable-path" stroke-dasharray="6 6" />
+                            <path id="cable2" class="flow-cable-path" stroke-dasharray="6 6" />
+                            <path id="cable3" class="flow-cable-path" stroke-dasharray="6 6" />
                         </svg>
 
                         <div class="nodes-flow-grid">
@@ -4468,7 +4512,7 @@
                                 <div class="target-avatar" id="currentChatAvatar"><span style="color:#f472b6;font-weight:700;">DA</span></div>
                                 <div>
                                     <div class="target-name-bold" id="currentChatName">Dr. Anna AI — Консультант клиники</div>
-                                    <div class="target-specs" id="currentChatSpecs">RAG-база: 14 протоколов · Интеграция с YClients</div>
+                                    <div class="target-specs" id="currentChatSpecs">RAG: 14 протоколов · Gemini Argon + Google VEO Video</div>
                                 </div>
                             </div>
 
@@ -4528,26 +4572,14 @@
         <div class="modal-overlay" id="embedModalOverlay" onclick="if(event.target===this) closeEmbedModal()">
             <div class="modal-card">
                 <button class="modal-close-btn" onclick="closeEmbedModal()">✕</button>
-                <h3 class="modal-title">Встройте AI-виджет на свой сайт</h3>
+                <h3 class="modal-title">AI-виджет на ваш сайт</h3>
                 <p class="modal-desc">
-                    Виджет подключается одной строчкой кода на любой сайт: Tilda, WordPress, Bitrix, Webflow, React или чистый HTML.
+                    Готовлю ассистента под ваш бизнес и подключаю его одной строкой кода на любой сайт: Tilda, WordPress, Bitrix, Webflow, React или чистый HTML.
                 </p>
-
-                <div class="code-snippet-box">
-                    <button class="btn-copy-code" onclick="copySnippetCode(this)">Копировать</button>
-                    <code id="snippetCodeBlock">&lt;!-- melevskiystudio Neural AI Widget --&gt;
-&lt;script 
-  src="https://cdn.melevskiystudio.com/v1/widget.js" 
-  data-agent-id="melevskiy-ai" 
-  data-brand-theme="dark" 
-  data-position="bottom-right" 
-  async&gt;
-&lt;/script&gt;</code>
-                </div>
 
                 <div class="modal-benefits-list">
                     <div class="benefit-row">
-                        <span class="ico">✓</span> <b>0% нагрузки на ваш хостинг</b> — вычисления на наших GPU кластерах.
+                        <span class="ico">✓</span> <b>Без нагрузки на ваш хостинг</b> — модель работает через API.
                     </div>
                     <div class="benefit-row">
                         <span class="ico">✓</span> <b>Сквозная передача лидов</b> — диалог и контакты мгновенно летят в Telegram и CRM.
@@ -4557,7 +4589,7 @@
                     </div>
                 </div>
 
-                <button class="btn-luminous-primary" style="width: 100%; justify-content: center;" onclick="closeEmbedModal(); openContactModal();">
+                <button class="btn-luminous-primary" style="width: 100%; justify-content: center;" onclick="closeEmbedModal(); openContactModal('Внедрение AI-ассистента');">
                     Заказать внедрение виджета под ключ ↗
                 </button>
             </div>
@@ -4996,7 +5028,7 @@
             <button class="modal-close-btn" onclick="closeContactModal()">✕</button>
             <h3 class="modal-title">Обсудить ваш проект</h3>
             <p class="modal-desc">
-                Заполните форму ниже — я свяжусь с вами в Telegram (@xtulnss) или WhatsApp в течение 15 минут для расчёта сметы и сроков.
+                Заполните форму — откроется Telegram (@xtulnss) с готовым сообщением, останется нажать «Отправить». Отвечу в течение 15 минут с расчётом сметы и сроков.
             </p>
 
             <form id="portfolioContactForm" onsubmit="handleContactSubmit(event)" style="display: flex; flex-direction: column; gap: 14px;">
@@ -5018,11 +5050,15 @@
                     <textarea id="formTask" rows="3" placeholder="Кратко опишите вашу задачу или нишу..." class="chat-input-field" style="width: 100%; border-radius: 12px; resize: none;"></textarea>
                 </div>
                 <button type="submit" class="btn-luminous-primary" style="width: 100%; justify-content: center; padding: 14px;">
-                    Отправить заявку ✦
+                    Отправить в Telegram ✦
                 </button>
             </form>
-            <div id="formSuccessMessage" style="display: none; text-align: center; padding: 20px 0; color: var(--emerald-glow); font-size: 15px;">
-                ✓ Спасибо! Заявка успешно отправлена. Я напишу вам в Telegram в течение 15 минут.
+            <div id="formSuccessMessage" style="display: none; text-align: center; padding: 20px 0; color: var(--text-highlight); font-size: 15px; line-height: 1.6;">
+                <div style="color: var(--emerald-glow); margin-bottom: 10px;">✓ Сообщение подготовлено</div>
+                В открывшемся Telegram нажмите «Отправить». Если окно не открылось — текст заявки уже скопирован в буфер обмена.
+                <div style="margin-top: 18px;">
+                    <a id="formTelegramLink" href="https://t.me/xtulnss" target="_blank" rel="noopener" class="btn-glass-secondary">Открыть Telegram ↗</a>
+                </div>
             </div>
         </div>
     </div>
