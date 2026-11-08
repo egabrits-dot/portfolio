@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>melevskiystudio — Инженерные сайты · Автоматизации n8n · Внедрение AI</title>
-    <meta name="description" content="melevskiystudio — Архитектура премиальных сайтов, сквозных n8n автоматизаций и кастомных AI-ассистентов для бизнеса. Решения под ключ от Егора Мелевского.">
+    <meta name="description" content="melevskiystudio — Сайты с калькуляторами, автоматизации на n8n и AI-ассистенты для малого бизнеса. Делает Егор Мелевский.">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="ru_RU">
     <meta property="og:site_name" content="melevskiystudio">
@@ -72,84 +72,90 @@
 
         <!-- HERO -->
         <section class="hero-section">
+            <div class="hero-grid-bg" aria-hidden="true"></div>
             <div class="hero-radial-glow"></div>
 
-            <!-- HERO VIDEO SHOWCASE (HIGH-END 3D PORTAL + FLOATING CALLOUT STATS) -->
-            <div class="hero-video-showcase">
-                <div class="hero-video-frame">
-                    <video class="hero-center-video" autoplay loop muted playsinline preload="auto">
-                        <source src="assets/hero-video.mp4" type="video/mp4">
-                    </video>
-
-                    <div class="hero-video-bottom-fade"></div>
-                </div>
-            </div>
-
             <div class="hero-badge-pill">
-                <span class="pulse-dot"></span> Next-Gen Digital Studio · melevskiystudio 2026
+                <span class="pulse-dot"></span> Открыт для новых проектов
             </div>
 
             <h1 class="hero-headline">
-                <span class="gradient-text">Инженерные сайты, n8n воронки</span><br>
-                <span class="neon-subtext">и умные AI-ассистенты</span>
+                <span class="gradient-text">Сайты, автоматизации n8n</span><br>
+                <span class="neon-subtext">и AI-ассистенты для бизнеса</span>
             </h1>
 
             <p class="hero-subdesc">
-                Архитектура цифровых решений нового поколения в стиле Silicon Valley. Объединяю визуальную эстетику интерфейсов, сквозные шины автоматизации n8n и кастомных нейроагентов, которые генерируют выручку 24/7 без рутины.
+                Делаю сайты, которые не просто висят в интернете: считают стоимость, собирают заявки и сразу передают их в CRM или Telegram. Работаю сам, напрямую, без посредников.
             </p>
 
             <div class="hero-actions-row">
                 <a href="#projects" class="btn-luminous-primary" onclick="playUiSound('click')">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2l2.4 7.4h7.6l-6.2 4.5 2.4 7.4-6.2-4.5-6.2 4.5 2.4-7.4-6.2-4.5h7.6z"/>
-                    </svg>
-                    <span>Смотреть кейсы</span>
+                    <span>Смотреть проекты</span>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                 </a>
-                <a href="#about" class="btn-glass-secondary" onclick="playUiSound('click')">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                        <circle cx="12" cy="7" r="4"></circle>
-                    </svg>
-                    <span>Об основателе</span>
-                </a>
-                <a href="#automations" class="btn-glass-secondary" onclick="playUiSound('click')">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-                    </svg>
-                    <span>n8n Симулятор</span>
-                </a>
-                <a href="#ai-assistants" class="btn-glass-secondary" onclick="playUiSound('click')">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="4" y="4" width="16" height="16" rx="2"></rect>
-                        <rect x="9" y="9" width="6" height="6"></rect>
-                        <line x1="9" y1="1" x2="9" y2="4"></line>
-                        <line x1="15" y1="1" x2="15" y2="4"></line>
-                        <line x1="9" y1="20" x2="9" y2="23"></line>
-                        <line x1="15" y1="20" x2="15" y2="23"></line>
-                        <line x1="20" y1="9" x2="23" y2="9"></line>
-                        <line x1="20" y1="14" x2="23" y2="14"></line>
-                        <line x1="1" y1="9" x2="4" y2="9"></line>
-                        <line x1="1" y1="14" x2="4" y2="14"></line>
-                    </svg>
-                    <span>AI-Терминал</span>
-                </a>
+                <button type="button" class="btn-glass-secondary" onclick="openContactModal()">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                    <span>Обсудить проект</span>
+                </button>
             </div>
 
-            <!-- TECH ECOSYSTEM & LOGO STRIP (REFERENCE 1 & 2 MOTIF) -->
+            <ul class="hero-spec-row">
+                <li><span class="spec-idx">01</span> Сайты с калькуляторами и квизами</li>
+                <li><span class="spec-idx">02</span> Автоматизации на n8n</li>
+                <li><span class="spec-idx">03</span> AI-ассистенты для сайта и Telegram</li>
+            </ul>
+
+            <div class="hero-video-showcase">
+                <span class="hud-corner tl" aria-hidden="true"></span>
+                <span class="hud-corner tr" aria-hidden="true"></span>
+                <span class="hud-corner bl" aria-hidden="true"></span>
+                <span class="hud-corner br" aria-hidden="true"></span>
+                <div class="hero-video-frame">
+                    <div class="hero-window-bar">
+                        <span class="win-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                        <span class="win-url">melevskiystudio / showreel</span>
+                        <span class="win-status"><span class="pulse-dot"></span> live</span>
+                    </div>
+                    <video class="hero-center-video" autoplay loop muted playsinline preload="metadata">
+                        <source src="assets/hero-video.mp4" type="video/mp4">
+                    </video>
+                    <div class="hero-video-bottom-fade"></div>
+                </div>
+            </div>
+
             <div class="ecosystem-strip-wrap">
-                <div class="ecosystem-strip-title">Флагманские нейросети & Инженерный стек архитектуры:</div>
-                <div class="ecosystem-pills-row">
-                    <div class="ecosystem-pill"><span class="pill-dot"></span> Claude Opus 5.5</div>
-                    <div class="ecosystem-pill"><span class="pill-dot"></span> Claude Fable 5.1</div>
-                    <div class="ecosystem-pill"><span class="pill-dot"></span> Gemini Argon</div>
-                    <div class="ecosystem-pill"><span class="pill-dot"></span> Google VEO</div>
-                    <div class="ecosystem-pill"><span class="pill-dot"></span> OpenAI Codex 6.1</div>
-                    <div class="ecosystem-pill"><span class="pill-dot"></span> Kimi 3.1</div>
-                    <div class="ecosystem-pill"><span class="pill-dot"></span> Antigravity IDE</div>
-                    <div class="ecosystem-pill"><span class="pill-dot"></span> Next.js 15 & TS</div>
-                    <div class="ecosystem-pill"><span class="pill-dot"></span> n8n Self-Hosted</div>
-                    <div class="ecosystem-pill"><span class="pill-dot"></span> Telegram Bot API</div>
-                    <div class="ecosystem-pill"><span class="pill-dot"></span> Docker & PostgreSQL</div>
+                <div class="ecosystem-strip-title">Инструменты, с которыми работаю</div>
+                <div class="ecosystem-marquee">
+                    <div class="ecosystem-track">
+                    <div class="ecosystem-pills-row">
+                        <div class="ecosystem-pill"><span class="pill-dot"></span> Claude Opus 5.5</div>
+                        <div class="ecosystem-pill"><span class="pill-dot"></span> Claude Fable 5.1</div>
+                        <div class="ecosystem-pill"><span class="pill-dot"></span> Gemini Argon</div>
+                        <div class="ecosystem-pill"><span class="pill-dot"></span> Google VEO</div>
+                        <div class="ecosystem-pill"><span class="pill-dot"></span> OpenAI Codex 6.1</div>
+                        <div class="ecosystem-pill"><span class="pill-dot"></span> Kimi 3.1</div>
+                        <div class="ecosystem-pill"><span class="pill-dot"></span> Antigravity IDE</div>
+                        <div class="ecosystem-pill"><span class="pill-dot"></span> n8n Self-Hosted</div>
+                        <div class="ecosystem-pill"><span class="pill-dot"></span> Telegram Bot API</div>
+                        <div class="ecosystem-pill"><span class="pill-dot"></span> Docker</div>
+                        <div class="ecosystem-pill"><span class="pill-dot"></span> PostgreSQL</div>
+                        <div class="ecosystem-pill"><span class="pill-dot"></span> HTML / CSS / JS</div>
+                    </div>
+                    <div class="ecosystem-pills-row" aria-hidden="true">
+                        <div class="ecosystem-pill"><span class="pill-dot"></span> Claude Opus 5.5</div>
+                        <div class="ecosystem-pill"><span class="pill-dot"></span> Claude Fable 5.1</div>
+                        <div class="ecosystem-pill"><span class="pill-dot"></span> Gemini Argon</div>
+                        <div class="ecosystem-pill"><span class="pill-dot"></span> Google VEO</div>
+                        <div class="ecosystem-pill"><span class="pill-dot"></span> OpenAI Codex 6.1</div>
+                        <div class="ecosystem-pill"><span class="pill-dot"></span> Kimi 3.1</div>
+                        <div class="ecosystem-pill"><span class="pill-dot"></span> Antigravity IDE</div>
+                        <div class="ecosystem-pill"><span class="pill-dot"></span> n8n Self-Hosted</div>
+                        <div class="ecosystem-pill"><span class="pill-dot"></span> Telegram Bot API</div>
+                        <div class="ecosystem-pill"><span class="pill-dot"></span> Docker</div>
+                        <div class="ecosystem-pill"><span class="pill-dot"></span> PostgreSQL</div>
+                        <div class="ecosystem-pill"><span class="pill-dot"></span> HTML / CSS / JS</div>
+                    </div>
+                    </div>
                 </div>
             </div>
 
@@ -755,10 +761,10 @@
         ===================================================== -->
         <section class="section-container about-section" id="about">
             <div class="section-header">
-                <div class="section-tag"><span>✦</span> Основатель & Lead Architect</div>
+                <div class="section-tag"><span>✦</span> Обо мне</div>
                 <h2 class="section-title">Кто стоит за Melevskiy Studio</h2>
                 <p class="section-subtitle">
-                    Егор Мелевский — инженер полного цикла, создающий комплексные цифровые решения: от безупречного дизайна веб-интерфейсов до отказоустойчивых конвейеров n8n и нейросетей без лишних звеньев.
+                    Егор Мелевский — делаю сайты, автоматизации на n8n и AI-ассистентов. Веду проект сам: от макета до запуска.
                 </p>
             </div>
 
@@ -774,7 +780,7 @@
                             </div>
                             <div class="founder-name-wrap">
                                 <div class="founder-name-text">Егор Мелевский</div>
-                                <div class="founder-title-text">Founder · Full-Stack & AI Automation Architect</div>
+                                <div class="founder-title-text">Веб-разработчик · автоматизации и AI</div>
                             </div>
                         </div>
                         <div class="founder-availability-chip">
@@ -784,18 +790,18 @@
                     </div>
 
                     <div class="founder-manifesto">
-                        «Я основал <b>melevskiystudio</b>, чтобы объединить то, что на рынке веб-разработки годами существовало раздельно: эстетику дизайна мирового уровня и строгую инженерную автоматизацию.<br><br>
-                        Сайт не должен быть просто “статичной визиткой”. Это <b>автономная бизнес-система</b>: интерфейс мгновенно вовлекает клиента, динамический калькулятор считает смету, AI-ассистент квалифицирует потребность, а конвейер n8n за 0.4 секунды заводит сделку в CRM и отправляет push в Telegram руководителю. Вы получаете систему, которая работает как швейцарские часы 24/7».
+                        «<b>melevskiystudio</b> — это я и мои проекты. Мне интересно, когда сайт не только красиво выглядит, но и делает часть работы за владельца бизнеса.<br><br>
+                        Например: калькулятор на сайте считает примерную стоимость, AI-ассистент отвечает на типовые вопросы, а сценарий n8n передаёт заявку в CRM и присылает уведомление в Telegram. Меньше ручной рутины — больше времени на клиентов».
                     </div>
 
                     <div class="founder-metrics-grid">
                         <div class="f-metric-item">
-                            <div class="f-metric-num">5<span>+</span></div>
-                            <div class="f-metric-label">лет в веб-разработке</div>
+                            <div class="f-metric-num">4</div>
+                            <div class="f-metric-label">проекта в портфолио</div>
                         </div>
                         <div class="f-metric-item">
-                            <div class="f-metric-num">100<span>k+</span></div>
-                            <div class="f-metric-label">вебхуков в n8n</div>
+                            <div class="f-metric-num">3</div>
+                            <div class="f-metric-label">готовых сценария n8n</div>
                         </div>
                         <div class="f-metric-item">
                             <div class="f-metric-num">0<span>₽</span></div>
@@ -820,17 +826,17 @@
                 <!-- Плашка 1: Чистый код и скорость -->
                 <div class="about-card">
                     <div class="about-tile-meta">
-                        <span class="about-tile-step">// 01 · ЧИСТЫЙ ИНЖИНИРИНГ</span>
-                        <span class="about-tile-spec-badge">SPEED 0.38S</span>
+                        <span class="about-tile-step">// 01 · СВОЙ КОД</span>
+                        <span class="about-tile-spec-badge">БЕЗ КОНСТРУКТОРОВ</span>
                     </div>
                     <div class="about-tile-icon-box cyan-glow">
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
                         </svg>
                     </div>
-                    <h3 class="about-tile-title">Скорость и чистая архитектура</h3>
+                    <h3 class="about-tile-title">Лёгкие и быстрые страницы</h3>
                     <p class="about-tile-desc">
-                        Принципиальный отказ от медленных конструкторов вроде Tilda/WordPress. Чистый TypeScript, современный CSS и компонентный подход обеспечивают моментальный отклик интерфейса.
+                        Пишу код вручную — HTML, CSS и JavaScript, без Tilda и WordPress. Поэтому в странице нет лишнего и её проще ускорять.
                     </p>
                     <div class="tile-hud-box">
                         <div class="hud-score-row">
@@ -839,27 +845,24 @@
                                     <path class="gauge-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
                                     <path class="gauge-fill" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
                                 </svg>
-                                <span class="hud-gauge-val">99</span>
+                                <span class="hud-gauge-val">90+</span>
                             </div>
                             <div class="hud-meta-col">
-                                <div class="hud-label">GOOGLE PAGESPEED BENCHMARK</div>
+                                <div class="hud-label">ЦЕЛЬ ПО GOOGLE PAGESPEED</div>
                                 <div class="hud-sub-stats">
-                                    <span>TTI: <b>0.38s</b></span>
-                                    <span>LCP: <b>0.52s</b></span>
-                                    <span>CLS: <b>0.00</b></span>
+                                    <span>Проверяю каждый проект в PageSpeed Insights</span>
                                 </div>
                             </div>
                         </div>
                         <div class="hud-status-strip">
-                            <span class="hud-status-pill"><span class="dot-live"></span> 100% Native TypeScript</span>
-                            <span class="hud-benchmark-tag">Zero Bloat</span>
+                            <span class="hud-status-pill"><span class="dot-live"></span> Vanilla JS</span>
+                            <span class="hud-benchmark-tag">Без лишнего</span>
                         </div>
                     </div>
                     <div class="about-tile-tags">
-                        <span class="about-tile-tag">Next.js / TS</span>
-                        <span class="about-tile-tag">Vanilla Canvas</span>
-                        <span class="about-tile-tag">PageSpeed 99+</span>
-                        <span class="about-tile-tag">Mobile 100%</span>
+                        <span class="about-tile-tag">HTML / CSS / JS</span>
+                        <span class="about-tile-tag">Canvas</span>
+                        <span class="about-tile-tag">Адаптив под мобильные</span>
                     </div>
                 </div>
 
@@ -878,7 +881,7 @@
                     </div>
                     <h3 class="about-tile-title">Автономия на вашем сервере</h3>
                     <p class="about-tile-desc">
-                        Развёртывание изолированных сценариев n8n в защищённых Docker-контейнерах на вашем собственном VPS. Клиентские базы, сделки и токены защищены от внешних блокировок и утечек.
+                        Развёртывание изолированных сценариев n8n в защищённых Docker-контейнерах на вашем собственном VPS. Данные клиентов и сделки остаются у вас, без ежемесячной оплаты Zapier.
                     </p>
                     <div class="tile-hud-box">
                         <div class="docker-stack-list">
@@ -887,21 +890,21 @@
                                     <span class="stack-dot green"></span>
                                     <span>n8n-vault.production</span>
                                 </div>
-                                <span class="stack-status-tag">RUNNING · 0.01% CPU</span>
+                                <span class="stack-status-tag">RUNNING</span>
                             </div>
                             <div class="docker-stack-item">
                                 <div class="item-left">
                                     <span class="stack-dot cyan"></span>
                                     <span>postgres-db-encrypted</span>
                                 </div>
-                                <span class="stack-status-tag">AES-256 GCM</span>
+                                <span class="stack-status-tag">DATABASE</span>
                             </div>
                             <div class="docker-stack-item">
                                 <div class="item-left">
                                     <span class="stack-dot amber"></span>
                                     <span>webhook-ingress-proxy</span>
                                 </div>
-                                <span class="stack-status-tag">SSL · &lt;0.4s SLA</span>
+                                <span class="stack-status-tag">SSL</span>
                             </div>
                         </div>
                         <div class="hud-status-strip">
@@ -921,7 +924,7 @@
                 <div class="about-card">
                     <div class="about-tile-meta">
                         <span class="about-tile-step">// 03 · NEURAL INTELLIGENCE</span>
-                        <span class="about-tile-spec-badge">NEXT-GEN AI MATRIX</span>
+                        <span class="about-tile-spec-badge">LLM + RAG</span>
                     </div>
                     <div class="about-tile-icon-box purple-glow">
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -931,9 +934,9 @@
                             <path d="M19.07 19.07a10 10 0 0 1-14.14 0"></path>
                         </svg>
                     </div>
-                    <h3 class="about-tile-title">Флагманские нейросети с корпоративной памятью</h3>
+                    <h3 class="about-tile-title">AI-ассистенты по вашей базе знаний</h3>
                     <p class="about-tile-desc">
-                        Внедрение топовых нейросетей нового поколения с векторным RAG-поиском по базе знаний компании: ответы строго по вашим документам и интеграция в ваши бизнес-процессы.
+                        Подключаю современные нейросети к вашим документам через RAG-поиск, чтобы ассистент отвечал по вашей информации, а не придумывал.
                     </p>
                     <div class="tile-hud-box">
                         <div class="ai-models-cluster">
@@ -981,7 +984,7 @@
                 <div class="about-card">
                     <div class="about-tile-meta">
                         <span class="about-tile-step">// 04 · БЕЗ ПОСРЕДНИКОВ</span>
-                        <span class="about-tile-spec-badge">DIRECT SLA</span>
+                        <span class="about-tile-spec-badge">НАПРЯМУЮ</span>
                     </div>
                     <div class="about-tile-icon-box emerald-glow">
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -992,32 +995,32 @@
                     </div>
                     <h3 class="about-tile-title">Прямой диалог с создателем</h3>
                     <p class="about-tile-desc">
-                        Никаких аккаунт-менеджеров и испорченного телефона. Вы работаете напрямую с автором системы. Первый работающий кликабельный интерактивный прототип проекта готов уже через 48 часов после старта.
+                        Никаких аккаунт-менеджеров и испорченного телефона. Вы работаете напрямую с автором системы. Сначала показываю кликабельный прототип, чтобы согласовать логику до основной разработки.
                     </p>
                     <div class="tile-hud-box">
                         <div class="timeline-hud-row">
                             <div class="timeline-step">
-                                <div class="step-badge">00h</div>
+                                <div class="step-badge">01</div>
                                 <div class="step-label">ТЗ & Логика</div>
                             </div>
                             <div class="timeline-connector"></div>
                             <div class="timeline-step highlight">
-                                <div class="step-badge">48h</div>
-                                <div class="step-label">Рабочий MVP</div>
+                                <div class="step-badge">02</div>
+                                <div class="step-label">Прототип</div>
                             </div>
                             <div class="timeline-connector"></div>
                             <div class="timeline-step">
-                                <div class="step-badge">VPS</div>
+                                <div class="step-badge">03</div>
                                 <div class="step-label">Релиз & Код</div>
                             </div>
                         </div>
                         <div class="hud-status-strip">
-                            <span class="hud-status-pill"><span class="dot-live"></span> 100% Передача Git</span>
+                            <span class="hud-status-pill"><span class="dot-live"></span> Код передаю вам</span>
                             <span class="hud-benchmark-tag">Без посредников</span>
                         </div>
                     </div>
                     <div class="about-tile-tags">
-                        <span class="about-tile-tag">MVP за 48 часов</span>
+                        <span class="about-tile-tag">Сначала прототип</span>
                         <span class="about-tile-tag">Прозрачный код</span>
                         <span class="about-tile-tag">Полная передача прав</span>
                         <span class="about-tile-tag">Direct Telegram</span>
@@ -1047,13 +1050,13 @@
                     <div class="service-icon-box cyan-glow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg></div>
                     <h3 class="service-card-title">Разработка сайтов & B2B порталов</h3>
                     <p class="service-card-desc">
-                        Премиальные лендинги и многостраничные порталы с онлайн-калькуляторами сметы, мгновенным откликом и оценкой 95+ по Google PageSpeed.
+                        Лендинги и многостраничные сайты с онлайн-калькуляторами стоимости и быстрой загрузкой.
                     </p>
                     <ul class="service-specs-list">
-                        <li>Дизайн в стиле Silicon Valley (Dark / Minimal)</li>
+                        <li>Современный тёмный минималистичный дизайн</li>
                         <li>Интерактивные калькуляторы стоимости и квизы</li>
                         <li>Чистый код без уязвимых плагинов и CMS-балласта</li>
-                        <li>100% плавная мобильная адаптация под iPhone/Android</li>
+                        <li>Адаптация под телефоны</li>
                     </ul>
                     <div class="service-footer-badge">
                         <span>Комплектация:</span>
@@ -1091,7 +1094,7 @@
                     <div class="service-icon-box purple-glow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a8 8 0 0 0-8 8c0 3.36 2.07 6.24 5 7.42V20a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-2.58c2.93-1.18 5-4.06 5-7.42a8 8 0 0 0-8-8z"></path><line x1="9" y1="10" x2="9.01" y2="10"></line><line x1="15" y1="10" x2="15.01" y2="10"></line></svg></div>
                     <h3 class="service-card-title">Кастомные AI-ассистенты & Multi-LLM оркестрация</h3>
                     <p class="service-card-desc">
-                        Диалоговые агенты с загрузкой корпоративной базы знаний на базе Claude Opus 5.5, Claude Fable 5.1, Gemini Argon, VEO, Codex 6.1 и Kimi 3.1. Консультируют клиентов на сайте и в Telegram за 1-2 секунды 24/7, опираясь на вашу базу знаний.
+                        Диалоговые агенты с загрузкой корпоративной базы знаний на базе Claude Opus 5.5, Claude Fable 5.1, Gemini Argon, VEO, Codex 6.1 и Kimi 3.1. Отвечают клиентам на сайте и в Telegram круглосуточно, опираясь на вашу базу знаний.
                     </p>
                     <ul class="service-specs-list">
                         <li>Флагманские нейросети: Claude Opus 5.5, Claude Fable 5.1, Gemini Argon, VEO, Codex 6.1, Kimi 3.1</li>
@@ -1132,10 +1135,10 @@
                     <span>✦</span> Начать сотрудничество
                 </div>
                 <h2 class="cta-headline">
-                    Готовы масштабировать<br>и автоматизировать бизнес?
+                    Есть задача?<br>Давайте обсудим
                 </h2>
                 <p class="cta-subtext">
-                    Обсудим вашу задачу на 20-минутном созвоне. Составлю карту процессов, подберу стек и покажу прототип уже через 48 часов.
+                    Обсудим вашу задачу на 20-минутном созвоне. Разберёмся, что стоит автоматизировать, и я предложу решение и сроки.
                 </p>
                 <div class="hero-actions-row" style="margin-bottom: 0;">
                     <button class="btn-luminous-primary" onclick="openContactModal()">
@@ -1151,7 +1154,7 @@
         <!-- FOOTER -->
         <footer class="footer-bar">
             <div>
-                © 2026 melevskiystudio. Все права защищены. Основатель & Lead Architect — Егор Мелевский.
+                © 2026 melevskiystudio. Егор Мелевский.
             </div>
             <div class="footer-links">
                 <a href="#projects" class="footer-link">Проекты</a>
